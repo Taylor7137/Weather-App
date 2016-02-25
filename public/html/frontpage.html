@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-1.12.0.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/frontpage.css">
+</head>
+<body>
+ 
+<div id="welcome">
+	<h2 class='welcome'>Welcome</h2>
+
+	<div class="container welcome">
+		<div class="row">
+			<div class="input-group col-md-12 text-center">
+   			<input type="text" class='form-control' id='enterlocation' placeholder='Enter Location: Please be specific'>
+   			<span class="input-group-btn">
+					<button id='go' type="button" class="btn">Go</button>
+   			</span>  			
+			</div>			
+   	</div>
+	</div>
+</div>
+
+<div id="address-input-bar2">
+	<div class="container">
+   	<div class="row">
+   		<div class="input-group col-md-12 text-center" style="width: 40%; margin-top: 1%; margin-left: 30%;">
+   			<input type="text" class='form-control' id='enterlocation2' placeholder='Enter Location: Please be specific'>
+   			<span class="input-group-btn">
+					<button id='go2' type="button" class="btn">Go</button>
+   			</span>  			
+			</div>
+   	</div>
+	</div>
+</div>
+<br>
+
+<div id='output'>
+  	
+</div>
+
+<script id='info' type='text/x-handlebars-template'>
+		<div class="container" id='top-block'>	
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1 id='location-output'> Address </h1>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-md-4 text-center first-three-blocks">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h2 class="h2-descriptor">Today</h2>
+						</div>
+					</div>	
+					<div class="row temp-row">
+							<div class="col-md-12">
+								<div class="row">
+									<p class="p-descriptor hi"> Hi: {{todayHi}} &deg;F</p>
+								</div>
+								<div class="row">
+									<p class="p-descriptor low"> Low: {{todayLow}} &deg;F</p>
+								</div>
+							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3 class="h3-descriptor"> % Rain = {{pRainToday}}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3 class="h3-descriptor"> Humidity = {{humidityToday}}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-md-offset-4 text-center">
+							<img src="images/{{todayIcon}}.png" alt='{{icon}}' class="img-responsive">
+						</div>
+					</div>
+					<div class="row">	
+						<div class="col-md-12 text-center" >
+							<p class="p-descriptor" style="margin: auto;"> {{todaySummary}} </p>
+						</div>
+					</div>
+			   </div>
+			   
+			   <div class="col-md-4 text-center first-three-blocks">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h2 class="h2-descriptor">Tomorrow</h2>
+						</div>
+					</div>	
+					<div class="row temp-row">
+							<div class="col-md-12">
+								<div class="row">
+									<p class="p-descriptor hi"> Hi: {{tomorrowHi}} &deg;F</p>
+								</div>
+								<div class="row">
+									<p class="p-descriptor low"> Low: {{tomorrowLow}} &deg;F</p>
+								</div>
+							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3 class="h3-descriptor"> % Rain = {{pRainTomorrow}}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3 class="h3-descriptor"> Humidity = {{humidityTomorrow}}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-md-offset-4 text-center">
+							<img src="images/{{tomorrowIcon}}.png" alt='{{icon}}' class="img-responsive">
+						</div>
+					</div>
+					<div class="row">	
+						<div class="col-md-12 text-center" >
+							<p class="p-descriptor" style="margin: auto;"> {{tomorrowSummary}} </p>
+						</div>
+					</div>
+			   </div>
+			   
+			   <div class="col-md-4 text-center first-three-blocks">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h2 class="h2-descriptor">Tomorrow's Tomorrow</h2>
+						</div>
+					</div>	
+					<div class="row temp-row">
+							<div class="col-md-12">
+								<div class="row">
+									<p class="p-descriptor hi" > Hi: {{tomorrowTomHi}} &deg;F</p>
+								</div>
+								<div class="row">
+									<p class="p-descriptor low"> Low: {{tomorrowTomLow}} &deg;F</p>
+								</div>
+							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3 class="h3-descriptor"> % Rain = {{pRainTomorrowTom}}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3 class="h3-descriptor"> Humidity = {{humidityTomorrowTom}}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-md-offset-4 text-center">
+							<img src="images/{{tomorrowTomIcon}}.png" alt='{{icon}}' class="img-responsive">
+						</div>
+					</div>
+					<div class="row">	
+						<div class="col-md-12 text-center" >
+							<p class="p-descriptor" style="margin: auto;"> {{tomorrowTomSummary}} </p>
+						</div>
+					</div>
+			   </div>
+		   </div>
+	   </div> 
+	   
+	   <br>
+	   
+	   <div class="container-fluid middle-block">
+	   	<div class="row">
+	   		<div class="col-md-12 text-center">
+	   			<h2 id=twelveHourTitle>Today's 12 Hour Forcast</span></h2>
+	   		</div>
+	      </div>	
+	      <div class="row twelve-columns">
+	   		<div class="col-md-1 H odd">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime1}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH1}} &deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH1}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH1}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH1}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H even">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime2}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH2}} &deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH2}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH2}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH2}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H odd">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime3}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH3}} &deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH3}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH3}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH3}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H even">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime4}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH4}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH4}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH3}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH4}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H odd">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime5}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH5}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH5}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH5}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH5}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H even">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime6}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH6}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH6}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH6}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH6}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H odd">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime7}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH7}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH7}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH7}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH7}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H even">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime8}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH8}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH8}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH8}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH8}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H odd">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime9}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH9}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH9}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH9}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH9}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H even">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime10}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH10}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH10}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH10}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH10}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H odd">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime11}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH11}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH11}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH11}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH11}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   		<div class="col-md-1 H even">
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Time: {{currentTime12}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Temp: {{currentH12}}&deg;F</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>% Rain: {{percentRainH12}}</h3>
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<img src="images/{{iconH12}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
+	   				</div>
+	   			</div>
+	   			<div class="row">
+	   				<div class="col-md-12">
+	   					<h3>Summary: {{summaryH12}}</h3>
+	   				</div>
+	   			</div>
+	   		</div>
+	   	</div>
+	   </div>  
+	   
+	   		  				  		
+ </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+
+</body>
+</html>

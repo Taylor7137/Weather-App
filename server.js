@@ -1,18 +1,25 @@
 var express = require('express'),
 	 logger = require('morgan')('dev'),
+	 moment = require('moment'),
 	 server = express();
+    
 
 server.use(express.static(__dirname+'/public'));
 server.use(logger);
 server.set('port', process.env.PORT || 8080);
 
-server.get('/',home);
+server.get('/', frontpage);
+server.get('/weather', main)
 
 server.listen(server.get('port'), listenCallback);
 
 
-function home(req, res){
-  res.sendFile('/html/main.html', {root: __dirname+'/public'});
+function frontpage(req, res){
+  res.sendFile('/html/frontpage.html', {root: __dirname+'/public'});
+}
+
+function main(req, res){
+	res.sendFile('/html/main.html', {root: __dirname+'/public'})
 }
 
 function listenCallback(){
