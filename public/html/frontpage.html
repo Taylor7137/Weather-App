@@ -3,17 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Weather Dude</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
 	<script src="https://code.jquery.com/jquery-1.12.0.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="/css/frontpage.css">
+	<link rel="stylesheet" href="css/frontpage.css">
+	<link rel="stylesheet" href="css/animate.css">
 </head>
 <body>
  
 <div id="welcome">
-	<h2 class='welcome'>Welcome</h2>
-
-	<div class="container welcome">
+	<h2 class='welcomeTitle animated bounceInRight'>Welcome</h2>
+	<div class="container welcome animated bounceInLeft">
 		<div class="row">
 			<div class="input-group col-md-12 text-center">
    			<input type="text" class='form-control' id='enterlocation' placeholder='Enter Location: Please be specific'>
@@ -28,7 +29,7 @@
 <div id="address-input-bar2">
 	<div class="container">
    	<div class="row">
-   		<div class="input-group col-md-12 text-center" style="width: 40%; margin-top: 1%; margin-left: 30%;">
+   		<div class="input-group col-md-12 text-center" style="width: 40%; margin-left: 30%;">
    			<input type="text" class='form-control' id='enterlocation2' placeholder='Enter Location: Please be specific'>
    			<span class="input-group-btn">
 					<button id='go2' type="button" class="btn">Go</button>
@@ -44,464 +45,980 @@
 </div>
 
 <script id='info' type='text/x-handlebars-template'>
-		<div class="container" id='top-block'>	
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<h1 id='location-output'> Address </h1>
+	
+	<div class="Location">		
+		<h1 id='location-output'> Address </h1>
+	</div>	
+				
+	<div id='time-zone'>
+		<p>TimeZone: {{timeZone}}</p>
+	</div>
+		
+	<div class="currently container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1> Currently </h1>
+			</div>	
+		</div>
+		<div class="row">
+			<div class="col-md-6">		
+				<img src="images/{{currentlyIcon}}.jpg" alt='{{icon}}' class="img-responsive">	
+			</div>			
+			<div class="col-md-6">
+				<p> Temp: {{currentlyTemp}}</p>
+				<p> Pressure: {{currentlyPress}}</p>
+				<p> Dew Point: {{currentlyDew}}</p>
+				<p> Visibility: {{currentlyVis}}</p>
+				<p> Humidity: {{currentlyHumid}}</p>
+				<p> Summary: {{currentlySum}}</p>
+			</div>
+		</div>
+	</div>
+	
+			
+		
+		<div id='seven-day-outlook'>	
+			<h1> Seven Day Outlook </h1>
+			<div class="container day">
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						{{day0}}
+					</div>
+				</div>	
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<img src="images/{{day0Icon}}.jpg" alt='{{icon}}' class="img-responsive">
+					</div>
+				</div>
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<p class="temp day-temp"> Hi temp: {{day0HiTemp}} &deg;F @ {{day0HiTempTime}}</p>
+						<p class="temp day-temp"> Low temp: {{day0LowTemp}} &deg;F @ {{day0LowTempTime}}</p>
+						<p class="rain day-rain"> % Rain = {{day0Rain}}</p>
+						<p class="cloud-cover"> Cloud Cover: {{day0Clouds}}</p>
+						<p class="dew day-dew"> Dew Point: {{day0Dew}}</p>
+						<p class="humidity day-humidity"> Humidity: {{day0Humid}}</p>
+						<p class="pressure day-pressure"> Pressure: {{day0Press}}</p>
+						<p class="sunrise"> Sunrise @ {{day0Sunrise}}</p>
+						<p class="sunset"> Sunset @ {{day0Sunset}}</p>
+						<p class="visibility day-visibility">Visibility: {{day0Vis}}</p>
+						<p class="wind-speed day-wind-speed"> Wind Speed: {{day0WindSpeed}}</p>
+						<p class="wind-bearing day-wind-bearing"> Wind Bearing: {{day0WindBearing}}</p>						
+						<p class="moon-phase"> Moon Phase: {{day0Moon}}</p>
+						<p class="summary"> Summary: {{day0Summary}}</p>
+					</div>
 				</div>
 			</div>	
-			<div class="row">
-				<div class="col-md-4 text-center first-three-blocks">
+			
+			<div class="container day">
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						{{day1}}
+					</div>
+				</div>	
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<img src="images/{{day1Icon}}.jpg" alt='{{icon}}' class="img-responsive">
+					</div>
+				</div>
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<p class="temp day-temp"> Hi temp: {{day1HiTemp}} &deg;F @ {{day1HiTempTime}}</p>
+						<p class="temp day-temp"> Low temp: {{day1LowTemp}} &deg;F @ {{day1LowTempTime}}</p>
+						<p class="rain day-rain"> % Rain = {{day1Rain}}</p>
+						<p class="cloud-cover"> Cloud Cover: {{day1Clouds}}</p>
+						<p class="dew day-dew"> Dew Point: {{day1Dew}}</p>
+						<p class="humidity day-humidity"> Humidity: {{day1Humid}}</p>
+						<p class="pressure day-pressure"> Pressure: {{day1Press}}</p>
+						<p class="sunrise"> Sunrise @ {{day1Sunrise}}</p>
+						<p class="sunset"> Sunset @ {{day1Sunset}}</p>
+						<p class="visibility day-visibility">Visibility: {{day1Vis}}</p>
+						<p class="wind-speed day-wind-speed"> Wind Speed: {{day1WindSpeed}}</p>
+						<p class="wind-bearing day-wind-bearing"> Wind Bearing: {{day1WindBearing}}</p>						
+						<p class="moon-phase"> Moon Phase: {{day1Moon}}</p>
+						<p class="summary"> Summary: {{day1Summary}}</p>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="container day">
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						{{day2}}
+					</div>
+				</div>	
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<img src="images/{{day2Icon}}.jpg" alt='{{icon}}' class="img-responsive">
+					</div>
+				</div>
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<p class="temp day-temp"> Hi temp: {{day2HiTemp}} &deg;F @ {{day2HiTempTime}}</p>
+						<p class="temp day-temp"> Low temp: {{day2LowTemp}} &deg;F @ {{day2LowTempTime}}</p>
+						<p class="rain day-rain"> % Rain = {{day2Rain}}</p>
+						<p class="cloud-cover"> Cloud Cover: {{day2Clouds}}</p>
+						<p class="dew day-dew"> Dew Point: {{day2Dew}}</p>
+						<p class="humidity day-humidity"> Humidity: {{day2Humid}}</p>
+						<p class="pressure day-pressure"> Pressure: {{day2Press}}</p>
+						<p class="sunrise"> Sunrise @ {{day2Sunrise}}</p>
+						<p class="sunset"> Sunset @ {{day2Sunset}}</p>
+						<p class="visibility day-visibility">Visibility: {{day2Vis}}</p>
+						<p class="wind-speed day-wind-speed"> Wind Speed: {{day2WindSpeed}}</p>
+						<p class="wind-bearing day-wind-bearing"> Wind Bearing: {{day2WindBearing}}</p>						
+						<p class="moon-phase"> Moon Phase: {{day2Moon}}</p>
+						<p class="summary"> Summary: {{day2Summary}}</p>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="container day">
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						{{day3}}
+					</div>
+				</div>	
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<img src="images/{{day3Icon}}.jpg" alt='{{icon}}' class="img-responsive">
+					</div>
+				</div>
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<p class="temp day-temp"> Hi temp: {{day3HiTemp}} &deg;F @ {{day3HiTempTime}}</p>
+						<p class="temp day-temp"> Low temp: {{day3LowTemp}} &deg;F @ {{day3LowTempTime}}</p>
+						<p class="rain day-rain"> % Rain = {{day3Rain}}</p>
+						<p class="cloud-cover"> Cloud Cover: {{day3Clouds}}</p>
+						<p class="dew day-dew"> Dew Point: {{day3Dew}}</p>
+						<p class="humidity day-humidity"> Humidity: {{day3Humid}}</p>
+						<p class="pressure day-pressure"> Pressure: {{day3Press}}</p>
+						<p class="sunrise"> Sunrise @ {{day3Sunrise}}</p>
+						<p class="sunset"> Sunset @ {{day3Sunset}}</p>
+						<p class="visibility day-visibility">Visibility: {{day3Vis}}</p>
+						<p class="wind-speed day-wind-speed"> Wind Speed: {{day3WindSpeed}}</p>
+						<p class="wind-bearing day-wind-bearing"> Wind Bearing: {{day3WindBearing}}</p>						
+						<p class="moon-phase"> Moon Phase: {{day3Moon}}</p>
+						<p class="summary"> Summary: {{day3Summary}}</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="container day">
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						{{day4}}
+					</div>
+				</div>	
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<img src="images/{{day4Icon}}.jpg" alt='{{icon}}' class="img-responsive">
+					</div>
+				</div>
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<p class="temp day-temp"> Hi temp: {{day4HiTemp}} &deg;F @ {{day4HiTempTime}}</p>
+						<p class="temp day-temp"> Low temp: {{day4LowTemp}} &deg;F @ {{day4LowTempTime}}</p>
+						<p class="rain day-rain"> % Rain = {{day4Rain}}</p>
+						<p class="cloud-cover"> Cloud Cover: {{day4Clouds}}</p>
+						<p class="dew day-dew"> Dew Point: {{day4Dew}}</p>
+						<p class="humidity day-humidity"> Humidity: {{day4Humid}}</p>
+						<p class="pressure day-pressure"> Pressure: {{day4Press}}</p>
+						<p class="sunrise"> Sunrise @ {{day4Sunrise}}</p>
+						<p class="sunset"> Sunset @ {{day4Sunset}}</p>
+						<p class="visibility day-visibility">Visibility: {{day4Vis}}</p>
+						<p class="wind-speed day-wind-speed"> Wind Speed: {{day4WindSpeed}}</p>
+						<p class="wind-bearing day-wind-bearing"> Wind Bearing: {{day4WindBearing}}</p>						
+						<p class="moon-phase"> Moon Phase: {{day4Moon}}</p>
+						<p class="summary"> Summary: {{day4Summary}}</p>
+					</div>
+				</div>
+			</div>		
+			
+			<div class="container day">
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						{{day5}}
+					</div>
+				</div>	
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<img src="images/{{day5Icon}}.jpg" alt='{{icon}}' class="img-responsive">
+					</div>
+				</div>
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<p class="temp day-temp"> Hi temp: {{day5HiTemp}} &deg;F @ {{day5HiTempTime}}</p>
+						<p class="temp day-temp"> Low temp: {{day5LowTemp}} &deg;F @ {{day5LowTempTime}}</p>
+						<p class="rain day-rain"> % Rain = {{day5Rain}}</p>
+						<p class="cloud-cover"> Cloud Cover: {{day5Clouds}}</p>
+						<p class="dew day-dew"> Dew Point: {{day5Dew}}</p>
+						<p class="humidity day-humidity"> Humidity: {{day5Humid}}</p>
+						<p class="pressure day-pressure"> Pressure: {{day5Press}}</p>
+						<p class="sunrise"> Sunrise @ {{day5Sunrise}}</p>
+						<p class="sunset"> Sunset @ {{day5Sunset}}</p>
+						<p class="visibility day-visibility">Visibility: {{day5Vis}}</p>
+						<p class="wind-speed day-wind-speed"> Wind Speed: {{day5WindSpeed}}</p>
+						<p class="wind-bearing day-wind-bearing"> Wind Bearing: {{day5WindBearing}}</p>						
+						<p class="moon-phase"> Moon Phase: {{day5Moon}}</p>
+						<p class="summary"> Summary: {{day5Summary}}</p>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="container day">
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						{{day6}}
+					</div>
+				</div>	
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<img src="images/{{day6Icon}}.jpg" alt='{{icon}}' class="img-responsive">
+					</div>
+				</div>
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<p class="temp day-temp"> Hi temp: {{day6HiTemp}} &deg;F @ {{day6HiTempTime}}</p>
+						<p class="temp day-temp"> Low temp: {{day6LowTemp}} &deg;F @ {{day6LowTempTime}}</p>
+						<p class="rain day-rain"> % Rain = {{day6Rain}}</p>
+						<p class="cloud-cover"> Cloud Cover: {{day6Clouds}}</p>
+						<p class="dew day-dew"> Dew Point: {{day6Dew}}</p>
+						<p class="humidity day-humidity"> Humidity: {{day6Humid}}</p>
+						<p class="pressure day-pressure"> Pressure: {{day6Press}}</p>
+						<p class="sunrise"> Sunrise @ {{day6Sunrise}}</p>
+						<p class="sunset"> Sunset @ {{day6Sunset}}</p>
+						<p class="visibility day-visibility">Visibility: {{day6Vis}}</p>
+						<p class="wind-speed day-wind-speed"> Wind Speed: {{day6WindSpeed}}</p>
+						<p class="wind-bearing day-wind-bearing"> Wind Bearing: {{day6WindBearing}}</p>						
+						<p class="moon-phase"> Moon Phase: {{day6Moon}}</p>
+						<p class="summary"> Summary: {{day6Summary}}</p>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="container day">
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						{{day7}}
+					</div>
+				</div>	
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<img src="images/{{day7Icon}}.jpg" alt='{{icon}}' class="img-responsive">
+					</div>
+				</div>
+				<div class='row'>
+					<div class="col-md-12 text-center">
+						<p class="temp day-temp"> Hi temp: {{day7HiTemp}} &deg;F @ {{day7HiTempTime}}</p>
+						<p class="temp day-temp"> Low temp: {{day7LowTemp}} &deg;F @ {{day7LowTempTime}}</p>
+						<p class="rain day-rain"> % Rain = {{day7Rain}}</p>
+						<p class="cloud-cover"> Cloud Cover: {{day7Clouds}}</p>
+						<p class="dew day-dew"> Dew Point: {{day7Dew}}</p>
+						<p class="humidity day-humidity"> Humidity: {{day7Humid}}</p>
+						<p class="pressure day-pressure"> Pressure: {{day7Press}}</p>
+						<p class="sunrise"> Sunrise @ {{day7Sunrise}}</p>
+						<p class="sunset"> Sunset @ {{day7Sunset}}</p>
+						<p class="visibility day-visibility">Visibility: {{day7Vis}}</p>
+						<p class="wind-speed day-wind-speed"> Wind Speed: {{day7WindSpeed}}</p>
+						<p class="wind-bearing day-wind-bearing"> Wind Bearing: {{day7WindBearing}}</p>						
+						<p class="moon-phase"> Moon Phase: {{day7Moon}}</p>
+						<p class="summary"> Summary: {{day7Summary}}</p>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="hourly-outlook">
+			
+				<h1> 48 Hour Outlook </h1>
+				
+				<div class="container">
 					<div class="row">
-						<div class="col-md-12 text-center">
-							<h2 class="h2-descriptor">Today</h2>
+						<div class="col-md-1">
+							<p class="time">Time: {{time1}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp1}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain1}}</p>
+							<img src="images/{{hourIcon1}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten1}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds1}}</p>
+							<p class="dew">Dew Point: {{hourDew1}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid1}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress1}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis1}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed1}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing1}}</p>
 						</div>
-					</div>	
-					<div class="row temp-row">
-							<div class="col-md-12">
-								<div class="row">
-									<p class="p-descriptor hi"> Hi: {{todayHi}} &deg;F</p>
-								</div>
-								<div class="row">
-									<p class="p-descriptor low"> Low: {{todayLow}} &deg;F</p>
-								</div>
-							</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time2}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp2}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain2}}</p>
+							<img src="images/{{hourIcon2}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten2}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds2}}</p>
+							<p class="dew">Dew Point: {{hourDew2}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid2}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress2}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis2}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed2}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing2}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time3}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp3}} &deg;F </p>
+							<p class="rain hour-rain">% Rain = {{hourRain3}}</p>
+							<img src="images/{{hourIcon3}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten3}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds3}}</p>
+							<p class="dew">Dew Point: {{hourDew3}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid3}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress3}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis3}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed3}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing3}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time4}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp4}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain4}}</p>
+							<img src="images/{{hourIcon4}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten4}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds4}}</p>
+							<p class="dew">Dew Point: {{hourDew4}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid4}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress4}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis4}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed4}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing4}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time5}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp5}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain5}}</p>
+							<img src="images/{{hourIcon5}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten5}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds5}}</p>
+							<p class="dew">Dew Point: {{hourDew5}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid5}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress5}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis5}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed5}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing5}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time6}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp6}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain6}}</p>
+							<img src="images/{{hourIcon6}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten6}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds6}}</p>
+							<p class="dew">Dew Point: {{hourDew6}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid6}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress6}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis6}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed6}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing6}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time7}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp7}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain7}}</p>
+							<img src="images/{{hourIcon7}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten7}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds7}}</p>
+							<p class="dew">Dew Point: {{hourDew7}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid7}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress7}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis7}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed7}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing7}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time8}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp8}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain8}}</p>
+							<img src="images/{{hourIcon8}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten8}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds8}}</p>
+							<p class="dew">Dew Point: {{hourDew8}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid8}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress8}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis8}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed8}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing8}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time9}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp9}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain9}}</p>
+							<img src="images/{{hourIcon9}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten9}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds9}}</p>
+							<p class="dew">Dew Point: {{hourDew9}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid9}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress9}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis9}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed9}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing9}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time10}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp10}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain10}}</p>
+							<img src="images/{{hourIcon10}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten10}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds10}}</p>
+							<p class="dew">Dew Point: {{hourDew10}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid10}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress10}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis10}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed10}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing10}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time11}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp11}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain11}}</p>
+							<img src="images/{{hourIcon11}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten11}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds11}}</p>
+							<p class="dew">Dew Point: {{hourDew11}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid11}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress11}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis11}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed11}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing11}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time12}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp12}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain12}}</p>
+							<img src="images/{{hourIcon12}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten12}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds12}}</p>
+							<p class="dew">Dew Point: {{hourDew12}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid12}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress12}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis12}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed12}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing12}}</p>
+						</div>
 					</div>
+					
 					<div class="row">
-						<div class="col-md-12 text-center">
-							<h3 class="h3-descriptor"> % Rain = {{pRainToday}}</h3>
+						<div class="col-md-1">
+							<p class="time">Time: {{time13}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp13}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain13}}</p>
+							<img src="images/{{hourIcon13}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten13}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds13}}</p>
+							<p class="dew">Dew Point: {{hourDew13}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid13}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress13}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis13}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed13}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing13}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time14}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp14}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain14}}</p>
+							<img src="images/{{hourIcon14}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten14}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds14}}</p>
+							<p class="dew">Dew Point: {{hourDew14}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid14}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress14}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis14}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed14}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing14}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time15}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp15}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain15}}</p>
+							<img src="images/{{hourIcon15}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten15}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds15}}</p>
+							<p class="dew">Dew Point: {{hourDew15}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid15}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress15}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis15}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed15}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing15}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time16}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp16}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain16}}</p>
+							<img src="images/{{hourIcon16}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten16}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds16}}</p>
+							<p class="dew">Dew Point: {{hourDew16}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid16}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress16}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis16}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed16}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing16}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time17}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp17}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain17}}</p>
+							<img src="images/{{hourIcon17}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten17}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds17}}</p>
+							<p class="dew">Dew Point: {{hourDew17}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid17}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress17}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis17}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed17}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing17}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time18}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp18}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain18}}</p>
+							<img src="images/{{hourIcon18}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten18}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds18}}</p>
+							<p class="dew">Dew Point: {{hourDew18}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid18}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress18}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis18}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed18}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing18}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time19}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp19}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain19}}</p>
+							<img src="images/{{hourIcon19}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten19}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds19}}</p>
+							<p class="dew">Dew Point: {{hourDew19}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid19}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress19}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis19}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed19}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing19}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time20}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp20}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain20}}</p>
+							<img src="images/{{hourIcon20}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten20}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds20}}</p>
+							<p class="dew">Dew Point: {{hourDew20}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid20}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress20}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis20}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed20}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing20}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time21}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp21}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain21}}</p>
+							<img src="images/{{hourIcon21}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten21}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds21}}</p>
+							<p class="dew">Dew Point: {{hourDew21}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid21}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress21}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis21}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed21}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing21}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time22}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp22}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain22}}</p>
+							<img src="images/{{hourIcon22}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten22}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds22}}</p>
+							<p class="dew">Dew Point: {{hourDew22}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid22}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress22}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis22}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed22}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing22}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time23}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp23}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain23}}</p>
+							<img src="images/{{hourIcon23}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten23}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds23}}</p>
+							<p class="dew">Dew Point: {{hourDew23}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid23}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress23}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis23}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed23}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing23}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time24}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp24}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain24}}</p>
+							<img src="images/{{hourIcon24}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten24}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds24}}</p>
+							<p class="dew">Dew Point: {{hourDew24}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid24}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress24}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis24}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed24}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing24}}</p>
 						</div>
 					</div>
+					
 					<div class="row">
-						<div class="col-md-12 text-center">
-							<h3 class="h3-descriptor"> Humidity = {{humidityToday}}</h3>
+						<div class="col-md-1">
+							<p class="time">Time: {{time25}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp25}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain25}}</p>
+							<img src="images/{{hourIcon25}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten25}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds25}}</p>
+							<p class="dew">Dew Point: {{hourDew25}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid25}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress25}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis25}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed25}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing25}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time26}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp26}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain26}}</p>
+							<img src="images/{{hourIcon26}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten26}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds26}}</p>
+							<p class="dew">Dew Point: {{hourDew26}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid26}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress26}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis26}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed26}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing26}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time27}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp27}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain27}}</p>
+							<img src="images/{{hourIcon27}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten27}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds27}}</p>
+							<p class="dew">Dew Point: {{hourDew27}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid27}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress27}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis27}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed27}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing27}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time28}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp28}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain28}}</p>
+							<img src="images/{{hourIcon28}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten28}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds28}}</p>
+							<p class="dew">Dew Point: {{hourDew28}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid28}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress28}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis28}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed28}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing28}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time29}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp29}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain29}}</p>
+							<img src="images/{{hourIcon29}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten29}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds29}}</p>
+							<p class="dew">Dew Point: {{hourDew29}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid29}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress29}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis29}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed29}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing29}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time30}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp30}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain30}}</p>
+							<img src="images/{{hourIcon30}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten30}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds30}}</p>
+							<p class="dew">Dew Point: {{hourDew30}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid30}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress30}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis30}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed30}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing30}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time31}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp31}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain31}}</p>
+							<img src="images/{{hourIcon31}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten31}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds31}}</p>
+							<p class="dew">Dew Point: {{hourDew31}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid31}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress31}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis31}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed31}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing31}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time32}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp32}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain32}}</p>
+							<img src="images/{{hourIcon32}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten32}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds32}}</p>
+							<p class="dew">Dew Point: {{hourDew32}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid32}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress32}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis32}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed32}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing32}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time33}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp33}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain33}}</p>
+							<img src="images/{{hourIcon33}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten33}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds33}}</p>
+							<p class="dew">Dew Point: {{hourDew33}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid33}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress33}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis33}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed33}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing33}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time34}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp34}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain34}}</p>
+							<img src="images/{{hourIcon34}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten34}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds34}}</p>
+							<p class="dew">Dew Point: {{hourDew34}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid34}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress34}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis34}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed34}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing34}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time35}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp35}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain35}}</p>
+							<img src="images/{{hourIcon35}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten35}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds35}}</p>
+							<p class="dew">Dew Point: {{hourDew35}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid35}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress35}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis35}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed35}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing35}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time36}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp36}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain36}}</p>
+							<img src="images/{{hourIcon36}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten36}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds36}}</p>
+							<p class="dew">Dew Point: {{hourDew36}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid36}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress36}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis36}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed36}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing36}}</p>
 						</div>
 					</div>
+					
 					<div class="row">
-						<div class="col-md-12 col-md-offset-4 text-center">
-							<img src="images/{{todayIcon}}.jpg" alt='{{icon}}' class="img-responsive">
+						<div class="col-md-1">
+							<p class="time">Time: {{time37}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp37}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain37}}</p>
+							<img src="images/{{hourIcon37}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten37}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds37}}</p>
+							<p class="dew">Dew Point: {{hourDew37}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid37}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress37}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis37}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed37}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing37}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time38}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp38}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain38}}</p>
+							<img src="images/{{hourIcon38}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten38}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds38}}</p>
+							<p class="dew">Dew Point: {{hourDew38}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid38}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress38}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis38}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed38}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing38}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time39}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp39}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain39}}</p>
+							<img src="images/{{hourIcon39}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten39}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds39}}</p>
+							<p class="dew">Dew Point: {{hourDew39}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid39}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress39}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis39}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed39}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing39}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time40}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp40}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain40}}</p>
+							<img src="images/{{hourIcon40}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten40}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds40}}</p>
+							<p class="dew">Dew Point: {{hourDew40}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid40}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress40}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis40}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed40}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing40}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time41}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp41}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain41}}</p>
+							<img src="images/{{hourIcon41}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten41}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds41}}</p>
+							<p class="dew">Dew Point: {{hourDew41}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid41}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress41}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis41}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed41}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing41}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time42}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp42}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain42}}</p>
+							<img src="images/{{hourIcon42}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten42}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds42}}</p>
+							<p class="dew">Dew Point: {{hourDew42}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid42}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress42}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis42}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed42}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing42}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time43}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp43}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain43}}</p>
+							<img src="images/{{hourIcon43}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten43}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds43}}</p>
+							<p class="dew">Dew Point: {{hourDew43}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid43}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress43}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis43}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed43}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing43}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time44}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp44}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain44}}</p>
+							<img src="images/{{hourIcon44}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten44}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds44}}</p>
+							<p class="dew">Dew Point: {{hourDew44}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid44}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress44}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis44}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed44}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing44}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time45}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp45}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain45}}</p>
+							<img src="images/{{hourIcon45}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten45}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds45}}</p>
+							<p class="dew">Dew Point: {{hourDew45}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid45}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress45}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis45}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed45}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing45}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time46}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp46}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain46}}</p>
+							<img src="images/{{hourIcon46}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten46}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds46}}</p>
+							<p class="dew">Dew Point: {{hourDew46}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid46}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress46}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis46}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed46}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing46}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time47}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp47}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain47}}</p>
+							<img src="images/{{hourIcon47}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten47}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds47}}</p>
+							<p class="dew">Dew Point: {{hourDew47}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid47}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress47}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis47}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed47}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing47}}</p>
+						</div>
+						<div class="col-md-1">
+							<p class="time">Time: {{time48}}</p>
+							<p class="temp hour-temp">Temp: {{hourTemp48}} &deg;F</p>
+							<p class="rain hour-rain">% Rain = {{hourRain48}}</p>
+							<img src="images/{{hourIcon48}}.jpg" alt='{{icon}}' class="img-responsive">
+							<p class="rain-intensity">Rain intensity: {{rainInten48}}</p>
+							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds48}}</p>
+							<p class="dew">Dew Point: {{hourDew48}}</p>
+							<p class="humidity hour-humidity"> Humidity: {{hourHumid48}}</p>
+							<p class="pressure hour-pressure"> Pressure: {{hourPress48}}</p>
+							<p class="visibility hour-visibility"> Visibility: {{hourVis48}}</p>
+							<p class="wind-speed hour-wind-speed"> Wind Speed: {{hourWindSpeed48}}</p>
+							<p class="wind-bearing hour-wind-bearing"> Wind Bearing: {{hourWindBearing48}}</p>
 						</div>
 					</div>
-					<div class="row">	
-						<div class="col-md-12 text-center" >
-							<p class="p-descriptor" style="margin: auto;"> {{todaySummary}} </p>
-						</div>
-					</div>
-			   </div>
-			   
-			   <div class="col-md-4 text-center first-three-blocks">
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<h2 class="h2-descriptor">Tomorrow</h2>
-						</div>
-					</div>	
-					<div class="row temp-row">
-							<div class="col-md-12">
-								<div class="row">
-									<p class="p-descriptor hi"> Hi: {{tomorrowHi}} &deg;F</p>
-								</div>
-								<div class="row">
-									<p class="p-descriptor low"> Low: {{tomorrowLow}} &deg;F</p>
-								</div>
-							</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<h3 class="h3-descriptor"> % Rain = {{pRainTomorrow}}</h3>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<h3 class="h3-descriptor"> Humidity = {{humidityTomorrow}}</h3>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 col-md-offset-4 text-center">
-							<img src="images/{{tomorrowIcon}}.jpg" alt='{{icon}}' class="img-responsive">
-						</div>
-					</div>
-					<div class="row">	
-						<div class="col-md-12 text-center" >
-							<p class="p-descriptor" style="margin: auto;"> {{tomorrowSummary}} </p>
-						</div>
-					</div>
-			   </div>
-			   
-			   <div class="col-md-4 text-center first-three-blocks">
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<h2 class="h2-descriptor">Tomorrow's Tomorrow</h2>
-						</div>
-					</div>	
-					<div class="row temp-row">
-							<div class="col-md-12">
-								<div class="row">
-									<p class="p-descriptor hi" > Hi: {{tomorrowTomHi}} &deg;F</p>
-								</div>
-								<div class="row">
-									<p class="p-descriptor low"> Low: {{tomorrowTomLow}} &deg;F</p>
-								</div>
-							</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<h3 class="h3-descriptor"> % Rain = {{pRainTomorrowTom}}</h3>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<h3 class="h3-descriptor"> Humidity = {{humidityTomorrowTom}}</h3>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 col-md-offset-4 text-center">
-							<img src="images/{{tomorrowTomIcon}}.jpg" alt='{{icon}}' class="img-responsive">
-						</div>
-					</div>
-					<div class="row">	
-						<div class="col-md-12 text-center" >
-							<p class="p-descriptor" style="margin: auto;"> {{tomorrowTomSummary}} </p>
-						</div>
-					</div>
-			   </div>
-		   </div>
-	   </div> 
-	   
-	   <br>
-	   
-	   <div class="container-fluid middle-block">
-	   	<div class="row">
-	   		<div class="col-md-12 text-center">
-	   			<h2 id=twelveHourTitle>Today's 12 Hour Forcast</h2>
-	   		</div>
-	      </div>	
-	      <div class="row twelve-columns">
-	   		<div class="col-md-1 H odd">
-	   			<div class="row">
-	   				<div class="col-md-12">
-	   					<h3>Time: {{currentTime1}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH1}} &deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH1}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH1}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH1}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H even">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime2}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH2}} &deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH2}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH2}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH2}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H odd">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime3}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH3}} &deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH3}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH3}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH3}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H even">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime4}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH4}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH4}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH3}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH4}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H odd">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime5}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH5}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH5}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH5}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH5}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H even">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime6}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH6}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH6}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH6}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH6}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H odd">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime7}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH7}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH7}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH7}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH7}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H even">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime8}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH8}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH8}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH8}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH8}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H odd">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime9}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH9}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH9}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH9}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH9}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H even">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime10}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH10}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH10}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH10}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH10}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H odd">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime11}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH11}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH11}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH11}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH11}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   		<div class="col-md-1 H even">
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Time: {{currentTime12}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Temp: {{currentH12}}&deg;F</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>% Rain: {{percentRainH12}}</h3>
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<img src="images/{{iconH12}}.jpg" alt='{{icon}}' class="img-responsive" style="display: inline;">
-	   				</div>
-	   			</div>
-	   			<div class="row">
-	   				<div class="col-md-12 text-center">
-	   					<h3>Summary: {{summaryH12}}</h3>
-	   				</div>
-	   			</div>
-	   		</div>
-	   	</div>
-	   </div>  
+				</div>
+			</div>
+			
+			
 	   
 	   		  				  		
  </script>
@@ -510,6 +1027,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
 <script src="js/config.js"></script>
 <script src="js/api.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>

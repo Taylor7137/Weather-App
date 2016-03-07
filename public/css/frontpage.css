@@ -7,11 +7,12 @@ body{
 	margin: 0;
 }
 
-h2.welcome {
+h2.welcomeTitle {
 	margin-top: 15%;
 	margin-left:41%;
 	font: oblique lighter 50px/100px "Book Antiqua", serif;
 	color:#1154C7;
+	
 }
 
 h2.welcome:hover {
@@ -45,7 +46,11 @@ button.btn#go2 {
 div#address-input-bar2 {
 	display: none;
 	width: 40%;
-	margin-top: 1%;
+	margin-top: 0.5%;
+	position: fixed;
+	left: 3%;
+	top: 2%;
+	z-index: 1;
 }
 
 h1#location-output {
@@ -53,10 +58,34 @@ h1#location-output {
 	font-family: "Book Antiqua", serif;
 	border: 3px solid none;
 	border-radius: 5px;
-	padding: 1%;
+	padding: 0;
 	width: 50%;
-	margin-left: 25%;
+	margin-left: 0;
 	margin-top: 0;
+	position: fixed;
+	left: 3%;
+	top: 2%;
+	z-index: 1;
+}
+
+#time-zone {
+	position: fixed;
+	left: 2%;
+	top: 5%;
+	margin-left: 75%;
+}
+
+.currently {
+	margin-top: 1%;
+}
+
+.container {
+
+}
+
+.day {
+	display: inline-block;
+	width: 15%;
 }
 
 h3 {
@@ -64,13 +93,13 @@ h3 {
 }
 
 h3.h3-descriptor {
-	font-size: large;
+	font-size: normal;
 }
 
 div.first-three-blocks {
 	border: 3px solid none;
 	border-radius: 10%;
-	background-color: #c7ddd8;
+	background-color: #d2dbdb;
 	background-blend-mode: lighten;
 	margin-right: 0;
 	margin-left: 0;
@@ -82,10 +111,12 @@ div.temp-row {
 
 p.hi {
 	color: #FF4615;
+	font-size: large;
 }
 
 p.low {
 	color: #322FDC;
+	font-size: large;
 }
 
 p {
@@ -93,12 +124,13 @@ p {
 }
 
 div#top-block {
-	
+	overflow: scroll;
 }
 
 .h2-descriptor {
 	font-family: "Book Antiqua", serif;
 	background-color: none;
+	color: white;
 }
 
 #twelveHourTitle {
