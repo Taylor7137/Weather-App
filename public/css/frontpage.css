@@ -77,10 +77,33 @@ h1#location-output {
 
 .currently {
 	margin-top: 1%;
+	margin-left: 5%;
 }
 
 .container {
 
+}
+
+#units {
+	position: absolute;
+	left: 65%;
+	top: 25%;
+	z-index: 1;
+}
+
+#seven-day-outlook {
+	width: auto;
+   overflow-x: scroll;
+   white-space: nowrap;
+}
+
+.hour-wind-speed {
+	margin-bottom: 0;
+}
+
+.summary {
+	white-space: normal;
+	height: 60px;
 }
 
 .day {
@@ -88,6 +111,9 @@ h1#location-output {
 	width: 15%;
 }
 
+.img-responsive {
+	display: initial;
+}
 h3 {
 	font-size: small;
 }
