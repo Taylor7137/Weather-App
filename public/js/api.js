@@ -11,14 +11,55 @@ $(document).ready(function(){
 	$('#enterlocation2').on('keyup',getcoordinates2);
 	$('#go2').on('click',getcoordinates22);	
 	
-	$('#units').on('click',changeUnits);	
+	$('#buttonUnits').on('click',changeUnits(lat,long));
 		
+	function changeUnits(lat,long){
+		console.log('I have been clicked');
+		
+		if ($('#buttonUnits').text() == "Change Units to SI"){
+			displayWeatherSI(lat, long);
+			$('#buttonUnits').text("Change Units to English");
+			$('p.visibility-units').text('Visibility is in kilometers. Stops after 10 miles');
+			$('p.pressure-units').text('Pressure is in Hectopascals (same as mBars)');
+			$('p.rain-intensity-units').text('Rain intensity has units of millimeter per hour');
+			$('p.wind-speed-units').text('Wind Speed is in m/s');
+			$('p.degree').text().replace('F', 'C');
+		}
+		else if ($('#buttonUnits').text() == "Change Units to English"){
+			displayWeather(lat, long);
+			$('#buttonUnits').text("Change Units to SI");
+			$('p.visibility-units').text('Visibility is in miles. Stops after 10 miles');
+			$('p.pressure-units').text('Pressure is in milliBars');
+			$('p.rain-intensity-units').text('Rain intensity has units of inches per hour');
+			$('p.wind-speed-units').text('Wind Speed is in mph');
+			$('p.degree').text().replace('C', 'F');
+		}
+			
+	}
+	
+	function displayWeatherSI(lat,long){
+		var ajaxObjects = {
+			    url: buildUrlWeatherSI (lat,long),
+			    dataType: 'jsonp',
+			    success: successHandler2,
+			    error: errorHandler,
+		};
+		
+		$.ajax(ajaxObjects);
+	}
+
+	function buildUrlWeatherSI(lat, long){
+    return 'https://api.forecast.io/forecast/' + weatherApiKey+'/'+lat+','+long+'?units=si';
+  	}
+		
+	
 	function loadWeatherHtml1(event){
 		if (event.which == 13){
 			$('#welcome').css('display', 'none');
 			$('#address-input-bar2').css('display', 'initial');	
 			$('body').css('background-image', 'url("https://www.wpfaster.org/wp-content/uploads/2014/06/sunshine-and-clouds-background.jpg")');
 			$('body').css('background-size', '100% 100%');
+			$('#buttonUnits').css('display','initial');
 		}
 	}
 	
@@ -27,6 +68,7 @@ $(document).ready(function(){
 			$('#address-input-bar2').css('display', 'initial');	
 			$('body').css('background-image', 'url("https://www.wpfaster.org/wp-content/uploads/2014/06/sunshine-and-clouds-background.jpg")');
 			$('body').css('background-size', '100% 100%');
+			$('#buttonUnits').css('display','initial');
 	}
 	
 	function getcoordinates1(event){
@@ -102,13 +144,10 @@ $(document).ready(function(){
 
    function buildUrlWeather(lat, long){
     return 'https://api.forecast.io/forecast/' + weatherApiKey+'/'+lat+','+long;
-  }
+   }
 	
-	function changeUnits(){
-		if ($('#units').text == 'Change Units to SI'){
-			
-		}
-	}
+	
+	
 	
 	
 	function successHandler2(wdata){
@@ -284,7 +323,7 @@ $(document).ready(function(){
 			hourTemp1: wdata.hourly.data[1].apparentTemperature,
 			hourRain1: wdata.hourly.data[1].precipProbability*100,
 			hourIcon1: wdata.hourly.data[1].icon,
-			hourInten1: wdata.hourly.data[1].precipIntensity,
+			rainInten1: wdata.hourly.data[1].precipIntensity,
 			hourClouds1: wdata.hourly.data[1].cloudCover, 
 			hourDew1: wdata.hourly.data[1].dewPoint,
 			hourHumid1: wdata.hourly.data[1].humidity,
@@ -1312,6 +1351,5 @@ $(document).ready(function(){
 		$('#location-output').text(address);
 		
 	}
-	
 	
 });
