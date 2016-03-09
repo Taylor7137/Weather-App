@@ -49,7 +49,8 @@ $(document).ready(function(){
 		if (event.which == 13){
 			$('#welcome').css('display', 'none');
 			$('#address-input-bar2').css('display', 'initial');	
-			$('body').css('background-image', 'url("https://www.wpfaster.org/wp-content/uploads/2014/06/sunshine-and-clouds-background.jpg")');
+			$('body').css('background-image', 'none');
+			$('body').css('background-color', '#f9fb5c');
 			$('body').css('background-size', '100% 100%');
 			$('#buttonUnits').css('display','initial');
 		}
@@ -58,8 +59,9 @@ $(document).ready(function(){
 	function loadWeatherHtml2(){
 			$('#welcome').css('display', 'none');
 			$('#address-input-bar2').css('display', 'initial');	
-			$('body').css('background-image', 'url("https://www.wpfaster.org/wp-content/uploads/2014/06/sunshine-and-clouds-background.jpg")');
-			$('body').css('background-size', '100% 100%');
+			$('body').css('background-image', 'none');
+			$('body').css('background-color', '#69b7ff');
+			$('body').css('background-size', '100% 100%');			
 			$('#buttonUnits').css('display','initial');
 	}
 	
