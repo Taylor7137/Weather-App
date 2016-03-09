@@ -70,7 +70,7 @@
 						<img src="images/{{currentlyIcon}}.png" alt='{{icon}}' class="img-responsive">	
 					</div>
 					<div class="col-md-8">
-						<p class="degree"> Temp: {{currentlyTemp}} &deg;F</p>
+						<p class="degree"> Temp: {{currentlyTemp}} &deg;<span class="changeUnit">F</span></p>
 						<p> Humidity: {{currentlyHumid}}</p>
 						<p> Pressure: {{currentlyPress}}</p>																		
 					</div>
@@ -78,7 +78,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<p style="margin-left: 25%;"> Visibility: {{currentlyVis}}</p>
-						<p class="degree" style="margin-left: 10%;"> Dew Point: {{currentlyDew}} &deg;F</p>
+						<p class="degree" style="margin-left: 10%;"> Dew Point: {{currentlyDew}} &deg;<span class="changeUnit">F</span></p>
 						<p> Summary: {{currentlySum}}</p>
 					</div>
 				</div>
@@ -113,11 +113,11 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day0HiTemp}} &deg;F @ {{day0HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day0LowTemp}} &deg;F @ {{day0LowTempTime}}</p>
+						<p class="temp day-temp degree"> Hi temp: {{day0HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day0HiTempTime}}</p>
+						<p class="temp day-temp degree"> Low temp: {{day0LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day0LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day0Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day0Clouds}}</p>
-						<p class="dew day-dew degree"> Dew Point: {{day0Dew}} &deg;F</p>
+						<p class="dew day-dew degree"> Dew Point: {{day0Dew}} &deg;<span class="changeUnit">F</span></p>
 						<p class="humidity day-humidity"> Humidity: {{day0Humid}}</p>
 						<p class="pressure day-pressure"> Pressure: {{day0Press}}</p>
 						<p class="sunrise"> Sunrise @ {{day0Sunrise}}</p>
@@ -144,11 +144,11 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day1HiTemp}} &deg;F @ {{day1HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day1LowTemp}} &deg;F @ {{day1LowTempTime}}</p>
+						<p class="temp day-temp degree"> Hi temp: {{day1HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day1HiTempTime}}</p>
+						<p class="temp day-temp degree"> Low temp: {{day1LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day1LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day1Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day1Clouds}}</p>
-						<p class="dew day-dew degree"> Dew Point: {{day1Dew}} &deg;F</p>
+						<p class="dew day-dew degree"> Dew Point: {{day1Dew}} &deg;<span class="changeUnit">F</span></p>
 						<p class="humidity day-humidity"> Humidity: {{day1Humid}}</p>
 						<p class="pressure day-pressure"> Pressure: {{day1Press}}</p>
 						<p class="sunrise"> Sunrise @ {{day1Sunrise}}</p>
@@ -175,11 +175,11 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day2HiTemp}} &deg;F @ {{day2HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day2LowTemp}} &deg;F @ {{day2LowTempTime}}</p>
+						<p class="temp day-temp degree"> Hi temp: {{day2HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day2HiTempTime}}</p>
+						<p class="temp day-temp degree"> Low temp: {{day2LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day2LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day2Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day2Clouds}}</p>
-						<p class="dew day-dew degree"> Dew Point: {{day2Dew}} &deg;F</p>
+						<p class="dew day-dew degree"> Dew Point: {{day2Dew}} &deg;<span class="changeUnit">F</span></p>
 						<p class="humidity day-humidity"> Humidity: {{day2Humid}}</p>
 						<p class="pressure day-pressure"> Pressure: {{day2Press}}</p>
 						<p class="sunrise"> Sunrise @ {{day2Sunrise}}</p>
@@ -206,11 +206,11 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day3HiTemp}} &deg;F @ {{day3HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day3LowTemp}} &deg;F @ {{day3LowTempTime}}</p>
+						<p class="temp day-temp degree"> Hi temp: {{day3HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day3HiTempTime}}</p>
+						<p class="temp day-temp degree"> Low temp: {{day3LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day3LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day3Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day3Clouds}}</p>
-						<p class="dew day-dew degree"> Dew Point: {{day3Dew}} &deg;F</p>
+						<p class="dew day-dew degree"> Dew Point: {{day3Dew}} &deg;<span class="changeUnit">F</span></p>
 						<p class="humidity day-humidity"> Humidity: {{day3Humid}}</p>
 						<p class="pressure day-pressure"> Pressure: {{day3Press}}</p>
 						<p class="sunrise"> Sunrise @ {{day3Sunrise}}</p>
@@ -237,11 +237,11 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day4HiTemp}} &deg;F @ {{day4HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day4LowTemp}} &deg;F @ {{day4LowTempTime}}</p>
+						<p class="temp day-temp degree"> Hi temp: {{day4HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day4HiTempTime}}</p>
+						<p class="temp day-temp degree"> Low temp: {{day4LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day4LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day4Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day4Clouds}}</p>
-						<p class="dew day-dew degree"> Dew Point: {{day4Dew}} &deg;F</p>
+						<p class="dew day-dew degree"> Dew Point: {{day4Dew}} &deg;<span class="changeUnit">F</span></p>
 						<p class="humidity day-humidity"> Humidity: {{day4Humid}}</p>
 						<p class="pressure day-pressure"> Pressure: {{day4Press}}</p>
 						<p class="sunrise"> Sunrise @ {{day4Sunrise}}</p>
@@ -268,11 +268,11 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day5HiTemp}} &deg;F @ {{day5HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day5LowTemp}} &deg;F @ {{day5LowTempTime}}</p>
+						<p class="temp day-temp degree"> Hi temp: {{day5HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day5HiTempTime}}</p>
+						<p class="temp day-temp degree"> Low temp: {{day5LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day5LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day5Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day5Clouds}}</p>
-						<p class="dew day-dew degree"> Dew Point: {{day5Dew}} &deg;F</p>
+						<p class="dew day-dew degree"> Dew Point: {{day5Dew}} &deg;<span class="changeUnit">F</span></p>
 						<p class="humidity day-humidity"> Humidity: {{day5Humid}}</p>
 						<p class="pressure day-pressure"> Pressure: {{day5Press}}</p>
 						<p class="sunrise"> Sunrise @ {{day5Sunrise}}</p>
@@ -299,11 +299,11 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day6HiTemp}} &deg;F @ {{day6HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day6LowTemp}} &deg;F @ {{day6LowTempTime}}</p>
+						<p class="temp day-temp degree"> Hi temp: {{day6HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day6HiTempTime}}</p>
+						<p class="temp day-temp degree"> Low temp: {{day6LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day6LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day6Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day6Clouds}}</p>
-						<p class="dew day-dew degree"> Dew Point: {{day6Dew}} &deg;F</p>
+						<p class="dew day-dew degree"> Dew Point: {{day6Dew}} &deg;<span class="changeUnit">F</span></p>
 						<p class="humidity day-humidity"> Humidity: {{day6Humid}}</p>
 						<p class="pressure day-pressure"> Pressure: {{day6Press}}</p>
 						<p class="sunrise"> Sunrise @ {{day6Sunrise}}</p>
@@ -330,11 +330,11 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day7HiTemp}} &deg;F @ {{day7HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day7LowTemp}} &deg;F @ {{day7LowTempTime}}</p>
+						<p class="temp day-temp degree"> Hi temp: {{day7HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day7HiTempTime}}</p>
+						<p class="temp day-temp degree"> Low temp: {{day7LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day7LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day7Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day7Clouds}}</p>
-						<p class="dew day-dew degree"> Dew Point: {{day7Dew}} &deg;F</p>
+						<p class="dew day-dew degree"> Dew Point: {{day7Dew}} &deg;<span class="changeUnit">F</span></p>
 						<p class="humidity day-humidity"> Humidity: {{day7Humid}}</p>
 						<p class="pressure day-pressure"> Pressure: {{day7Press}}</p>
 						<p class="sunrise"> Sunrise @ {{day7Sunrise}}</p>
@@ -357,12 +357,12 @@
 					<div class="row">
 						<div class="col-md-1 odd">
 							<p class="time">{{time1}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp1}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp1}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain1}}</p>
 							<img src="images/{{hourIcon1}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten1}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds1}}</p>
-							<p class="dew degree">Dew Point: {{hourDew1}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew1}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid1}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress1}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis1}}</p>
@@ -371,12 +371,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time2}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp2}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp2}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain2}}</p>
 							<img src="images/{{hourIcon2}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten2}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds2}}</p>
-							<p class="dew degree">Dew Point: {{hourDew2}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew2}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid2}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress2}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis2}}</p>
@@ -385,12 +385,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time3}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp3}} &deg;F </p>
+							<p class="temp hour-temp degree"> {{hourTemp3}} &deg;<span class="changeUnit">F</span> </p>
 							<p class="rain hour-rain">% Rain = {{hourRain3}}</p>
 							<img src="images/{{hourIcon3}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten3}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds3}}</p>
-							<p class="dew degree">Dew Point: {{hourDew3}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew3}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid3}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress3}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis3}}</p>
@@ -399,12 +399,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time4}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp4}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp4}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain4}}</p>
 							<img src="images/{{hourIcon4}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten4}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds4}}</p>
-							<p class="dew degree">Dew Point: {{hourDew4}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew4}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid4}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress4}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis4}}</p>
@@ -413,12 +413,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time5}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp5}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp5}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain5}}</p>
 							<img src="images/{{hourIcon5}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten5}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds5}}</p>
-							<p class="dew degree">Dew Point: {{hourDew5}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew5}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid5}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress5}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis5}}</p>
@@ -427,12 +427,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time6}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp6}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp6}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain6}}</p>
 							<img src="images/{{hourIcon6}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten6}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds6}}</p>
-							<p class="dew degree">Dew Point: {{hourDew6}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew6}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid6}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress6}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis6}}</p>
@@ -441,12 +441,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time7}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp7}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp7}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain7}}</p>
 							<img src="images/{{hourIcon7}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten7}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds7}}</p>
-							<p class="dew degree">Dew Point: {{hourDew7}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew7}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid7}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress7}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis7}}</p>
@@ -455,12 +455,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time8}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp8}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp8}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain8}}</p>
 							<img src="images/{{hourIcon8}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten8}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds8}}</p>
-							<p class="dew degree">Dew Point: {{hourDew8}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew8}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid8}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress8}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis8}}</p>
@@ -469,12 +469,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time9}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp9}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp9}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain9}}</p>
 							<img src="images/{{hourIcon9}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten9}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds9}}</p>
-							<p class="dew degree">Dew Point: {{hourDew9}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew9}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid9}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress9}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis9}}</p>
@@ -483,12 +483,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time10}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp10}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp10}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain10}}</p>
 							<img src="images/{{hourIcon10}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten10}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds10}}</p>
-							<p class="dew degree">Dew Point: {{hourDew10}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew10}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid10}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress10}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis10}}</p>
@@ -497,12 +497,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time11}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp11}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp11}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain11}}</p>
 							<img src="images/{{hourIcon11}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten11}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds11}}</p>
-							<p class="dew degree">Dew Point: {{hourDew11}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew11}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid11}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress11}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis11}}</p>
@@ -511,12 +511,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time12}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp12}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp12}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain12}}</p>
 							<img src="images/{{hourIcon12}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten12}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds12}}</p>
-							<p class="dew degree">Dew Point: {{hourDew12}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew12}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid12}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress12}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis12}}</p>
@@ -528,12 +528,12 @@
 					<div class="row">
 						<div class="col-md-1 even">
 							<p class="time">{{time13}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp13}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp13}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain13}}</p>
 							<img src="images/{{hourIcon13}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten13}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds13}}</p>
-							<p class="dew degree">Dew Point: {{hourDew13}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew13}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid13}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress13}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis13}}</p>
@@ -542,12 +542,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time14}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp14}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp14}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain14}}</p>
 							<img src="images/{{hourIcon14}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten14}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds14}}</p>
-							<p class="dew degree">Dew Point: {{hourDew14}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew14}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid14}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress14}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis14}}</p>
@@ -556,12 +556,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time15}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp15}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp15}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain15}}</p>
 							<img src="images/{{hourIcon15}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten15}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds15}}</p>
-							<p class="dew degree">Dew Point: {{hourDew15}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew15}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid15}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress15}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis15}}</p>
@@ -570,12 +570,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time16}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp16}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp16}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain16}}</p>
 							<img src="images/{{hourIcon16}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten16}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds16}}</p>
-							<p class="dew degree">Dew Point: {{hourDew16}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew16}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid16}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress16}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis16}}</p>
@@ -584,12 +584,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time17}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp17}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp17}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain17}}</p>
 							<img src="images/{{hourIcon17}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten17}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds17}}</p>
-							<p class="dew degree">Dew Point: {{hourDew17}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew17}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid17}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress17}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis17}}</p>
@@ -598,12 +598,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time18}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp18}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp18}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain18}}</p>
 							<img src="images/{{hourIcon18}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten18}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds18}}</p>
-							<p class="dew degree">Dew Point: {{hourDew18}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew18}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid18}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress18}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis18}}</p>
@@ -612,12 +612,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time19}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp19}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp19}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain19}}</p>
 							<img src="images/{{hourIcon19}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten19}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds19}}</p>
-							<p class="dew degree">Dew Point: {{hourDew19}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew19}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid19}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress19}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis19}}</p>
@@ -626,12 +626,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time20}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp20}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp20}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain20}}</p>
 							<img src="images/{{hourIcon20}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten20}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds20}}</p>
-							<p class="dew degree">Dew Point: {{hourDew20}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew20}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid20}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress20}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis20}}</p>
@@ -640,12 +640,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time21}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp21}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp21}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain21}}</p>
 							<img src="images/{{hourIcon21}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten21}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds21}}</p>
-							<p class="dew degree">Dew Point: {{hourDew21}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew21}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid21}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress21}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis21}}</p>
@@ -654,12 +654,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time22}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp22}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp22}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain22}}</p>
 							<img src="images/{{hourIcon22}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten22}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds22}}</p>
-							<p class="dew degree">Dew Point: {{hourDew22}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew22}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid22}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress22}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis22}}</p>
@@ -668,12 +668,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time23}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp23}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp23}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain23}}</p>
 							<img src="images/{{hourIcon23}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten23}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds23}}</p>
-							<p class="dew degree">Dew Point: {{hourDew23}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew23}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid23}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress23}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis23}}</p>
@@ -682,12 +682,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time24}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp24}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp24}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain24}}</p>
 							<img src="images/{{hourIcon24}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten24}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds24}}</p>
-							<p class="dew degree">Dew Point: {{hourDew24}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew24}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid24}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress24}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis24}}</p>
@@ -699,12 +699,12 @@
 					<div class="row">
 						<div class="col-md-1 odd">
 							<p class="time">{{time25}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp25}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp25}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain25}}</p>
 							<img src="images/{{hourIcon25}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten25}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds25}}</p>
-							<p class="dew degree">Dew Point: {{hourDew25}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew25}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid25}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress25}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis25}}</p>
@@ -713,12 +713,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time26}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp26}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp26}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain26}}</p>
 							<img src="images/{{hourIcon26}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten26}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds26}}</p>
-							<p class="dew degree">Dew Point: {{hourDew26}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew26}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid26}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress26}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis26}}</p>
@@ -727,12 +727,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time27}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp27}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp27}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain27}}</p>
 							<img src="images/{{hourIcon27}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten27}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds27}}</p>
-							<p class="dew degree">Dew Point: {{hourDew27}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew27}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid27}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress27}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis27}}</p>
@@ -741,12 +741,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time28}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp28}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp28}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain28}}</p>
 							<img src="images/{{hourIcon28}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten28}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds28}}</p>
-							<p class="dew degree">Dew Point: {{hourDew28}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew28}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid28}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress28}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis28}}</p>
@@ -755,12 +755,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time29}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp29}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp29}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain29}}</p>
 							<img src="images/{{hourIcon29}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten29}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds29}}</p>
-							<p class="dew degree">Dew Point: {{hourDew29}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew29}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid29}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress29}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis29}}</p>
@@ -769,12 +769,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time30}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp30}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp30}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain30}}</p>
 							<img src="images/{{hourIcon30}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten30}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds30}}</p>
-							<p class="dew degree">Dew Point: {{hourDew30}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew30}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid30}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress30}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis30}}</p>
@@ -783,12 +783,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time31}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp31}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp31}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain31}}</p>
 							<img src="images/{{hourIcon31}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten31}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds31}}</p>
-							<p class="dew degree">Dew Point: {{hourDew31}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew31}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid31}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress31}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis31}}</p>
@@ -797,12 +797,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time32}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp32}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp32}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain32}}</p>
 							<img src="images/{{hourIcon32}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten32}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds32}}</p>
-							<p class="dew degree">Dew Point: {{hourDew32}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew32}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid32}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress32}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis32}}</p>
@@ -811,12 +811,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time33}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp33}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp33}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain33}}</p>
 							<img src="images/{{hourIcon33}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten33}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds33}}</p>
-							<p class="dew degree">Dew Point: {{hourDew33}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew33}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid33}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress33}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis33}}</p>
@@ -825,12 +825,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time34}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp34}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp34}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain34}}</p>
 							<img src="images/{{hourIcon34}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten34}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds34}}</p>
-							<p class="dew degree">Dew Point: {{hourDew34}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew34}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid34}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress34}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis34}}</p>
@@ -839,12 +839,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time35}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp35}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp35}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain35}}</p>
 							<img src="images/{{hourIcon35}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten35}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds35}}</p>
-							<p class="dew degree">Dew Point: {{hourDew35}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew35}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid35}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress35}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis35}}</p>
@@ -853,12 +853,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time36}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp36}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp36}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain36}}</p>
 							<img src="images/{{hourIcon36}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten36}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds36}}</p>
-							<p class="dew degree">Dew Point: {{hourDew36}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew36}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid36}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress36}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis36}}</p>
@@ -870,12 +870,12 @@
 					<div class="row">
 						<div class="col-md-1 even">
 							<p class="time">{{time37}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp37}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp37}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain37}}</p>
 							<img src="images/{{hourIcon37}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten37}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds37}}</p>
-							<p class="dew degree">Dew Point: {{hourDew37}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew37}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid37}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress37}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis37}}</p>
@@ -884,12 +884,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time38}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp38}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp38}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain38}}</p>
 							<img src="images/{{hourIcon38}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten38}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds38}}</p>
-							<p class="dew degree">Dew Point: {{hourDew38}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew38}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid38}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress38}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis38}}</p>
@@ -898,12 +898,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time39}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp39}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp39}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain39}}</p>
 							<img src="images/{{hourIcon39}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten39}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds39}}</p>
-							<p class="dew degree">Dew Point: {{hourDew39}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew39}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid39}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress39}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis39}}</p>
@@ -912,12 +912,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time40}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp40}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp40}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain40}}</p>
 							<img src="images/{{hourIcon40}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten40}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds40}}</p>
-							<p class="dew degree">Dew Point: {{hourDew40}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew40}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid40}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress40}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis40}}</p>
@@ -926,12 +926,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time41}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp41}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp41}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain41}}</p>
 							<img src="images/{{hourIcon41}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten41}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds41}}</p>
-							<p class="dew degree">Dew Point: {{hourDew41}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew41}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid41}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress41}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis41}}</p>
@@ -940,12 +940,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time42}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp42}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp42}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain42}}</p>
 							<img src="images/{{hourIcon42}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten42}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds42}}</p>
-							<p class="dew degree">Dew Point: {{hourDew42}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew42}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid42}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress42}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis42}}</p>
@@ -954,12 +954,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time43}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp43}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp43}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain43}}</p>
 							<img src="images/{{hourIcon43}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten43}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds43}}</p>
-							<p class="dew degree">Dew Point: {{hourDew43}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew43}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid43}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress43}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis43}}</p>
@@ -968,12 +968,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time44}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp44}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp44}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain44}}</p>
 							<img src="images/{{hourIcon44}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten44}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds44}}</p>
-							<p class="dew degree">Dew Point: {{hourDew44}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew44}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid44}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress44}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis44}}</p>
@@ -982,12 +982,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time45}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp45}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp45}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain45}}</p>
 							<img src="images/{{hourIcon45}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten45}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds45}}</p>
-							<p class="dew degree">Dew Point: {{hourDew45}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew45}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid45}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress45}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis45}}</p>
@@ -996,12 +996,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time46}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp46}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp46}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain46}}</p>
 							<img src="images/{{hourIcon46}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten46}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds46}}</p>
-							<p class="dew degree">Dew Point: {{hourDew46}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew46}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid46}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress46}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis46}}</p>
@@ -1010,12 +1010,12 @@
 						</div>
 						<div class="col-md-1 even">
 							<p class="time">{{time47}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp47}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp47}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain47}}</p>
 							<img src="images/{{hourIcon47}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten47}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds47}}</p>
-							<p class="dew degree">Dew Point: {{hourDew47}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew47}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid47}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress47}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis47}}</p>
@@ -1024,12 +1024,12 @@
 						</div>
 						<div class="col-md-1 odd">
 							<p class="time">{{time48}}</p>
-							<p class="temp hour-temp degree">Temp: {{hourTemp48}} &deg;F</p>
+							<p class="temp hour-temp degree"> {{hourTemp48}} &deg;<span class="changeUnit">F</span></p>
 							<p class="rain hour-rain">% Rain = {{hourRain48}}</p>
 							<img src="images/{{hourIcon48}}.png" alt='{{icon}}' class="img-responsive">
 							<p class="rain-intensity">Rain Inten: {{rainInten48}}</p>
 							<p class="hour-cloud-cover"> Cloud Cover: {{hourClouds48}}</p>
-							<p class="dew degree">Dew Point: {{hourDew48}} &deg;F</p>
+							<p class="dew degree">Dew Point: {{hourDew48}} &deg;<span class="changeUnit">F</span></p>
 							<p class="humidity hour-humidity"> Humidity: {{hourHumid48}}</p>
 							<p class="pressure hour-pressure"> Pressure: {{hourPress48}}</p>
 							<p class="visibility hour-visibility"> Vis: {{hourVis48}}</p>

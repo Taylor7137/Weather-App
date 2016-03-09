@@ -1,7 +1,10 @@
+var units = 0;
+var click = false;
 $(document).ready(function(){
 	var address = 'address';
 	var lat = {};
 	var long = {};
+	
 	
 	$('#enterlocation').on('keyup',loadWeatherHtml1);
 	$('#go').on('click',loadWeatherHtml2);
@@ -11,30 +14,19 @@ $(document).ready(function(){
 	$('#enterlocation2').on('keyup',getcoordinates2);
 	$('#go2').on('click',getcoordinates22);	
 	
-	$('#buttonUnits').on('click',changeUnits(lat,long));
+	$('#buttonUnits').on('click', function (){
+		changeUnits(lat,long)
+	});
 		
 	function changeUnits(lat,long){
 		console.log('I have been clicked');
+		click = true;
 		
-		if ($('#buttonUnits').text() == "Change Units to SI"){
+		if (units == 0){			
 			displayWeatherSI(lat, long);
-			$('#buttonUnits').text("Change Units to English");
-			$('p.visibility-units').text('Visibility is in kilometers. Stops after 10 miles');
-			$('p.pressure-units').text('Pressure is in Hectopascals (same as mBars)');
-			$('p.rain-intensity-units').text('Rain intensity has units of millimeter per hour');
-			$('p.wind-speed-units').text('Wind Speed is in m/s');
-			$('p.degree').text().replace('F', 'C');
-		}
-		else if ($('#buttonUnits').text() == "Change Units to English"){
+		}else {			
 			displayWeather(lat, long);
-			$('#buttonUnits').text("Change Units to SI");
-			$('p.visibility-units').text('Visibility is in miles. Stops after 10 miles');
-			$('p.pressure-units').text('Pressure is in milliBars');
-			$('p.rain-intensity-units').text('Rain intensity has units of inches per hour');
-			$('p.wind-speed-units').text('Wind Speed is in mph');
-			$('p.degree').text().replace('C', 'F');
-		}
-			
+		}			
 	}
 	
 	function displayWeatherSI(lat,long){
@@ -1343,12 +1335,32 @@ $(document).ready(function(){
 			dataa.time46 = moment(moment.unix(dataa.time46)).format("dddd, h:mm a");
 			dataa.time47 = moment(moment.unix(dataa.time47)).format("dddd, h:mm a");
 			dataa.time48 = moment(moment.unix(dataa.time48)).format("dddd, h:mm a");
-		
 			
 		var html = template(dataa);
 		$('#output').html(html);
 		
 		$('#location-output').text(address);
+		
+		if (click){
+			if (units == 0){			
+				$('#buttonUnits').text("Change Units to English");
+				$('p.visibility-units').text('Visibility is in kilometers. Stops after 16.09 kilometers');
+				$('p.pressure-units').text('Pressure is in Hectopascals (same as mBars)');
+				$('p.rain-intensity-units').text('Rain intensity has units of millimeters per hour');
+				$('p.wind-speed-units').text('Wind Speed is in m/s');
+				$('span.changeUnit').text("C");			
+				units = 1;
+			}else {			
+				$('#buttonUnits').text("Change Units to SI");
+				$('p.visibility-units').text('Visibility is in miles. Stops after 10 miles');
+				$('p.pressure-units').text('Pressure is in milliBars');
+				$('p.rain-intensity-units').text('Rain intensity has units of inches per hour');
+				$('p.wind-speed-units').text('Wind Speed is in mph');
+				$('span.changeUnit').text("F");
+				units = 0;
+			}
+		}
+		
 		
 	}
 	
