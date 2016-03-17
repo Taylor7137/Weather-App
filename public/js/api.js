@@ -1,5 +1,5 @@
 var units = 0;
-var click = false;
+var changeUnitsClick = false;
 $(document).ready(function(){
 	var address = 'address';
 	var lat = {};
@@ -20,13 +20,24 @@ $(document).ready(function(){
 		
 	function changeUnits(lat,long){
 		console.log('I have been clicked');
-		click = true;
+		changeUnitsClick = true;
 		
 		if (units == 0){			
 			displayWeatherSI(lat, long);
 		}else {			
 			displayWeather(lat, long);
 		}			
+	}
+	
+	function displayWeather(lat,long){
+		var ajaxObjects = {
+			    url: buildUrlWeather (lat,long),
+			    dataType: 'jsonp',
+			    success: successHandler2,
+			    error: errorHandler,
+		};
+		
+		$.ajax(ajaxObjects);
 	}
 	
 	function displayWeatherSI(lat,long){
@@ -118,31 +129,22 @@ $(document).ready(function(){
 	function successHandler(addressData){
 	   lat = addressData.results[0].geometry.location.lat;
 		long = addressData.results[0].geometry.location.lng;
-		displayWeather(lat,long);
+	   console.log(units);
+		if (units == 0){
+			displayWeather(lat,long);
+		} else {
+			displayWeatherSI(lat,long);
+		}
 	}
 	
 	function errorHandler(err){
       console.log(err);
-   }
-	
-	function displayWeather(lat,long){
-		var ajaxObjects = {
-			    url: buildUrlWeather (lat,long),
-			    dataType: 'jsonp',
-			    success: successHandler2,
-			    error: errorHandler,
-		};
-		
-		$.ajax(ajaxObjects);
-	}
+   }	
 
    function buildUrlWeather(lat, long){
     return 'https://api.forecast.io/forecast/' + weatherApiKey+'/'+lat+','+long;
    }
-	
-	
-	
-	
+		
 	
 	function successHandler2(wdata){
 		console.log(wdata);
@@ -1342,8 +1344,9 @@ $(document).ready(function(){
 		$('#output').html(html);
 		
 		$('#location-output').text(address);
-		
-		if (click){
+		console.log(changeUnitsClick);
+		if (changeUnitsClick){
+			console.log('inside click');
 			if (units == 0){			
 				$('#buttonUnits').text("Change Units to English");
 				$('p.visibility-units').text('Visibility is in kilometers. Stops after 16.09 kilometers');
@@ -1352,7 +1355,7 @@ $(document).ready(function(){
 				$('p.wind-speed-units').text('Wind Speed is in m/s');
 				$('span.changeUnit').text("C");			
 				units = 1;
-			}else {			
+			}else if (units == 1){			
 				$('#buttonUnits').text("Change Units to SI");
 				$('p.visibility-units').text('Visibility is in miles. Stops after 10 miles');
 				$('p.pressure-units').text('Pressure is in milliBars');
@@ -1362,8 +1365,28 @@ $(document).ready(function(){
 				units = 0;
 			}
 		}
-		
-		
+		else {
+			if (units == 1){			
+				$('#buttonUnits').text("Change Units to English");
+				$('p.visibility-units').text('Visibility is in kilometers. Stops after 16.09 kilometers');
+				$('p.pressure-units').text('Pressure is in Hectopascals (same as mBars)');
+				$('p.rain-intensity-units').text('Rain intensity has units of millimeters per hour');
+				$('p.wind-speed-units').text('Wind Speed is in m/s');
+				$('span.changeUnit').text("C");			
+				units = 1;
+			}else if (units == 0){			
+				$('#buttonUnits').text("Change Units to SI");
+				$('p.visibility-units').text('Visibility is in miles. Stops after 10 miles');
+				$('p.pressure-units').text('Pressure is in milliBars');
+				$('p.rain-intensity-units').text('Rain intensity has units of inches per hour');
+				$('p.wind-speed-units').text('Wind Speed is in mph');
+				$('span.changeUnit').text("F");
+				units = 0;
+			}
+		}
+		changeUnitsClick = false;
+		console.log(changeUnitsClick);
+		console.log(units);
 	}
 	
 });
