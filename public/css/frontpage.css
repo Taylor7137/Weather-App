@@ -230,3 +230,7 @@ h3 {
 div.twelve-columns {
 	padding: 1%;
 }
+
+p.rain-intensity {
+	height: 40px;
+}
