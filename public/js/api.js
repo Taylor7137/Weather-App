@@ -1,11 +1,14 @@
+var weatherApiKey = 'f09d77ba36698d3c19afa5bffb35e8d6';   var addressApiKey = 'AIzaSyDt4tJye8MS5PNeCQZeMOWOMrVb_TC32vU';
+
 var units = 0;
 var changeUnitsClick = false;
+
 $(document).ready(function(){
 	var address = 'address';
 	var lat = {};
 	var long = {};
 	
-	
+
 	$('#enterlocation').on('keyup',loadWeatherHtml1);
 	$('#go').on('click',loadWeatherHtml2);
 	$('#enterlocation').on('keyup',getcoordinates1);

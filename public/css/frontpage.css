@@ -1,19 +1,23 @@
 html {
 	margin: 0;
+	height: 100%;
+	min-height: 100%;
 }
 body{
 	background-image: url("../images/openingOceanPic.jpg");
 	font-family: "Myriad Set Pro","Helvetica Neue","Helvetica","Arial",sans-serif;
 	margin: 0;
-	background-size: cover;	
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 h2.welcomeTitle {
 	margin-top: 15%;
-	margin-left:37%;
+	/*margin-left:37%;*/
 	font: oblique lighter 75px/100px "Book Antiqua", serif;
 	color:#000327;
-	
+
 }
 
 h2.welcome:hover {
@@ -35,12 +39,12 @@ input:active {
 }
 
 button.btn#go {
-	background-color: #02132F; 
+	background-color: #02132F;
 	color: #C0C8D6;
 }
 
 button.btn#go2 {
-	background-color: #02132F; 
+	background-color: #02132F;
 	color: #C0C8D6;
 }
 
@@ -156,7 +160,7 @@ div.first-three-blocks {
 }
 
 div.temp-row {
-	
+
 }
 
 p.hi {
@@ -205,7 +209,7 @@ h3 {
 	margin-left: 0;
 	margin-right: 0;
 	padding-left: 10px;
-	padding-right: 10px;	
+	padding-right: 10px;
 }
 
 .odd {
@@ -232,5 +236,9 @@ div.twelve-columns {
 }
 
 p.rain-intensity {
+	height: 40px;
+}
+
+p.hour-cloud-cover {
 	height: 40px;
 }

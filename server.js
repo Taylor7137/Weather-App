@@ -1,7 +1,9 @@
 var express = require('express'),
 	 logger = require('morgan')('dev'),
 	 moment = require('moment'),
-	 server = express();
+	 server = express(),
+	 requests = require('request-promise');
+//	 keys = require('./config.js');
     
 
 server.use(express.static(__dirname+'/public'));
@@ -19,7 +21,7 @@ function frontpage(req, res){
 }
 
 function main(req, res){
-	res.sendFile('/html/main.html', {root: __dirname+'/public'})
+	res.sendFile('/html/main.html', {root: __dirname+'/public'});
 }
 
 function listenCallback(){
