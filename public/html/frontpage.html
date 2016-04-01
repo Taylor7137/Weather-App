@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- <html lang="en" ng-app="weatherApp"> -->
 <head>
 	<meta charset="UTF-8">
 	<title>Weather Dude</title>
@@ -11,6 +12,7 @@
 	<link rel="stylesheet" href="css/animate.css">
 </head>
 <body>
+<!-- <body ng-controller="weatherControllers"> -->
 
 <div id="welcome">
 	<h2 class='welcomeTitle animated bounceInRight text-center'>Welcome</h2>
@@ -113,8 +115,8 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day0HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day0HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day0LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day0LowTempTime}}</p>
+						<p class="temp day-temp degree hi-temp"> Hi temp: {{day0HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day0HiTempTime}}</p>
+						<p class="temp day-temp degree low-temp"> Low temp: {{day0LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day0LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day0Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day0Clouds}}</p>
 						<p class="dew day-dew degree"> Dew Point: {{day0Dew}} &deg;<span class="changeUnit">F</span></p>
@@ -144,8 +146,8 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day1HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day1HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day1LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day1LowTempTime}}</p>
+						<p class="temp day-temp degree hi-temp"> Hi temp: {{day1HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day1HiTempTime}}</p>
+						<p class="temp day-temp degree low-temp"> Low temp: {{day1LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day1LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day1Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day1Clouds}}</p>
 						<p class="dew day-dew degree"> Dew Point: {{day1Dew}} &deg;<span class="changeUnit">F</span></p>
@@ -175,8 +177,8 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day2HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day2HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day2LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day2LowTempTime}}</p>
+						<p class="temp day-temp degree hi-temp"> Hi temp: {{day2HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day2HiTempTime}}</p>
+						<p class="temp day-temp degree low-temp"> Low temp: {{day2LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day2LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day2Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day2Clouds}}</p>
 						<p class="dew day-dew degree"> Dew Point: {{day2Dew}} &deg;<span class="changeUnit">F</span></p>
@@ -206,8 +208,8 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day3HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day3HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day3LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day3LowTempTime}}</p>
+						<p class="temp day-temp degree hi-temp"> Hi temp: {{day3HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day3HiTempTime}}</p>
+						<p class="temp day-temp degree low-temp"> Low temp: {{day3LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day3LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day3Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day3Clouds}}</p>
 						<p class="dew day-dew degree"> Dew Point: {{day3Dew}} &deg;<span class="changeUnit">F</span></p>
@@ -237,8 +239,8 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day4HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day4HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day4LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day4LowTempTime}}</p>
+						<p class="temp day-temp degree hi-temp"> Hi temp: {{day4HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day4HiTempTime}}</p>
+						<p class="temp day-temp degree low-temp"> Low temp: {{day4LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day4LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day4Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day4Clouds}}</p>
 						<p class="dew day-dew degree"> Dew Point: {{day4Dew}} &deg;<span class="changeUnit">F</span></p>
@@ -268,8 +270,8 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day5HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day5HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day5LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day5LowTempTime}}</p>
+						<p class="temp day-temp degree hi-temp"> Hi temp: {{day5HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day5HiTempTime}}</p>
+						<p class="temp day-temp degree low-temp"> Low temp: {{day5LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day5LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day5Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day5Clouds}}</p>
 						<p class="dew day-dew degree"> Dew Point: {{day5Dew}} &deg;<span class="changeUnit">F</span></p>
@@ -299,8 +301,8 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day6HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day6HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day6LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day6LowTempTime}}</p>
+						<p class="temp day-temp degree hi-temp"> Hi temp: {{day6HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day6HiTempTime}}</p>
+						<p class="temp day-temp degree low-temp"> Low temp: {{day6LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day6LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day6Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day6Clouds}}</p>
 						<p class="dew day-dew degree"> Dew Point: {{day6Dew}} &deg;<span class="changeUnit">F</span></p>
@@ -330,8 +332,8 @@
 				</div>
 				<div class='row'>
 					<div class="col-md-12 text-center">
-						<p class="temp day-temp degree"> Hi temp: {{day7HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day7HiTempTime}}</p>
-						<p class="temp day-temp degree"> Low temp: {{day7LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day7LowTempTime}}</p>
+						<p class="temp day-temp degree hi-temp"> Hi temp: {{day7HiTemp}} &deg;<span class="changeUnit">F</span> @ {{day7HiTempTime}}</p>
+						<p class="temp day-temp degree low-temp"> Low temp: {{day7LowTemp}} &deg;<span class="changeUnit">F</span> @ {{day7LowTempTime}}</p>
 						<p class="rain day-rain"> % Rain = {{day7Rain}}</p>
 						<p class="cloud-cover"> Cloud Cover: {{day7Clouds}}</p>
 						<p class="dew day-dew degree"> Dew Point: {{day7Dew}} &deg;<span class="changeUnit">F</span></p>

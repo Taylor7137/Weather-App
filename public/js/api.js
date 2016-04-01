@@ -1,5 +1,3 @@
-var weatherApiKey = 'f09d77ba36698d3c19afa5bffb35e8d6';   var addressApiKey = 'AIzaSyDt4tJye8MS5PNeCQZeMOWOMrVb_TC32vU';
-
 var units = 0;
 var changeUnitsClick = false;
 
@@ -7,78 +5,77 @@ $(document).ready(function(){
 	var address = 'address';
 	var lat = {};
 	var long = {};
-	
+
 
 	$('#enterlocation').on('keyup',loadWeatherHtml1);
 	$('#go').on('click',loadWeatherHtml2);
 	$('#enterlocation').on('keyup',getcoordinates1);
 	$('#go').on('click',getcoordinates11);
-	
+
 	$('#enterlocation2').on('keyup',getcoordinates2);
-	$('#go2').on('click',getcoordinates22);	
-	
+	$('#go2').on('click',getcoordinates22);
+
 	$('#buttonUnits').on('click', function (){
 		changeUnits(lat,long)
 	});
-		
+
 	function changeUnits(lat,long){
 		console.log('I have been clicked');
 		changeUnitsClick = true;
-		
-		if (units == 0){			
+
+		if (units == 0){
 			displayWeatherSI(lat, long);
-		}else {			
+		}else {
 			displayWeather(lat, long);
-		}			
+		}
 	}
-	
+
 	function displayWeather(lat,long){
 		var ajaxObjects = {
 			    url: buildUrlWeather (lat,long),
-			    dataType: 'jsonp',
+			    dataType: 'json',
 			    success: successHandler2,
 			    error: errorHandler,
 		};
-		
+
 		$.ajax(ajaxObjects);
 	}
-	
+
 	function displayWeatherSI(lat,long){
 		var ajaxObjects = {
 			    url: buildUrlWeatherSI (lat,long),
-			    dataType: 'jsonp',
+			    dataType: 'json',
 			    success: successHandler2,
 			    error: errorHandler,
 		};
-		
+
 		$.ajax(ajaxObjects);
 	}
 
 	function buildUrlWeatherSI(lat, long){
-    return 'https://api.forecast.io/forecast/' + weatherApiKey+'/'+lat+','+long+'?units=si';
-  	}
-		
-	
+	 return '/weatherSI/'+lat+','+long;
+	}
+
 	function loadWeatherHtml1(event){
 		if (event.which == 13){
 			$('#welcome').css('display', 'none');
-			$('#address-input-bar2').css('display', 'initial');	
+			$('#address-input-bar2').css('display', 'initial');
 			$('body').css('background-image', 'none');
 			$('body').css('background-color', '#f9fb5c');
 			$('body').css('background-size', '100% 100%');
 			$('#buttonUnits').css('display','initial');
 		}
 	}
-	
+
 	function loadWeatherHtml2(){
 			$('#welcome').css('display', 'none');
-			$('#address-input-bar2').css('display', 'initial');	
+			$('#address-input-bar2').css('display', 'initial');
 			$('body').css('background-image', 'none');
 			$('body').css('background-color', '#69b7ff');
-			$('body').css('background-size', '100% 100%');			
+			$('body').css('background-size', '100% 100%');
 			$('#buttonUnits').css('display','initial');
 	}
-	
+
 	function getcoordinates1(event){
 		if (event.which == 13){
 			address = $('#enterlocation').val();
@@ -90,7 +87,7 @@ $(document).ready(function(){
 
 			$.ajax(ajaxObjects);}
 	}
-	
+
 	function getcoordinates11(){
 			address = $('#enterlocation').val();
 			var ajaxObjects = {
@@ -101,7 +98,7 @@ $(document).ready(function(){
 
 			$.ajax(ajaxObjects);
 	}
-	
+
 	function getcoordinates2(event){
 		if (event.which == 13){
 			address = $('#enterlocation2').val();
@@ -110,10 +107,10 @@ $(document).ready(function(){
 					 success: successHandler,
 					 error: errorHandler,
 			};
-		
+
 		$.ajax(ajaxObjects);}
 	}
-	
+
 	function getcoordinates22(){
 		address = $('#enterlocation2').val();
 		var ajaxObjects = {
@@ -121,43 +118,41 @@ $(document).ready(function(){
 			    success: successHandler,
 			    error: errorHandler,
 		};
-		
+
 		$.ajax(ajaxObjects);
 	}
-	
+
 	function buildUrlAddress(address){
-     return 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address +'&key='+addressApiKey;
-   }
+	     return '/address/'+address;
+	   }
 
 	function successHandler(addressData){
 	   lat = addressData.results[0].geometry.location.lat;
 		long = addressData.results[0].geometry.location.lng;
-	   console.log(units);
 		if (units == 0){
 			displayWeather(lat,long);
 		} else {
 			displayWeatherSI(lat,long);
 		}
 	}
-	
+
 	function errorHandler(err){
       console.log(err);
-   }	
-
-   function buildUrlWeather(lat, long){
-    return 'https://api.forecast.io/forecast/' + weatherApiKey+'/'+lat+','+long;
    }
-		
-	
+
+  function buildUrlWeather(lat, long){
+	  return '/weather/'+lat+','+long;
+	}
+
 	function successHandler2(wdata){
 		console.log(wdata);
 		var source = $('#info').html();
 		var template = Handlebars.compile(source);
 		var dataa = {
 			location: wdata.latitude,
-			
+
 			timeZone: wdata.timezone,
-			
+
 			currentlyIcon: wdata.currently.icon,
 			currentlyTemp: wdata.currently.temperature,
 			currentlyPress: wdata.currently.pressure,
@@ -165,7 +160,7 @@ $(document).ready(function(){
 			currentlyVis: wdata.currently.visibility,
 			currentlyHumid: wdata.currently.humidity,
 			currentlySum: wdata.daily.summary,
-			
+
 			day0: wdata.daily.data[0].time,
 			day0Icon: wdata.daily.data[0].icon,
 			day0HiTemp: wdata.daily.data[0].apparentTemperatureMax,
@@ -184,7 +179,7 @@ $(document).ready(function(){
 			day0WindBearing: wdata.daily.data[0].windBearing,
 			day0Moon: wdata.daily.data[0].moonPhase,
 			day0Summary: wdata.daily.data[0].summary,
-			
+
 			day1: wdata.daily.data[1].time,
 			day1Icon: wdata.daily.data[1].icon,
 			day1HiTemp: wdata.daily.data[1].apparentTemperatureMax,
@@ -203,7 +198,7 @@ $(document).ready(function(){
 			day1WindBearing: wdata.daily.data[1].windBearing,
 			day1Moon: wdata.daily.data[1].moonPhase,
 			day1Summary: wdata.daily.data[1].summary,
-			
+
 			day2: wdata.daily.data[2].time,
 			day2Icon: wdata.daily.data[2].icon,
 			day2HiTemp: wdata.daily.data[2].apparentTemperatureMax,
@@ -222,7 +217,7 @@ $(document).ready(function(){
 			day2WindBearing: wdata.daily.data[2].windBearing,
 			day2Moon: wdata.daily.data[2].moonPhase,
 			day2Summary: wdata.daily.data[2].summary,
-			
+
 			day3: wdata.daily.data[3].time,
 			day3Icon: wdata.daily.data[3].icon,
 			day3HiTemp: wdata.daily.data[3].apparentTemperatureMax,
@@ -241,7 +236,7 @@ $(document).ready(function(){
 			day3WindBearing: wdata.daily.data[3].windBearing,
 			day3Moon: wdata.daily.data[3].moonPhase,
 			day3Summary: wdata.daily.data[3].summary,
-			
+
 			day4: wdata.daily.data[4].time,
 			day4Icon: wdata.daily.data[4].icon,
 			day4HiTemp: wdata.daily.data[4].apparentTemperatureMax,
@@ -260,7 +255,7 @@ $(document).ready(function(){
 			day4WindBearing: wdata.daily.data[4].windBearing,
 			day4Moon: wdata.daily.data[4].moonPhase,
 			day4Summary: wdata.daily.data[4].summary,
-			
+
 			day5: wdata.daily.data[5].time,
 			day5Icon: wdata.daily.data[5].icon,
 			day5HiTemp: wdata.daily.data[5].apparentTemperatureMax,
@@ -279,7 +274,7 @@ $(document).ready(function(){
 			day5WindBearing: wdata.daily.data[5].windBearing,
 			day5Moon: wdata.daily.data[5].moonPhase,
 			day5Summary: wdata.daily.data[5].summary,
-			
+
 			day6: wdata.daily.data[6].time,
 			day6Icon: wdata.daily.data[6].icon,
 			day6HiTemp: wdata.daily.data[6].apparentTemperatureMax,
@@ -298,7 +293,7 @@ $(document).ready(function(){
 			day6WindBearing: wdata.daily.data[6].windBearing,
 			day6Moon: wdata.daily.data[6].moonPhase,
 			day6Summary: wdata.daily.data[6].summary,
-			
+
 			day7: wdata.daily.data[7].time,
 			day7Icon: wdata.daily.data[7].icon,
 			day7HiTemp: wdata.daily.data[7].apparentTemperatureMax,
@@ -317,639 +312,639 @@ $(document).ready(function(){
 			day7WindBearing: wdata.daily.data[7].windBearing,
 			day7Moon: wdata.daily.data[7].moonPhase,
 			day7Summary: wdata.daily.data[7].summary,
-			
+
 			time1: wdata.hourly.data[1].time,
 			hourTemp1: wdata.hourly.data[1].apparentTemperature,
 			hourRain1: wdata.hourly.data[1].precipProbability*100,
 			hourIcon1: wdata.hourly.data[1].icon,
 			rainInten1: wdata.hourly.data[1].precipIntensity,
-			hourClouds1: wdata.hourly.data[1].cloudCover, 
+			hourClouds1: wdata.hourly.data[1].cloudCover,
 			hourDew1: wdata.hourly.data[1].dewPoint,
 			hourHumid1: wdata.hourly.data[1].humidity,
 			hourPress1: wdata.hourly.data[1].pressure,
 			hourVis1: wdata.hourly.data[1].visibility,
 			hourWindSpeed1: wdata.hourly.data[1].windSpeed,
 			hourWindBearing1: wdata.hourly.data[1].windBearing,
-			
+
 			time2: wdata.hourly.data[2].time,
 			hourTemp2: wdata.hourly.data[2].apparentTemperature,
 			hourRain2: wdata.hourly.data[2].precipProbability*100,
 			hourIcon2: wdata.hourly.data[2].icon,
 			rainInten2: wdata.hourly.data[2].precipIntensity,
-			hourClouds2: wdata.hourly.data[2].cloudCover, 
+			hourClouds2: wdata.hourly.data[2].cloudCover,
 			hourDew2: wdata.hourly.data[2].dewPoint,
 			hourHumid2: wdata.hourly.data[2].humidity,
 			hourPress2: wdata.hourly.data[2].pressure,
 			hourVis2: wdata.hourly.data[2].visibility,
 			hourWindSpeed2: wdata.hourly.data[2].windSpeed,
 			hourWindBearing2: wdata.hourly.data[2].windBearing,
-			
+
 			time3: wdata.hourly.data[3].time,
 			hourTemp3: wdata.hourly.data[3].apparentTemperature,
 			hourRain3: wdata.hourly.data[3].precipProbability*100,
 			hourIcon3: wdata.hourly.data[3].icon,
 			rainInten3: wdata.hourly.data[3].precipIntensity,
-			hourClouds3: wdata.hourly.data[3].cloudCover, 
+			hourClouds3: wdata.hourly.data[3].cloudCover,
 			hourDew3: wdata.hourly.data[3].dewPoint,
 			hourHumid3: wdata.hourly.data[3].humidity,
 			hourPress3: wdata.hourly.data[3].pressure,
 			hourVis3: wdata.hourly.data[3].visibility,
 			hourWindSpeed3: wdata.hourly.data[3].windSpeed,
 			hourWindBearing3: wdata.hourly.data[3].windBearing,
-			
+
 			time4: wdata.hourly.data[4].time,
 			hourTemp4: wdata.hourly.data[4].apparentTemperature,
 			hourRain4: wdata.hourly.data[4].precipProbability*100,
 			hourIcon4: wdata.hourly.data[4].icon,
 			rainInten4: wdata.hourly.data[4].precipIntensity,
-			hourClouds4: wdata.hourly.data[4].cloudCover, 
+			hourClouds4: wdata.hourly.data[4].cloudCover,
 			hourDew4: wdata.hourly.data[4].dewPoint,
 			hourHumid4: wdata.hourly.data[4].humidity,
 			hourPress4: wdata.hourly.data[4].pressure,
 			hourVis4: wdata.hourly.data[4].visibility,
 			hourWindSpeed4: wdata.hourly.data[4].windSpeed,
 			hourWindBearing4: wdata.hourly.data[4].windBearing,
-			
+
 			time5: wdata.hourly.data[5].time,
 			hourTemp5: wdata.hourly.data[5].apparentTemperature,
 			hourRain5: wdata.hourly.data[5].precipProbability*100,
 			hourIcon5: wdata.hourly.data[5].icon,
 			rainInten5: wdata.hourly.data[5].precipIntensity,
-			hourClouds5: wdata.hourly.data[5].cloudCover, 
+			hourClouds5: wdata.hourly.data[5].cloudCover,
 			hourDew5: wdata.hourly.data[5].dewPoint,
 			hourHumid5: wdata.hourly.data[5].humidity,
 			hourPress5: wdata.hourly.data[5].pressure,
 			hourVis5: wdata.hourly.data[5].visibility,
 			hourWindSpeed5: wdata.hourly.data[5].windSpeed,
 			hourWindBearing5: wdata.hourly.data[5].windBearing,
-			
+
 			time6: wdata.hourly.data[6].time,
 			hourTemp6: wdata.hourly.data[6].apparentTemperature,
 			hourRain6: wdata.hourly.data[6].precipProbability*100,
 			hourIcon6: wdata.hourly.data[6].icon,
 			rainInten6: wdata.hourly.data[6].precipIntensity,
-			hourClouds6: wdata.hourly.data[6].cloudCover, 
+			hourClouds6: wdata.hourly.data[6].cloudCover,
 			hourDew6: wdata.hourly.data[6].dewPoint,
 			hourHumid6: wdata.hourly.data[6].humidity,
 			hourPress6: wdata.hourly.data[6].pressure,
 			hourVis6: wdata.hourly.data[6].visibility,
 			hourWindSpeed6: wdata.hourly.data[6].windSpeed,
 			hourWindBearing6: wdata.hourly.data[6].windBearing,
-			
+
 			time7: wdata.hourly.data[7].time,
 			hourTemp7: wdata.hourly.data[7].apparentTemperature,
 			hourRain7: wdata.hourly.data[7].precipProbability*100,
 			hourIcon7: wdata.hourly.data[7].icon,
 			rainInten7: wdata.hourly.data[7].precipIntensity,
-			hourClouds7: wdata.hourly.data[7].cloudCover, 
+			hourClouds7: wdata.hourly.data[7].cloudCover,
 			hourDew7: wdata.hourly.data[7].dewPoint,
 			hourHumid7: wdata.hourly.data[7].humidity,
 			hourPress7: wdata.hourly.data[7].pressure,
 			hourVis7: wdata.hourly.data[7].visibility,
 			hourWindSpeed7: wdata.hourly.data[7].windSpeed,
 			hourWindBearing7: wdata.hourly.data[7].windBearing,
-			
+
 			time8: wdata.hourly.data[8].time,
 			hourTemp8: wdata.hourly.data[8].apparentTemperature,
 			hourRain8: wdata.hourly.data[8].precipProbability*100,
 			hourIcon8: wdata.hourly.data[8].icon,
 			rainInten8: wdata.hourly.data[8].precipIntensity,
-			hourClouds8: wdata.hourly.data[8].cloudCover, 
+			hourClouds8: wdata.hourly.data[8].cloudCover,
 			hourDew8: wdata.hourly.data[8].dewPoint,
 			hourHumid8: wdata.hourly.data[8].humidity,
 			hourPress8: wdata.hourly.data[8].pressure,
 			hourVis8: wdata.hourly.data[8].visibility,
 			hourWindSpeed8: wdata.hourly.data[8].windSpeed,
 			hourWindBearing8: wdata.hourly.data[8].windBearing,
-			
+
 			time9: wdata.hourly.data[9].time,
 			hourTemp9: wdata.hourly.data[9].apparentTemperature,
 			hourRain9: wdata.hourly.data[9].precipProbability*100,
 			hourIcon9: wdata.hourly.data[9].icon,
 			rainInten9: wdata.hourly.data[9].precipIntensity,
-			hourClouds9: wdata.hourly.data[9].cloudCover, 
+			hourClouds9: wdata.hourly.data[9].cloudCover,
 			hourDew9: wdata.hourly.data[9].dewPoint,
 			hourHumid9: wdata.hourly.data[9].humidity,
 			hourPress9: wdata.hourly.data[9].pressure,
 			hourVis9: wdata.hourly.data[9].visibility,
 			hourWindSpeed9: wdata.hourly.data[9].windSpeed,
 			hourWindBearing9: wdata.hourly.data[9].windBearing,
-			
+
 			time10: wdata.hourly.data[10].time,
 			hourTemp10: wdata.hourly.data[10].apparentTemperature,
 			hourRain10: wdata.hourly.data[10].precipProbability*100,
 			hourIcon10: wdata.hourly.data[10].icon,
 			rainInten10: wdata.hourly.data[10].precipIntensity,
-			hourClouds10: wdata.hourly.data[10].cloudCover, 
+			hourClouds10: wdata.hourly.data[10].cloudCover,
 			hourDew10: wdata.hourly.data[10].dewPoint,
 			hourHumid10: wdata.hourly.data[10].humidity,
 			hourPress10: wdata.hourly.data[10].pressure,
 			hourVis10: wdata.hourly.data[10].visibility,
 			hourWindSpeed10: wdata.hourly.data[10].windSpeed,
 			hourWindBearing10: wdata.hourly.data[10].windBearing,
-			
+
 			time11: wdata.hourly.data[11].time,
 			hourTemp11: wdata.hourly.data[11].apparentTemperature,
 			hourRain11: wdata.hourly.data[11].precipProbability*100,
 			hourIcon11: wdata.hourly.data[11].icon,
 			rainInten11: wdata.hourly.data[11].precipIntensity,
-			hourClouds11: wdata.hourly.data[11].cloudCover, 
+			hourClouds11: wdata.hourly.data[11].cloudCover,
 			hourDew11: wdata.hourly.data[11].dewPoint,
 			hourHumid11: wdata.hourly.data[11].humidity,
 			hourPress11: wdata.hourly.data[11].pressure,
 			hourVis11: wdata.hourly.data[11].visibility,
 			hourWindSpeed11: wdata.hourly.data[11].windSpeed,
 			hourWindBearing11: wdata.hourly.data[11].windBearing,
-			
+
 			time12: wdata.hourly.data[12].time,
 			hourTemp12: wdata.hourly.data[12].apparentTemperature,
 			hourRain12: wdata.hourly.data[12].precipProbability*100,
 			hourIcon12: wdata.hourly.data[12].icon,
 			rainInten12: wdata.hourly.data[12].precipIntensity,
-			hourClouds12: wdata.hourly.data[12].cloudCover, 
+			hourClouds12: wdata.hourly.data[12].cloudCover,
 			hourDew12: wdata.hourly.data[12].dewPoint,
 			hourHumid12: wdata.hourly.data[12].humidity,
 			hourPress12: wdata.hourly.data[12].pressure,
 			hourVis12: wdata.hourly.data[12].visibility,
 			hourWindSpeed12: wdata.hourly.data[12].windSpeed,
 			hourWindBearing12: wdata.hourly.data[12].windBearing,
-			
+
 			time13: wdata.hourly.data[13].time,
 			hourTemp13: wdata.hourly.data[13].apparentTemperature,
 			hourRain13: wdata.hourly.data[13].precipProbability*100,
 			hourIcon13: wdata.hourly.data[13].icon,
 			rainInten13: wdata.hourly.data[13].precipIntensity,
-			hourClouds13: wdata.hourly.data[13].cloudCover, 
+			hourClouds13: wdata.hourly.data[13].cloudCover,
 			hourDew13: wdata.hourly.data[13].dewPoint,
 			hourHumid13: wdata.hourly.data[13].humidity,
 			hourPress13: wdata.hourly.data[13].pressure,
 			hourVis13: wdata.hourly.data[13].visibility,
 			hourWindSpeed13: wdata.hourly.data[13].windSpeed,
 			hourWindBearing13: wdata.hourly.data[13].windBearing,
-			
+
 			time14: wdata.hourly.data[14].time,
 			hourTemp14: wdata.hourly.data[14].apparentTemperature,
 			hourRain14: wdata.hourly.data[14].precipProbability*100,
 			hourIcon14: wdata.hourly.data[14].icon,
 			rainInten14: wdata.hourly.data[14].precipIntensity,
-			hourClouds14: wdata.hourly.data[14].cloudCover, 
+			hourClouds14: wdata.hourly.data[14].cloudCover,
 			hourDew14: wdata.hourly.data[14].dewPoint,
 			hourHumid14: wdata.hourly.data[14].humidity,
 			hourPress14: wdata.hourly.data[14].pressure,
 			hourVis14: wdata.hourly.data[14].visibility,
 			hourWindSpeed14: wdata.hourly.data[14].windSpeed,
 			hourWindBearing14: wdata.hourly.data[14].windBearing,
-			
+
 			time15: wdata.hourly.data[15].time,
 			hourTemp15: wdata.hourly.data[15].apparentTemperature,
 			hourRain15: wdata.hourly.data[15].precipProbability*100,
 			hourIcon15: wdata.hourly.data[15].icon,
 			rainInten15: wdata.hourly.data[15].precipIntensity,
-			hourClouds15: wdata.hourly.data[15].cloudCover, 
+			hourClouds15: wdata.hourly.data[15].cloudCover,
 			hourDew15: wdata.hourly.data[15].dewPoint,
 			hourHumid15: wdata.hourly.data[15].humidity,
 			hourPress15: wdata.hourly.data[15].pressure,
 			hourVis15: wdata.hourly.data[15].visibility,
 			hourWindSpeed15: wdata.hourly.data[15].windSpeed,
 			hourWindBearing15: wdata.hourly.data[15].windBearing,
-			
+
 			time16: wdata.hourly.data[16].time,
 			hourTemp16: wdata.hourly.data[16].apparentTemperature,
 			hourRain16: wdata.hourly.data[16].precipProbability*100,
 			hourIcon16: wdata.hourly.data[16].icon,
 			rainInten16: wdata.hourly.data[16].precipIntensity,
-			hourClouds16: wdata.hourly.data[16].cloudCover, 
+			hourClouds16: wdata.hourly.data[16].cloudCover,
 			hourDew16: wdata.hourly.data[16].dewPoint,
 			hourHumid16: wdata.hourly.data[16].humidity,
 			hourPress16: wdata.hourly.data[16].pressure,
 			hourVis16: wdata.hourly.data[16].visibility,
 			hourWindSpeed16: wdata.hourly.data[16].windSpeed,
 			hourWindBearing16: wdata.hourly.data[16].windBearing,
-			
+
 			time17: wdata.hourly.data[17].time,
 			hourTemp17: wdata.hourly.data[17].apparentTemperature,
 			hourRain17: wdata.hourly.data[17].precipProbability*100,
 			hourIcon17: wdata.hourly.data[17].icon,
 			rainInten17: wdata.hourly.data[17].precipIntensity,
-			hourClouds17: wdata.hourly.data[17].cloudCover, 
+			hourClouds17: wdata.hourly.data[17].cloudCover,
 			hourDew17: wdata.hourly.data[17].dewPoint,
 			hourHumid17: wdata.hourly.data[17].humidity,
 			hourPress17: wdata.hourly.data[17].pressure,
 			hourVis17: wdata.hourly.data[17].visibility,
 			hourWindSpeed17: wdata.hourly.data[17].windSpeed,
 			hourWindBearing17: wdata.hourly.data[17].windBearing,
-			
+
 			time18: wdata.hourly.data[18].time,
 			hourTemp18: wdata.hourly.data[18].apparentTemperature,
 			hourRain18: wdata.hourly.data[18].precipProbability*100,
 			hourIcon18: wdata.hourly.data[18].icon,
 			rainInten18: wdata.hourly.data[18].precipIntensity,
-			hourClouds18: wdata.hourly.data[18].cloudCover, 
+			hourClouds18: wdata.hourly.data[18].cloudCover,
 			hourDew18: wdata.hourly.data[18].dewPoint,
 			hourHumid18: wdata.hourly.data[18].humidity,
 			hourPress18: wdata.hourly.data[18].pressure,
 			hourVis18: wdata.hourly.data[18].visibility,
 			hourWindSpeed18: wdata.hourly.data[18].windSpeed,
 			hourWindBearing18: wdata.hourly.data[18].windBearing,
-			
+
 			time19: wdata.hourly.data[19].time,
 			hourTemp19: wdata.hourly.data[19].apparentTemperature,
 			hourRain19: wdata.hourly.data[19].precipProbability*100,
 			hourIcon19: wdata.hourly.data[19].icon,
 			rainInten19: wdata.hourly.data[19].precipIntensity,
-			hourClouds19: wdata.hourly.data[19].cloudCover, 
+			hourClouds19: wdata.hourly.data[19].cloudCover,
 			hourDew19: wdata.hourly.data[19].dewPoint,
 			hourHumid19: wdata.hourly.data[19].humidity,
 			hourPress19: wdata.hourly.data[19].pressure,
 			hourVis19: wdata.hourly.data[19].visibility,
 			hourWindSpeed19: wdata.hourly.data[19].windSpeed,
 			hourWindBearing19: wdata.hourly.data[19].windBearing,
-			
+
 			time20: wdata.hourly.data[20].time,
 			hourTemp20: wdata.hourly.data[20].apparentTemperature,
 			hourRain20: wdata.hourly.data[20].precipProbability*100,
 			hourIcon20: wdata.hourly.data[20].icon,
 			rainInten20: wdata.hourly.data[20].precipIntensity,
-			hourClouds20: wdata.hourly.data[20].cloudCover, 
+			hourClouds20: wdata.hourly.data[20].cloudCover,
 			hourDew20: wdata.hourly.data[20].dewPoint,
 			hourHumid20: wdata.hourly.data[20].humidity,
 			hourPress20: wdata.hourly.data[20].pressure,
 			hourVis20: wdata.hourly.data[20].visibility,
 			hourWindSpeed20: wdata.hourly.data[20].windSpeed,
 			hourWindBearing20: wdata.hourly.data[20].windBearing,
-			
+
 			time21: wdata.hourly.data[21].time,
 			hourTemp21: wdata.hourly.data[21].apparentTemperature,
 			hourRain21: wdata.hourly.data[21].precipProbability*100,
 			hourIcon21: wdata.hourly.data[21].icon,
 			rainInten21: wdata.hourly.data[21].precipIntensity,
-			hourClouds21: wdata.hourly.data[21].cloudCover, 
+			hourClouds21: wdata.hourly.data[21].cloudCover,
 			hourDew21: wdata.hourly.data[21].dewPoint,
 			hourHumid21: wdata.hourly.data[21].humidity,
 			hourPress21: wdata.hourly.data[21].pressure,
 			hourVis21: wdata.hourly.data[21].visibility,
 			hourWindSpeed21: wdata.hourly.data[21].windSpeed,
 			hourWindBearing21: wdata.hourly.data[21].windBearing,
-			
+
 			time22: wdata.hourly.data[22].time,
 			hourTemp22: wdata.hourly.data[22].apparentTemperature,
 			hourRain22: wdata.hourly.data[22].precipProbability*100,
 			hourIcon22: wdata.hourly.data[22].icon,
 			rainInten22: wdata.hourly.data[22].precipIntensity,
-			hourClouds22: wdata.hourly.data[22].cloudCover, 
+			hourClouds22: wdata.hourly.data[22].cloudCover,
 			hourDew22: wdata.hourly.data[22].dewPoint,
 			hourHumid22: wdata.hourly.data[22].humidity,
 			hourPress22: wdata.hourly.data[22].pressure,
 			hourVis22: wdata.hourly.data[22].visibility,
 			hourWindSpeed22: wdata.hourly.data[22].windSpeed,
 			hourWindBearing22: wdata.hourly.data[22].windBearing,
-			
+
 			time23: wdata.hourly.data[23].time,
 			hourTemp23: wdata.hourly.data[23].apparentTemperature,
 			hourRain23: wdata.hourly.data[23].precipProbability*100,
 			hourIcon23: wdata.hourly.data[23].icon,
 			rainInten23: wdata.hourly.data[23].precipIntensity,
-			hourClouds23: wdata.hourly.data[23].cloudCover, 
+			hourClouds23: wdata.hourly.data[23].cloudCover,
 			hourDew23: wdata.hourly.data[23].dewPoint,
 			hourHumid23: wdata.hourly.data[23].humidity,
 			hourPress23: wdata.hourly.data[23].pressure,
 			hourVis23: wdata.hourly.data[23].visibility,
 			hourWindSpeed23: wdata.hourly.data[23].windSpeed,
 			hourWindBearing23: wdata.hourly.data[23].windBearing,
-			
+
 			time24: wdata.hourly.data[24].time,
 			hourTemp24: wdata.hourly.data[24].apparentTemperature,
 			hourRain24: wdata.hourly.data[24].precipProbability*100,
 			hourIcon24: wdata.hourly.data[24].icon,
 			rainInten24: wdata.hourly.data[24].precipIntensity,
-			hourClouds24: wdata.hourly.data[24].cloudCover, 
+			hourClouds24: wdata.hourly.data[24].cloudCover,
 			hourDew24: wdata.hourly.data[24].dewPoint,
 			hourHumid24: wdata.hourly.data[24].humidity,
 			hourPress24: wdata.hourly.data[24].pressure,
 			hourVis24: wdata.hourly.data[24].visibility,
 			hourWindSpeed24: wdata.hourly.data[24].windSpeed,
 			hourWindBearing24: wdata.hourly.data[24].windBearing,
-			
+
 			time25: wdata.hourly.data[25].time,
 			hourTemp25: wdata.hourly.data[25].apparentTemperature,
 			hourRain25: wdata.hourly.data[25].precipProbability*100,
 			hourIcon25: wdata.hourly.data[25].icon,
 			rainInten25: wdata.hourly.data[25].precipIntensity,
-			hourClouds25: wdata.hourly.data[25].cloudCover, 
+			hourClouds25: wdata.hourly.data[25].cloudCover,
 			hourDew25: wdata.hourly.data[25].dewPoint,
 			hourHumid25: wdata.hourly.data[25].humidity,
 			hourPress25: wdata.hourly.data[25].pressure,
 			hourVis25: wdata.hourly.data[25].visibility,
 			hourWindSpeed25: wdata.hourly.data[25].windSpeed,
 			hourWindBearing25: wdata.hourly.data[25].windBearing,
-			
+
 			time26: wdata.hourly.data[26].time,
 			hourTemp26: wdata.hourly.data[26].apparentTemperature,
 			hourRain26: wdata.hourly.data[26].precipProbability*100,
 			hourIcon26: wdata.hourly.data[26].icon,
 			rainInten26: wdata.hourly.data[26].precipIntensity,
-			hourClouds26: wdata.hourly.data[26].cloudCover, 
+			hourClouds26: wdata.hourly.data[26].cloudCover,
 			hourDew26: wdata.hourly.data[26].dewPoint,
 			hourHumid26: wdata.hourly.data[26].humidity,
 			hourPress26: wdata.hourly.data[26].pressure,
 			hourVis26: wdata.hourly.data[26].visibility,
 			hourWindSpeed26: wdata.hourly.data[26].windSpeed,
 			hourWindBearing26: wdata.hourly.data[26].windBearing,
-			
+
 			time27: wdata.hourly.data[27].time,
 			hourTemp27: wdata.hourly.data[27].apparentTemperature,
 			hourRain27: wdata.hourly.data[27].precipProbability*100,
 			hourIcon27: wdata.hourly.data[27].icon,
 			rainInten27: wdata.hourly.data[27].precipIntensity,
-			hourClouds27: wdata.hourly.data[27].cloudCover, 
+			hourClouds27: wdata.hourly.data[27].cloudCover,
 			hourDew27: wdata.hourly.data[27].dewPoint,
 			hourHumid27: wdata.hourly.data[27].humidity,
 			hourPress27: wdata.hourly.data[27].pressure,
 			hourVis27: wdata.hourly.data[27].visibility,
 			hourWindSpeed27: wdata.hourly.data[27].windSpeed,
 			hourWindBearing27: wdata.hourly.data[27].windBearing,
-			
+
 			time28: wdata.hourly.data[28].time,
 			hourTemp28: wdata.hourly.data[28].apparentTemperature,
 			hourRain28: wdata.hourly.data[28].precipProbability*100,
 			hourIcon28: wdata.hourly.data[28].icon,
 			rainInten28: wdata.hourly.data[28].precipIntensity,
-			hourClouds28: wdata.hourly.data[28].cloudCover, 
+			hourClouds28: wdata.hourly.data[28].cloudCover,
 			hourDew28: wdata.hourly.data[28].dewPoint,
 			hourHumid28: wdata.hourly.data[28].humidity,
 			hourPress28: wdata.hourly.data[28].pressure,
 			hourVis28: wdata.hourly.data[28].visibility,
 			hourWindSpeed28: wdata.hourly.data[28].windSpeed,
 			hourWindBearing28: wdata.hourly.data[28].windBearing,
-			
+
 			time29: wdata.hourly.data[29].time,
 			hourTemp29: wdata.hourly.data[29].apparentTemperature,
 			hourRain29: wdata.hourly.data[29].precipProbability*100,
 			hourIcon29: wdata.hourly.data[29].icon,
 			rainInten29: wdata.hourly.data[29].precipIntensity,
-			hourClouds29: wdata.hourly.data[29].cloudCover, 
+			hourClouds29: wdata.hourly.data[29].cloudCover,
 			hourDew29: wdata.hourly.data[29].dewPoint,
 			hourHumid29: wdata.hourly.data[29].humidity,
 			hourPress29: wdata.hourly.data[29].pressure,
 			hourVis29: wdata.hourly.data[29].visibility,
 			hourWindSpeed29: wdata.hourly.data[29].windSpeed,
 			hourWindBearing29: wdata.hourly.data[29].windBearing,
-			
+
 			time30: wdata.hourly.data[30].time,
 			hourTemp30: wdata.hourly.data[30].apparentTemperature,
 			hourRain30: wdata.hourly.data[30].precipProbability*100,
 			hourIcon30: wdata.hourly.data[30].icon,
 			rainInten30: wdata.hourly.data[30].precipIntensity,
-			hourClouds30: wdata.hourly.data[30].cloudCover, 
+			hourClouds30: wdata.hourly.data[30].cloudCover,
 			hourDew30: wdata.hourly.data[30].dewPoint,
 			hourHumid30: wdata.hourly.data[30].humidity,
 			hourPress30: wdata.hourly.data[30].pressure,
 			hourVis30: wdata.hourly.data[30].visibility,
 			hourWindSpeed30: wdata.hourly.data[30].windSpeed,
 			hourWindBearing30: wdata.hourly.data[30].windBearing,
-			
+
 			time31: wdata.hourly.data[31].time,
 			hourTemp31: wdata.hourly.data[31].apparentTemperature,
 			hourRain31: wdata.hourly.data[31].precipProbability*100,
 			hourIcon31: wdata.hourly.data[31].icon,
 			rainInten31: wdata.hourly.data[31].precipIntensity,
-			hourClouds31: wdata.hourly.data[31].cloudCover, 
+			hourClouds31: wdata.hourly.data[31].cloudCover,
 			hourDew31: wdata.hourly.data[31].dewPoint,
 			hourHumid31: wdata.hourly.data[31].humidity,
 			hourPress31: wdata.hourly.data[31].pressure,
 			hourVis31: wdata.hourly.data[31].visibility,
 			hourWindSpeed31: wdata.hourly.data[31].windSpeed,
 			hourWindBearing31: wdata.hourly.data[31].windBearing,
-			
+
 			time32: wdata.hourly.data[32].time,
 			hourTemp32: wdata.hourly.data[32].apparentTemperature,
 			hourRain32: wdata.hourly.data[32].precipProbability*100,
 			hourIcon32: wdata.hourly.data[32].icon,
 			rainInten32: wdata.hourly.data[32].precipIntensity,
-			hourClouds32: wdata.hourly.data[32].cloudCover, 
+			hourClouds32: wdata.hourly.data[32].cloudCover,
 			hourDew32: wdata.hourly.data[32].dewPoint,
 			hourHumid32: wdata.hourly.data[32].humidity,
 			hourPress32: wdata.hourly.data[32].pressure,
 			hourVis32: wdata.hourly.data[32].visibility,
 			hourWindSpeed32: wdata.hourly.data[32].windSpeed,
 			hourWindBearing32: wdata.hourly.data[32].windBearing,
-			
+
 			time33: wdata.hourly.data[33].time,
 			hourTemp33: wdata.hourly.data[33].apparentTemperature,
 			hourRain33: wdata.hourly.data[33].precipProbability*100,
 			hourIcon33: wdata.hourly.data[33].icon,
 			rainInten33: wdata.hourly.data[33].precipIntensity,
-			hourClouds33: wdata.hourly.data[33].cloudCover, 
+			hourClouds33: wdata.hourly.data[33].cloudCover,
 			hourDew33: wdata.hourly.data[33].dewPoint,
 			hourHumid33: wdata.hourly.data[33].humidity,
 			hourPress33: wdata.hourly.data[33].pressure,
 			hourVis33: wdata.hourly.data[33].visibility,
 			hourWindSpeed33: wdata.hourly.data[33].windSpeed,
 			hourWindBearing33: wdata.hourly.data[33].windBearing,
-			
+
 			time34: wdata.hourly.data[34].time,
 			hourTemp34: wdata.hourly.data[34].apparentTemperature,
 			hourRain34: wdata.hourly.data[34].precipProbability*100,
 			hourIcon34: wdata.hourly.data[34].icon,
 			rainInten34: wdata.hourly.data[34].precipIntensity,
-			hourClouds34: wdata.hourly.data[34].cloudCover, 
+			hourClouds34: wdata.hourly.data[34].cloudCover,
 			hourDew34: wdata.hourly.data[34].dewPoint,
 			hourHumid34: wdata.hourly.data[34].humidity,
 			hourPress34: wdata.hourly.data[34].pressure,
 			hourVis34: wdata.hourly.data[34].visibility,
 			hourWindSpeed34: wdata.hourly.data[34].windSpeed,
 			hourWindBearing34: wdata.hourly.data[34].windBearing,
-			
+
 			time35: wdata.hourly.data[35].time,
 			hourTemp35: wdata.hourly.data[35].apparentTemperature,
 			hourRain35: wdata.hourly.data[35].precipProbability*100,
 			hourIcon35: wdata.hourly.data[35].icon,
 			rainInten35: wdata.hourly.data[35].precipIntensity,
-			hourClouds35: wdata.hourly.data[35].cloudCover, 
+			hourClouds35: wdata.hourly.data[35].cloudCover,
 			hourDew35: wdata.hourly.data[35].dewPoint,
 			hourHumid35: wdata.hourly.data[35].humidity,
 			hourPress35: wdata.hourly.data[35].pressure,
 			hourVis35: wdata.hourly.data[35].visibility,
 			hourWindSpeed35: wdata.hourly.data[35].windSpeed,
 			hourWindBearing35: wdata.hourly.data[35].windBearing,
-			
+
 			time36: wdata.hourly.data[36].time,
 			hourTemp36: wdata.hourly.data[36].apparentTemperature,
 			hourRain36: wdata.hourly.data[36].precipProbability*100,
 			hourIcon36: wdata.hourly.data[36].icon,
 			rainInten36: wdata.hourly.data[36].precipIntensity,
-			hourClouds36: wdata.hourly.data[36].cloudCover, 
+			hourClouds36: wdata.hourly.data[36].cloudCover,
 			hourDew36: wdata.hourly.data[36].dewPoint,
 			hourHumid36: wdata.hourly.data[36].humidity,
 			hourPress36: wdata.hourly.data[36].pressure,
 			hourVis36: wdata.hourly.data[36].visibility,
 			hourWindSpeed36: wdata.hourly.data[36].windSpeed,
 			hourWindBearing36: wdata.hourly.data[36].windBearing,
-			
+
 			time37: wdata.hourly.data[37].time,
 			hourTemp37: wdata.hourly.data[37].apparentTemperature,
 			hourRain37: wdata.hourly.data[37].precipProbability*100,
 			hourIcon37: wdata.hourly.data[37].icon,
 			rainInten37: wdata.hourly.data[37].precipIntensity,
-			hourClouds37: wdata.hourly.data[37].cloudCover, 
+			hourClouds37: wdata.hourly.data[37].cloudCover,
 			hourDew37: wdata.hourly.data[37].dewPoint,
 			hourHumid37: wdata.hourly.data[37].humidity,
 			hourPress37: wdata.hourly.data[37].pressure,
 			hourVis37: wdata.hourly.data[37].visibility,
 			hourWindSpeed37: wdata.hourly.data[37].windSpeed,
 			hourWindBearing37: wdata.hourly.data[37].windBearing,
-			
+
 			time38: wdata.hourly.data[38].time,
 			hourTemp38: wdata.hourly.data[38].apparentTemperature,
 			hourRain38: wdata.hourly.data[38].precipProbability*100,
 			hourIcon38: wdata.hourly.data[38].icon,
 			rainInten38: wdata.hourly.data[38].precipIntensity,
-			hourClouds38: wdata.hourly.data[38].cloudCover, 
+			hourClouds38: wdata.hourly.data[38].cloudCover,
 			hourDew38: wdata.hourly.data[38].dewPoint,
 			hourHumid38: wdata.hourly.data[38].humidity,
 			hourPress38: wdata.hourly.data[38].pressure,
 			hourVis38: wdata.hourly.data[38].visibility,
 			hourWindSpeed38: wdata.hourly.data[38].windSpeed,
 			hourWindBearing38: wdata.hourly.data[38].windBearing,
-			
+
 			time39: wdata.hourly.data[39].time,
 			hourTemp39: wdata.hourly.data[39].apparentTemperature,
 			hourRain39: wdata.hourly.data[39].precipProbability*100,
 			hourIcon39: wdata.hourly.data[39].icon,
 			rainInten39: wdata.hourly.data[39].precipIntensity,
-			hourClouds39: wdata.hourly.data[39].cloudCover, 
+			hourClouds39: wdata.hourly.data[39].cloudCover,
 			hourDew39: wdata.hourly.data[39].dewPoint,
 			hourHumid39: wdata.hourly.data[39].humidity,
 			hourPress39: wdata.hourly.data[39].pressure,
 			hourVis39: wdata.hourly.data[39].visibility,
 			hourWindSpeed39: wdata.hourly.data[39].windSpeed,
 			hourWindBearing39: wdata.hourly.data[39].windBearing,
-			
+
 			time40: wdata.hourly.data[40].time,
 			hourTemp40: wdata.hourly.data[40].apparentTemperature,
 			hourRain40: wdata.hourly.data[40].precipProbability*100,
 			hourIcon40: wdata.hourly.data[40].icon,
 			rainInten40: wdata.hourly.data[40].precipIntensity,
-			hourClouds40: wdata.hourly.data[40].cloudCover, 
+			hourClouds40: wdata.hourly.data[40].cloudCover,
 			hourDew40: wdata.hourly.data[40].dewPoint,
 			hourHumid40: wdata.hourly.data[40].humidity,
 			hourPress40: wdata.hourly.data[40].pressure,
 			hourVis40: wdata.hourly.data[40].visibility,
 			hourWindSpeed40: wdata.hourly.data[40].windSpeed,
 			hourWindBearing40: wdata.hourly.data[40].windBearing,
-			
+
 			time41: wdata.hourly.data[41].time,
 			hourTemp41: wdata.hourly.data[41].apparentTemperature,
 			hourRain41: wdata.hourly.data[41].precipProbability*100,
 			hourIcon41: wdata.hourly.data[41].icon,
 			rainInten41: wdata.hourly.data[41].precipIntensity,
-			hourClouds41: wdata.hourly.data[41].cloudCover, 
+			hourClouds41: wdata.hourly.data[41].cloudCover,
 			hourDew41: wdata.hourly.data[41].dewPoint,
 			hourHumid41: wdata.hourly.data[41].humidity,
 			hourPress41: wdata.hourly.data[41].pressure,
 			hourVis41: wdata.hourly.data[41].visibility,
 			hourWindSpeed41: wdata.hourly.data[41].windSpeed,
 			hourWindBearing41: wdata.hourly.data[41].windBearing,
-			
+
 			time42: wdata.hourly.data[42].time,
 			hourTemp42: wdata.hourly.data[42].apparentTemperature,
 			hourRain42: wdata.hourly.data[42].precipProbability*100,
 			hourIcon42: wdata.hourly.data[42].icon,
 			rainInten42: wdata.hourly.data[42].precipIntensity,
-			hourClouds42: wdata.hourly.data[42].cloudCover, 
+			hourClouds42: wdata.hourly.data[42].cloudCover,
 			hourDew42: wdata.hourly.data[42].dewPoint,
 			hourHumid42: wdata.hourly.data[42].humidity,
 			hourPress42: wdata.hourly.data[42].pressure,
 			hourVis42: wdata.hourly.data[42].visibility,
 			hourWindSpeed42: wdata.hourly.data[42].windSpeed,
 			hourWindBearing42: wdata.hourly.data[42].windBearing,
-			
+
 			time43: wdata.hourly.data[43].time,
 			hourTemp43: wdata.hourly.data[43].apparentTemperature,
 			hourRain43: wdata.hourly.data[43].precipProbability*100,
 			hourIcon43: wdata.hourly.data[43].icon,
 			rainInten43: wdata.hourly.data[43].precipIntensity,
-			hourClouds43: wdata.hourly.data[43].cloudCover, 
+			hourClouds43: wdata.hourly.data[43].cloudCover,
 			hourDew43: wdata.hourly.data[43].dewPoint,
 			hourHumid43: wdata.hourly.data[43].humidity,
 			hourPress43: wdata.hourly.data[43].pressure,
 			hourVis43: wdata.hourly.data[43].visibility,
 			hourWindSpeed43: wdata.hourly.data[43].windSpeed,
 			hourWindBearing43: wdata.hourly.data[43].windBearing,
-			
+
 			time44: wdata.hourly.data[44].time,
 			hourTemp44: wdata.hourly.data[44].apparentTemperature,
 			hourRain44: wdata.hourly.data[44].precipProbability*100,
 			hourIcon44: wdata.hourly.data[44].icon,
 			rainInten44: wdata.hourly.data[44].precipIntensity,
-			hourClouds44: wdata.hourly.data[44].cloudCover, 
+			hourClouds44: wdata.hourly.data[44].cloudCover,
 			hourDew44: wdata.hourly.data[44].dewPoint,
 			hourHumid44: wdata.hourly.data[44].humidity,
 			hourPress44: wdata.hourly.data[44].pressure,
 			hourVis44: wdata.hourly.data[44].visibility,
 			hourWindSpeed44: wdata.hourly.data[44].windSpeed,
 			hourWindBearing44: wdata.hourly.data[44].windBearing,
-			
+
 			time45: wdata.hourly.data[45].time,
 			hourTemp45: wdata.hourly.data[45].apparentTemperature,
 			hourRain45: wdata.hourly.data[45].precipProbability*100,
 			hourIcon45: wdata.hourly.data[45].icon,
 			rainInten45: wdata.hourly.data[45].precipIntensity,
-			hourClouds45: wdata.hourly.data[45].cloudCover, 
+			hourClouds45: wdata.hourly.data[45].cloudCover,
 			hourDew45: wdata.hourly.data[45].dewPoint,
 			hourHumid45: wdata.hourly.data[45].humidity,
 			hourPress45: wdata.hourly.data[45].pressure,
 			hourVis45: wdata.hourly.data[45].visibility,
 			hourWindSpeed45: wdata.hourly.data[45].windSpeed,
 			hourWindBearing45: wdata.hourly.data[45].windBearing,
-			
+
 			time46: wdata.hourly.data[46].time,
 			hourTemp46: wdata.hourly.data[46].apparentTemperature,
 			hourRain46: wdata.hourly.data[46].precipProbability*100,
 			hourIcon46: wdata.hourly.data[46].icon,
 			rainInten46: wdata.hourly.data[46].precipIntensity,
-			hourClouds46: wdata.hourly.data[46].cloudCover, 
+			hourClouds46: wdata.hourly.data[46].cloudCover,
 			hourDew46: wdata.hourly.data[46].dewPoint,
 			hourHumid46: wdata.hourly.data[46].humidity,
 			hourPress46: wdata.hourly.data[46].pressure,
 			hourVis46: wdata.hourly.data[46].visibility,
 			hourWindSpeed46: wdata.hourly.data[46].windSpeed,
 			hourWindBearing46: wdata.hourly.data[46].windBearing,
-			
+
 			time47: wdata.hourly.data[47].time,
 			hourTemp47: wdata.hourly.data[47].apparentTemperature,
 			hourRain47: wdata.hourly.data[47].precipProbability*100,
 			hourIcon47: wdata.hourly.data[47].icon,
 			rainInten47: wdata.hourly.data[47].precipIntensity,
-			hourClouds47: wdata.hourly.data[47].cloudCover, 
+			hourClouds47: wdata.hourly.data[47].cloudCover,
 			hourDew47: wdata.hourly.data[47].dewPoint,
 			hourHumid47: wdata.hourly.data[47].humidity,
 			hourPress47: wdata.hourly.data[47].pressure,
 			hourVis47: wdata.hourly.data[47].visibility,
 			hourWindSpeed47: wdata.hourly.data[47].windSpeed,
 			hourWindBearing47: wdata.hourly.data[47].windBearing,
-			
+
 			time48: wdata.hourly.data[48].time,
 			hourTemp48: wdata.hourly.data[48].apparentTemperature,
 			hourRain48: wdata.hourly.data[48].precipProbability*100,
 			hourIcon48: wdata.hourly.data[48].icon,
 			rainInten48: wdata.hourly.data[48].precipIntensity,
-			hourClouds48: wdata.hourly.data[48].cloudCover, 
+			hourClouds48: wdata.hourly.data[48].cloudCover,
 			hourDew48: wdata.hourly.data[48].dewPoint,
 			hourHumid48: wdata.hourly.data[48].humidity,
 			hourPress48: wdata.hourly.data[48].pressure,
 			hourVis48: wdata.hourly.data[48].visibility,
 			hourWindSpeed48: wdata.hourly.data[48].windSpeed,
 			hourWindBearing48: wdata.hourly.data[48].windBearing,
-			
+
 		};
-		   
+
 			dataa.currentlyTemp = dataa.currentlyTemp.toFixed();
 		   dataa.currentlyPress = dataa.currentlyPress.toFixed();
 			dataa.currentlyDew = dataa.currentlyDew.toFixed();
 			dataa.currentlyVis = dataa.currentlyVis.toFixed(2);
 			dataa.currentlyHumid = dataa.currentlyHumid.toFixed(2);
-		
+
 			dataa.day0HiTemp = dataa.day0HiTemp.toFixed();
 			dataa.day1HiTemp = dataa.day1HiTemp.toFixed();
 			dataa.day2HiTemp = dataa.day2HiTemp.toFixed();
@@ -957,8 +952,8 @@ $(document).ready(function(){
 			dataa.day4HiTemp = dataa.day4HiTemp.toFixed();
 			dataa.day5HiTemp = dataa.day5HiTemp.toFixed();
 			dataa.day6HiTemp = dataa.day6HiTemp.toFixed();
-			dataa.day7HiTemp = dataa.day7HiTemp.toFixed();		
-		
+			dataa.day7HiTemp = dataa.day7HiTemp.toFixed();
+
 			dataa.day0LowTemp = dataa.day0LowTemp.toFixed();
 			dataa.day1LowTemp = dataa.day1LowTemp.toFixed();
 			dataa.day2LowTemp = dataa.day2LowTemp.toFixed();
@@ -966,8 +961,8 @@ $(document).ready(function(){
 			dataa.day4LowTemp = dataa.day4LowTemp.toFixed();
 			dataa.day5LowTemp = dataa.day5LowTemp.toFixed();
 			dataa.day6LowTemp = dataa.day6LowTemp.toFixed();
-			dataa.day7LowTemp = dataa.day7LowTemp.toFixed();	
-		
+			dataa.day7LowTemp = dataa.day7LowTemp.toFixed();
+
 			dataa.day0Rain = dataa.day0Rain.toFixed();
 			dataa.day1Rain = dataa.day1Rain.toFixed();
 			dataa.day2Rain = dataa.day2Rain.toFixed();
@@ -975,8 +970,8 @@ $(document).ready(function(){
 			dataa.day4Rain = dataa.day4Rain.toFixed();
 			dataa.day5Rain = dataa.day5Rain.toFixed();
 			dataa.day6Rain = dataa.day6Rain.toFixed();
-			dataa.day7Rain = dataa.day7Rain.toFixed();	
-		
+			dataa.day7Rain = dataa.day7Rain.toFixed();
+
 			dataa.day0Dew = dataa.day0Dew.toFixed();
 			dataa.day1Dew = dataa.day1Dew.toFixed();
 			dataa.day2Dew = dataa.day2Dew.toFixed();
@@ -985,7 +980,7 @@ $(document).ready(function(){
 			dataa.day5Dew = dataa.day5Dew.toFixed();
 			dataa.day6Dew = dataa.day6Dew.toFixed();
 			dataa.day7Dew = dataa.day7Dew.toFixed();
-		
+
 			dataa.day0Humid = dataa.day0Humid.toFixed(2);
 			dataa.day1Humid = dataa.day1Humid.toFixed(2);
 			dataa.day2Humid = dataa.day2Humid.toFixed(2);
@@ -994,7 +989,7 @@ $(document).ready(function(){
 			dataa.day5Humid = dataa.day5Humid.toFixed(2);
 			dataa.day6Humid = dataa.day6Humid.toFixed(2);
 			dataa.day7Humid = dataa.day7Humid.toFixed(2);
-				
+
 			dataa.day0Press = dataa.day0Press.toFixed();
 			dataa.day1Press = dataa.day1Press.toFixed();
 			dataa.day2Press = dataa.day2Press.toFixed();
@@ -1003,7 +998,7 @@ $(document).ready(function(){
 			dataa.day5Press = dataa.day5Press.toFixed();
 			dataa.day6Press = dataa.day6Press.toFixed();
 			dataa.day7Press = dataa.day7Press.toFixed();
-		
+
 			dataa.hourTemp1 = dataa.hourTemp1.toFixed();
 			dataa.hourTemp2 = dataa.hourTemp2.toFixed();
 			dataa.hourTemp3 = dataa.hourTemp3.toFixed();
@@ -1052,7 +1047,7 @@ $(document).ready(function(){
 			dataa.hourTemp46 = dataa.hourTemp46.toFixed();
 			dataa.hourTemp47 = dataa.hourTemp47.toFixed();
 			dataa.hourTemp48 = dataa.hourTemp48.toFixed();
-		
+
 			dataa.hourHumid1 = dataa.hourHumid1.toFixed(2);
 			dataa.hourHumid2 = dataa.hourHumid2.toFixed(2);
 			dataa.hourHumid3 = dataa.hourHumid3.toFixed(2);
@@ -1101,7 +1096,7 @@ $(document).ready(function(){
 			dataa.hourHumid46 = dataa.hourHumid46.toFixed(2);
 			dataa.hourHumid47 = dataa.hourHumid47.toFixed(2);
 			dataa.hourHumid48 = dataa.hourHumid48.toFixed(2);
-		
+
 			dataa.hourRain1 = dataa.hourRain1.toFixed();
 			dataa.hourRain2 = dataa.hourRain2.toFixed();
 			dataa.hourRain3 = dataa.hourRain3.toFixed();
@@ -1150,7 +1145,7 @@ $(document).ready(function(){
 			dataa.hourRain46 = dataa.hourRain46.toFixed();
 			dataa.hourRain47 = dataa.hourRain47.toFixed();
 			dataa.hourRain48 = dataa.hourRain48.toFixed();
-		
+
 			dataa.hourDew1 = dataa.hourDew1.toFixed();
 			dataa.hourDew2 = dataa.hourDew2.toFixed();
 			dataa.hourDew3 = dataa.hourDew3.toFixed();
@@ -1199,7 +1194,7 @@ $(document).ready(function(){
 			dataa.hourDew46 = dataa.hourDew46.toFixed();
 			dataa.hourDew47 = dataa.hourDew47.toFixed();
 			dataa.hourDew48 = dataa.hourDew48.toFixed();
-		
+
 			dataa.hourPress1 = dataa.hourPress1.toFixed();
 			dataa.hourPress2 = dataa.hourPress2.toFixed();
 			dataa.hourPress3 = dataa.hourPress3.toFixed();
@@ -1248,7 +1243,7 @@ $(document).ready(function(){
 			dataa.hourPress46 = dataa.hourPress46.toFixed();
 			dataa.hourPress47 = dataa.hourPress47.toFixed();
 			dataa.hourPress48 = dataa.hourPress48.toFixed();
-		
+
 			dataa.hourWindSpeed1 = dataa.hourWindSpeed1.toFixed(1);
 			dataa.hourWindSpeed2 = dataa.hourWindSpeed2.toFixed(1);
 			dataa.hourWindSpeed3 = dataa.hourWindSpeed3.toFixed(1);
@@ -1297,52 +1292,52 @@ $(document).ready(function(){
 			dataa.hourWindSpeed46 = dataa.hourWindSpeed46.toFixed(1);
 			dataa.hourWindSpeed47 = dataa.hourWindSpeed47.toFixed(1);
 			dataa.hourWindSpeed48 = dataa.hourWindSpeed48.toFixed(1);
-		
+
 		   dataa.day0 = moment(moment.unix(dataa.day0)).format("dddd");
 			dataa.day1 = moment(moment.unix(dataa.day1)).format("dddd");
 			dataa.day2 = moment(moment.unix(dataa.day2)).format("dddd");
 			dataa.day3 = moment(moment.unix(dataa.day3)).format("dddd");
-			dataa.day4 = moment(moment.unix(dataa.day4)).format("dddd");		
+			dataa.day4 = moment(moment.unix(dataa.day4)).format("dddd");
 			dataa.day5 = moment(moment.unix(dataa.day5)).format("dddd");
 			dataa.day6 = moment(moment.unix(dataa.day6)).format("dddd");
 			dataa.day7 = moment(moment.unix(dataa.day7)).format("dddd");
-		
+
 			dataa.day0HiTempTime = moment(moment.unix(dataa.day0HiTempTime)).format("h:mm a");
 			dataa.day1HiTempTime = moment(moment.unix(dataa.day1HiTempTime)).format("h:mm a");
 			dataa.day2HiTempTime = moment(moment.unix(dataa.day2HiTempTime)).format("h:mm a");
 			dataa.day3HiTempTime = moment(moment.unix(dataa.day3HiTempTime)).format("h:mm a");
-			dataa.day4HiTempTime = moment(moment.unix(dataa.day4HiTempTime)).format("h:mm a");		
+			dataa.day4HiTempTime = moment(moment.unix(dataa.day4HiTempTime)).format("h:mm a");
 			dataa.day5HiTempTime = moment(moment.unix(dataa.day5HiTempTime)).format("h:mm a");
 			dataa.day6HiTempTime = moment(moment.unix(dataa.day6HiTempTime)).format("h:mm a");
 			dataa.day7HiTempTime = moment(moment.unix(dataa.day7HiTempTime)).format("h:mm a");
-		
+
 			dataa.day0LowTempTime = moment(moment.unix(dataa.day0LowTempTime)).format("h:mm a");
 			dataa.day1LowTempTime = moment(moment.unix(dataa.day1LowTempTime)).format("h:mm a");
 			dataa.day2LowTempTime = moment(moment.unix(dataa.day2LowTempTime)).format("h:mm a");
 			dataa.day3LowTempTime = moment(moment.unix(dataa.day3LowTempTime)).format("h:mm a");
-			dataa.day4LowTempTime = moment(moment.unix(dataa.day4LowTempTime)).format("h:mm a");		
+			dataa.day4LowTempTime = moment(moment.unix(dataa.day4LowTempTime)).format("h:mm a");
 			dataa.day5LowTempTime = moment(moment.unix(dataa.day5LowTempTime)).format("h:mm a");
 			dataa.day6LowTempTime = moment(moment.unix(dataa.day6LowTempTime)).format("h:mm a");
 			dataa.day7LowTempTime = moment(moment.unix(dataa.day7LowTempTime)).format("h:mm a");
-		
+
 			dataa.day0Sunrise = moment(moment.unix(dataa.day0Sunrise)).format("h:mm a");
 			dataa.day1Sunrise = moment(moment.unix(dataa.day1Sunrise)).format("h:mm a");
 			dataa.day2Sunrise = moment(moment.unix(dataa.day2Sunrise)).format("h:mm a");
 			dataa.day3Sunrise = moment(moment.unix(dataa.day3Sunrise)).format("h:mm a");
-			dataa.day4Sunrise = moment(moment.unix(dataa.day4Sunrise)).format("h:mm a");		
+			dataa.day4Sunrise = moment(moment.unix(dataa.day4Sunrise)).format("h:mm a");
 			dataa.day5Sunrise = moment(moment.unix(dataa.day5Sunrise)).format("h:mm a");
 			dataa.day6Sunrise = moment(moment.unix(dataa.day6Sunrise)).format("h:mm a");
 			dataa.day7Sunrise = moment(moment.unix(dataa.day7Sunrise)).format("h:mm a");
-		
+
 			dataa.day0Sunset = moment(moment.unix(dataa.day0Sunset)).format("h:mm a");
 			dataa.day1Sunset = moment(moment.unix(dataa.day1Sunset)).format("h:mm a");
 			dataa.day2Sunset = moment(moment.unix(dataa.day2Sunset)).format("h:mm a");
 			dataa.day3Sunset = moment(moment.unix(dataa.day3Sunset)).format("h:mm a");
-			dataa.day4Sunset = moment(moment.unix(dataa.day4Sunset)).format("h:mm a");		
+			dataa.day4Sunset = moment(moment.unix(dataa.day4Sunset)).format("h:mm a");
 			dataa.day5Sunset = moment(moment.unix(dataa.day5Sunset)).format("h:mm a");
 			dataa.day6Sunset = moment(moment.unix(dataa.day6Sunset)).format("h:mm a");
 			dataa.day7Sunset = moment(moment.unix(dataa.day7Sunset)).format("h:mm a");
-		
+
 			dataa.time1 = moment(moment.unix(dataa.time1)).format("dddd, h:mm a");
 			dataa.time2 = moment(moment.unix(dataa.time2)).format("dddd, h:mm a");
 			dataa.time3 = moment(moment.unix(dataa.time3)).format("dddd, h:mm a");
@@ -1391,23 +1386,23 @@ $(document).ready(function(){
 			dataa.time46 = moment(moment.unix(dataa.time46)).format("dddd, h:mm a");
 			dataa.time47 = moment(moment.unix(dataa.time47)).format("dddd, h:mm a");
 			dataa.time48 = moment(moment.unix(dataa.time48)).format("dddd, h:mm a");
-			
+
 		var html = template(dataa);
 		$('#output').html(html);
-		
+
 		$('#location-output').text(address);
 		console.log(changeUnitsClick);
 		if (changeUnitsClick){
 			console.log('inside click');
-			if (units == 0){			
+			if (units == 0){
 				$('#buttonUnits').text("Change Units to English");
 				$('p.visibility-units').text('Visibility is in kilometers. Stops after 16.09 kilometers');
 				$('p.pressure-units').text('Pressure is in Hectopascals (same as mBars)');
 				$('p.rain-intensity-units').text('Rain intensity has units of millimeters per hour');
 				$('p.wind-speed-units').text('Wind Speed is in m/s');
-				$('span.changeUnit').text("C");			
+				$('span.changeUnit').text("C");
 				units = 1;
-			}else if (units == 1){			
+			}else if (units == 1){
 				$('#buttonUnits').text("Change Units to SI");
 				$('p.visibility-units').text('Visibility is in miles. Stops after 10 miles');
 				$('p.pressure-units').text('Pressure is in milliBars');
@@ -1418,15 +1413,15 @@ $(document).ready(function(){
 			}
 		}
 		else {
-			if (units == 1){			
+			if (units == 1){
 				$('#buttonUnits').text("Change Units to English");
 				$('p.visibility-units').text('Visibility is in kilometers. Stops after 16.09 kilometers');
 				$('p.pressure-units').text('Pressure is in Hectopascals (same as mBars)');
 				$('p.rain-intensity-units').text('Rain intensity has units of millimeters per hour');
 				$('p.wind-speed-units').text('Wind Speed is in m/s');
-				$('span.changeUnit').text("C");			
+				$('span.changeUnit').text("C");
 				units = 1;
-			}else if (units == 0){			
+			}else if (units == 0){
 				$('#buttonUnits').text("Change Units to SI");
 				$('p.visibility-units').text('Visibility is in miles. Stops after 10 miles');
 				$('p.pressure-units').text('Pressure is in milliBars');
@@ -1440,5 +1435,5 @@ $(document).ready(function(){
 		console.log(changeUnitsClick);
 		console.log(units);
 	}
-	
+
 });
