@@ -1,134 +1,126 @@
-var units = 0;
-var changeUnitsClick = false;
 
-$(document).ready(function(){
 	var address = 'address';
 	var lat = {};
 	var long = {};
+	var units = 0;
+  var changeUnitsClick = false;
+	var wdata = {};
 
+	var app = angular.module('weatherApp', []);
 
-	$('#enterlocation').on('keyup',loadWeatherHtml1);
-	$('#go').on('click',loadWeatherHtml2);
-	$('#enterlocation').on('keyup',getcoordinates1);
-	$('#go').on('click',getcoordinates11);
+app.controller('frontpageController', function($scope, $location, $http){
 
-	$('#enterlocation2').on('keyup',getcoordinates2);
-	$('#go2').on('click',getcoordinates22);
+	$scope.getCoordinatesClick = function(){
+		address = $scope.address;
+		getcoordinates1();
+	};
 
-	$('#buttonUnits').on('click', function (){
-		changeUnits(lat,long)
-	});
+	$scope.getCoordinatesKeyup = function(event){
+		address = $scope.address;
+		getcoordinates11(event);
+  };
 
-	function changeUnits(lat,long){
-		console.log('I have been clicked');
-		changeUnitsClick = true;
-
-		if (units == 0){
-			displayWeatherSI(lat, long);
-		}else {
-			displayWeather(lat, long);
-		}
+	function getcoordinates1(){
+			$http.get(buildUrlAddress(address))
+				.then(function(response){
+					successHandler(response.data)
+				})
+				.catch(function(err){
+					console.error(err)
+				});
 	}
 
-	function displayWeather(lat,long){
-		var ajaxObjects = {
-			    url: buildUrlWeather (lat,long),
-			    dataType: 'json',
-			    success: successHandler2,
-			    error: errorHandler,
-		};
-
-		$.ajax(ajaxObjects);
-	}
-
-	function displayWeatherSI(lat,long){
-		var ajaxObjects = {
-			    url: buildUrlWeatherSI (lat,long),
-			    dataType: 'json',
-			    success: successHandler2,
-			    error: errorHandler,
-		};
-
-		$.ajax(ajaxObjects);
-	}
-
-	function buildUrlWeatherSI(lat, long){
-	 return '/weatherSI/'+lat+','+long;
-	}
-
-	function loadWeatherHtml1(event){
-		if (event.which == 13){
-			$('#welcome').css('display', 'none');
-			$('#address-input-bar2').css('display', 'initial');
-			$('body').css('background-image', 'none');
-			$('body').css('background-color', '#f9fb5c');
-			$('body').css('background-size', '100% 100%');
-			$('#buttonUnits').css('display','initial');
-		}
-	}
-
-	function loadWeatherHtml2(){
-			$('#welcome').css('display', 'none');
-			$('#address-input-bar2').css('display', 'initial');
-			$('body').css('background-image', 'none');
-			$('body').css('background-color', '#69b7ff');
-			$('body').css('background-size', '100% 100%');
-			$('#buttonUnits').css('display','initial');
-	}
-
-	function getcoordinates1(event){
-		if (event.which == 13){
-			address = $('#enterlocation').val();
-			var ajaxObjects = {
-					 url: buildUrlAddress (address),
-					 success: successHandler,
-					 error: errorHandler,
-			};
-
-			$.ajax(ajaxObjects);}
-	}
-
-	function getcoordinates11(){
-			address = $('#enterlocation').val();
-			var ajaxObjects = {
-					 url: buildUrlAddress (address),
-					 success: successHandler,
-					 error: errorHandler,
-			};
-
-			$.ajax(ajaxObjects);
-	}
-
-	function getcoordinates2(event){
-		if (event.which == 13){
-			address = $('#enterlocation2').val();
-			var ajaxObjects = {
-					 url: buildUrlAddress (address),
-					 success: successHandler,
-					 error: errorHandler,
-			};
-
-		$.ajax(ajaxObjects);}
-	}
-
-	function getcoordinates22(){
-		address = $('#enterlocation2').val();
-		var ajaxObjects = {
-			    url: buildUrlAddress (address),
-			    success: successHandler,
-			    error: errorHandler,
-		};
-
-		$.ajax(ajaxObjects);
+	function getcoordinates11(event){
+			if (event.which == 13){
+				$http.get(buildUrlAddress(address))
+					.then(function(response){
+						successHandler(response.data)
+					})
+					.catch(function(err){
+						console.error(err)
+					});
+			}
 	}
 
 	function buildUrlAddress(address){
 	     return '/address/'+address;
-	   }
+	}
 
 	function successHandler(addressData){
-	   lat = addressData.results[0].geometry.location.lat;
-		long = addressData.results[0].geometry.location.lng;
+		 lat = addressData.results[0].geometry.location.lat;
+		 long = addressData.results[0].geometry.location.lng;
+		 displayWeather(lat, long);
+	}
+
+	function displayWeather(lat,long){
+		$http.get(buildUrlWeather(lat,long))
+			.then(function(response){
+				successHandler2(response.data)
+			})
+			.catch(function(err){
+				console.error(err)
+			});
+		$location.path('/main')
+	}
+
+	function buildUrlWeather(lat,long){
+		return '/weather/'+lat+','+long;
+	}
+
+});
+
+app.controller('mainController', function($scope, $location, $http){
+
+	console.log(lat,long);
+
+	displayWeather(lat,long)
+
+	$scope.changeUnits = function(lat,long){
+			console.log('I have been clicked');
+			changeUnitsClick = true;
+
+			if (units == 0){
+				displayWeatherSI(lat, long);
+			}else {
+				displayWeather(lat, long);
+			}
+		}
+
+	$scope.getCoordinatesTwoClick = function(){
+		address = $scope.addressTwo;
+		getcoordinates1();
+	};
+
+	$scope.getCoordinatesTwoKeyup = function(event){
+		address = $scope.addressTwo;
+		getcoordinates11(event);
+	};
+
+	function getcoordinates1(){
+		$http.get(buildUrlAddress(address))
+			.then(function(response){
+				successHandlerB(response.data)
+			})
+			.catch(function(err){
+				console.error(err)
+			});
+	}
+
+	function getcoordinates11(event){
+			if (event.which == 13){
+				$http.get(buildUrlAddress(address))
+					.then(function(response){
+						successHandlerB(response.data)
+					})
+					.catch(function(err){
+						console.error(err)
+					});
+			}
+	}
+
+	function successHandlerB(addressData){
+		 lat = addressData.results[0].geometry.location.lat;
+		 long = addressData.results[0].geometry.location.lng;
 		if (units == 0){
 			displayWeather(lat,long);
 		} else {
@@ -136,20 +128,43 @@ $(document).ready(function(){
 		}
 	}
 
-	function errorHandler(err){
-      console.log(err);
-   }
-
-  function buildUrlWeather(lat, long){
-	  return '/weather/'+lat+','+long;
+	function displayWeather(lat,long){
+		$http.get(buildUrlWeather(lat,long))
+			.then(function(response){
+				successHandler2(response.data)
+			})
+			.catch(function(err){
+				console.error(err)
+			});
 	}
+
+	function displayWeatherSI(lat,long){
+		$http.get(buildUrlWeatherSI(lat,long))
+			.then(function(response){
+				successHandler2(response.data)
+			})
+			.catch(function(err){
+				console.error(err)
+			});
+	}
+
+	function buildUrlAddress(address){
+			 return '/address/'+address;
+	}
+
+	function buildUrlWeather(lat,long){
+		return '/weather/'+lat+','+long;
+	}
+
+	function buildUrlWeatherSI(lat,long){
+	 return '/weatherSI/'+lat+','+long;
+	}
+
+});
 
 	function successHandler2(wdata){
 		console.log(wdata);
-		var source = $('#info').html();
-		var template = Handlebars.compile(source);
-		var dataa = {
-			location: wdata.latitude,
+    var dataa = {
 
 			timeZone: wdata.timezone,
 
@@ -937,10 +952,12 @@ $(document).ready(function(){
 			hourWindSpeed48: wdata.hourly.data[48].windSpeed,
 			hourWindBearing48: wdata.hourly.data[48].windBearing,
 
-		};
+		}
+
+		console.log(dataa);
 
 			dataa.currentlyTemp = dataa.currentlyTemp.toFixed();
-		   dataa.currentlyPress = dataa.currentlyPress.toFixed();
+		  dataa.currentlyPress = dataa.currentlyPress.toFixed();
 			dataa.currentlyDew = dataa.currentlyDew.toFixed();
 			dataa.currentlyVis = dataa.currentlyVis.toFixed(2);
 			dataa.currentlyHumid = dataa.currentlyHumid.toFixed(2);
@@ -1387,10 +1404,793 @@ $(document).ready(function(){
 			dataa.time47 = moment(moment.unix(dataa.time47)).format("dddd, h:mm a");
 			dataa.time48 = moment(moment.unix(dataa.time48)).format("dddd, h:mm a");
 
-		var html = template(dataa);
-		$('#output').html(html);
+			$scope.timeZone = dataa.timezone;
 
-		$('#location-output').text(address);
+			$scope.currentlyIcon = dataa.currentlyIcon;
+			$scope.currentlyTemp = dataa.currentlyTemp;
+			$scope.currentlyPress = dataa.currentlyPress;
+			$scope.currentlyDew = dataa.currentlyDew;
+			$scope.currentlyVis = dataa.currentlyVis;
+			$scope.currentlyHumid = dataa.currentlyHumid;
+			$scope.currentlySum = dataa.currentlySum;
+
+			$scope.day0 = dataa.day0;
+			$scope.day0Icon = dataa.day0Icon;
+			$scope.day0HiTemp = dataa.day0HiTemp;
+			$scope.day0HiTempTime = dataa.day0HiTempTime;
+			$scope.day0LowTemp = dataa.day0LowTemp;
+			$scope.day0LowTempTime = dataa.day0LowTempTime;
+			$scope.day0Rain = dataa.day0Rain;
+			$scope.day0Clouds = dataa.day0Clouds;
+			$scope.day0Dew = dataa.day0Dew;
+			$scope.day0Humid = dataa.day0Humid;
+			$scope.day0Press = dataa.day0Press;
+			$scope.day0Sunrise = dataa.day0Sunrise;
+			$scope.day0Sunset = dataa.day0Sunset;
+			$scope.day0Vis = dataa.day0Vis;
+			$scope.day0WindSpeed = dataa.day0WindSpeed;
+			$scope.day0WindBearing = dataa.day0WindBearing;
+			$scope.day0Moon = dataa.day0Moon;
+			$scope.day0Summary = dataa.day0Summary;
+
+			$scope.day1 = dataa.day1;
+			$scope.day1Icon = dataa.day1Icon;
+			$scope.day1HiTemp = dataa.day1HiTemp;
+			$scope.day1HiTempTime = dataa.day1HiTempTime;
+			$scope.day1LowTemp = dataa.day1LowTemp;
+			$scope.day1LowTempTime = dataa.day1LowTempTime;
+			$scope.day1Rain = dataa.day1Rain;
+			$scope.day1Clouds = dataa.day1Clouds;
+			$scope.day1Dew = dataa.day1Dew;
+			$scope.day1Humid = dataa.day1Humid;
+			$scope.day1Press = dataa.day1Press;
+			$scope.day1Sunrise = dataa.day1Sunrise;
+			$scope.day1Sunset = dataa.day1Sunset;
+			$scope.day1Vis = dataa.day1Vis;
+			$scope.day1WindSpeed = dataa.day1WindSpeed;
+			$scope.day1WindBearing = dataa.day1WindBearing;
+			$scope.day1Moon = dataa.day1Moon;
+			$scope.day1Summary = dataa.day1Summary;
+
+			$scope.day2 = dataa.day2;
+			$scope.day2Icon = dataa.day2Icon;
+			$scope.day2HiTemp = dataa.day2HiTemp;
+			$scope.day2HiTempTime = dataa.day2HiTempTime;
+			$scope.day2LowTemp = dataa.day2LowTemp;
+			$scope.day2LowTempTime = dataa.day2LowTempTime;
+			$scope.day2Rain = dataa.day2Rain;
+			$scope.day2Clouds = dataa.day2Clouds;
+			$scope.day2Dew = dataa.day2Dew;
+			$scope.day2Humid = dataa.day2Humid;
+			$scope.day2Press = dataa.day2Press;
+			$scope.day2Sunrise = dataa.day2Sunrise;
+			$scope.day2Sunset = dataa.day2Sunset;
+			$scope.day2Vis = dataa.day2Vis;
+			$scope.day2WindSpeed = dataa.day2WindSpeed;
+			$scope.day2WindBearing = dataa.day2WindBearing;
+			$scope.day2Moon = dataa.day2Moon;
+			$scope.day2Summary = dataa.day2Summary;
+
+			$scope.day3 = dataa.day3;
+			$scope.day3Icon = dataa.day3Icon;
+			$scope.day3HiTemp = dataa.day3HiTemp;
+			$scope.day3HiTempTime = dataa.day3HiTempTime;
+			$scope.day3LowTemp = dataa.day3LowTemp;
+			$scope.day3LowTempTime = dataa.day3LowTempTime;
+			$scope.day3Rain = dataa.day3Rain;
+			$scope.day3Clouds = dataa.day3Clouds;
+			$scope.day3Dew = dataa.day3Dew;
+			$scope.day3Humid = dataa.day3Humid;
+			$scope.day3Press = dataa.day3Press;
+			$scope.day3Sunrise = dataa.day3Sunrise;
+			$scope.day3Sunset = dataa.day3Sunset;
+			$scope.day3Vis = dataa.day3Vis;
+			$scope.day3WindSpeed = dataa.day3WindSpeed;
+			$scope.day3WindBearing = dataa.day3WindBearing;
+			$scope.day3Moon = dataa.day3Moon;
+			$scope.day3Summary = dataa.day3Summary;
+
+			$scope.day4 = dataa.day4;
+			$scope.day4Icon = dataa.day4Icon;
+			$scope.day4HiTemp = dataa.day4HiTemp;
+			$scope.day4HiTempTime = dataa.day4HiTempTime;
+			$scope.day4LowTemp = dataa.day4LowTemp;
+			$scope.day4LowTempTime = dataa.day4LowTempTime;
+			$scope.day4Rain = dataa.day4Rain;
+			$scope.day4Clouds = dataa.day4Clouds;
+			$scope.day4Dew = dataa.day4Dew;
+			$scope.day4Humid = dataa.day4Humid;
+			$scope.day4Press = dataa.day4Press;
+			$scope.day4Sunrise = dataa.day4Sunrise;
+			$scope.day4Sunset = dataa.day4Sunset;
+			$scope.day4Vis = dataa.day4Vis;
+			$scope.day4WindSpeed = dataa.day4WindSpeed;
+			$scope.day4WindBearing = dataa.day4WindBearing;
+			$scope.day4Moon = dataa.day4Moon;
+			$scope.day4Summary = dataa.day4Summary;
+
+			$scope.day5 = dataa.day5;
+			$scope.day5Icon = dataa.day5Icon;
+			$scope.day5HiTemp = dataa.day5HiTemp;
+			$scope.day5HiTempTime = dataa.day5HiTempTime;
+			$scope.day5LowTemp = dataa.day5LowTemp;
+			$scope.day5LowTempTime = dataa.day5LowTempTime;
+			$scope.day5Rain = dataa.day5Rain;
+			$scope.day5Clouds = dataa.day5Clouds;
+			$scope.day5Dew = dataa.day5Dew;
+			$scope.day5Humid = dataa.day5Humid;
+			$scope.day5Press = dataa.day5Press;
+			$scope.day5Sunrise = dataa.day5Sunrise;
+			$scope.day5Sunset = dataa.day5Sunset;
+			$scope.day5Vis = dataa.day5Vis;
+			$scope.day5WindSpeed = dataa.day5WindSpeed;
+			$scope.day5WindBearing = dataa.day5WindBearing;
+			$scope.day5Moon = dataa.day5Moon;
+			$scope.day5Summary = dataa.day5Summary;
+
+			$scope.day6 = dataa.day6;
+			$scope.day6Icon = dataa.day6Icon;
+			$scope.day6HiTemp = dataa.day6HiTemp;
+			$scope.day6HiTempTime = dataa.day6HiTempTime;
+			$scope.day6LowTemp = dataa.day6LowTemp;
+			$scope.day6LowTempTime = dataa.day6LowTempTime;
+			$scope.day6Rain = dataa.day6Rain;
+			$scope.day6Clouds = dataa.day6Clouds;
+			$scope.day6Dew = dataa.day6Dew;
+			$scope.day6Humid = dataa.day6Humid;
+			$scope.day6Press = dataa.day6Press;
+			$scope.day6Sunrise = dataa.day6Sunrise;
+			$scope.day6Sunset = dataa.day6Sunset;
+			$scope.day6Vis = dataa.day6Vis;
+			$scope.day6WindSpeed = dataa.day6WindSpeed;
+			$scope.day6WindBearing = dataa.day6WindBearing;
+			$scope.day6Moon = dataa.day6Moon;
+			$scope.day6Summary = dataa.day6Summary;
+
+			$scope.day7 = dataa.day7;
+			$scope.day7Icon = dataa.day7Icon;
+			$scope.day7HiTemp = dataa.day7HiTemp;
+			$scope.day7HiTempTime = dataa.day7HiTempTime;
+			$scope.day7LowTemp = dataa.day7LowTemp;
+			$scope.day7LowTempTime = dataa.day7LowTempTime;
+			$scope.day7Rain = dataa.day7Rain;
+			$scope.day7Clouds = dataa.day7Clouds;
+			$scope.day7Dew = dataa.day7Dew;
+			$scope.day7Humid = dataa.day7Humid;
+			$scope.day7Press = dataa.day7Press;
+			$scope.day7Sunrise = dataa.day7Sunrise;
+			$scope.day7Sunset = dataa.day7Sunset;
+			$scope.day7Vis = dataa.day7Vis;
+			$scope.day7WindSpeed = dataa.day7WindSpeed;
+			$scope.day7WindBearing = dataa.day7WindBearing;
+			$scope.day7Moon = dataa.day7Moon;
+			$scope.day7Summary = dataa.day7Summary;
+
+			$scope.time1 = dataa.time1;
+			$scope.hourTemp1 = dataa.hourTemp1;
+			$scope.hourRain1 = dataa.hourRain1;
+			$scope.hourIcon1 = dataa.hourIcon1;
+			$scope.rainInten1 = dataa.rainInten1;
+			$scope.hourClouds1 = dataa.hourClouds1;
+			$scope.hourDew1 = dataa.hourDew1;
+			$scope.hourHumid1 = dataa.hourHumid1;
+			$scope.hourPress1 = dataa.hourPress1;
+			$scope.hourVis1 = dataa.hourVis1;
+			$scope.hourWindSpeed1 = dataa.hourWindSpeed1;
+			$scope.hourWindBearing1 = dataa.hourWindBearing1;
+
+			$scope.time2 = dataa.time2;
+			$scope.hourTemp2 = dataa.hourTemp2;
+			$scope.hourRain2 = dataa.hourRain2;
+			$scope.hourIcon2 = dataa.hourIcon2;
+			$scope.rainInten2 = dataa.rainInten2;
+			$scope.hourClouds2 = dataa.hourClouds2;
+			$scope.hourDew2 = dataa.hourDew2;
+			$scope.hourHumid2 = dataa.hourHumid2;
+			$scope.hourPress2 = dataa.hourPress2;
+			$scope.hourVis2 = dataa.hourVis2;
+			$scope.hourWindSpeed2 = dataa.hourWindSpeed2;
+			$scope.hourWindBearing2 = dataa.hourWindBearing2;
+
+			$scope.time3 = dataa.time3;
+			$scope.hourTemp3 = dataa.hourTemp3;
+			$scope.hourRain3 = dataa.hourRain3;
+			$scope.hourIcon3 = dataa.hourIcon3;
+			$scope.rainInten3 = dataa.rainInten3;
+			$scope.hourClouds3 = dataa.hourClouds3;
+			$scope.hourDew3 = dataa.hourDew3;
+			$scope.hourHumid3 = dataa.hourHumid3;
+			$scope.hourPress3 = dataa.hourPress3;
+			$scope.hourVis3 = dataa.hourVis3;
+			$scope.hourWindSpeed3 = dataa.hourWindSpeed3;
+			$scope.hourWindBearing3 = dataa.hourWindBearing3;
+
+			$scope.time4 = dataa.time4;
+			$scope.hourTemp4 = dataa.hourTemp4;
+			$scope.hourRain4 = dataa.hourRain4;
+			$scope.hourIcon4 = dataa.hourIcon4;
+			$scope.rainInten4 = dataa.rainInten4;
+			$scope.hourClouds4 = dataa.hourClouds4;
+			$scope.hourDew4 = dataa.hourDew4;
+			$scope.hourHumid4 = dataa.hourHumid4;
+			$scope.hourPress4 = dataa.hourPress4;
+			$scope.hourVis4 = dataa.hourVis4;
+			$scope.hourWindSpeed4 = dataa.hourWindSpeed4;
+			$scope.hourWindBearing4 = dataa.hourWindBearing4;
+
+			$scope.time5 = dataa.time5;
+			$scope.hourTemp5 = dataa.hourTemp5;
+			$scope.hourRain5 = dataa.hourRain5;
+			$scope.hourIcon5 = dataa.hourIcon5;
+			$scope.rainInten5 = dataa.rainInten5;
+			$scope.hourClouds5 = dataa.hourClouds5;
+			$scope.hourDew5 = dataa.hourDew5;
+			$scope.hourHumid5 = dataa.hourHumid5;
+			$scope.hourPress5 = dataa.hourPress5;
+			$scope.hourVis5 = dataa.hourVis5;
+			$scope.hourWindSpeed5 = dataa.hourWindSpeed5;
+			$scope.hourWindBearing5 = dataa.hourWindBearing5;
+
+			$scope.time6 = dataa.time6;
+			$scope.hourTemp6 = dataa.hourTemp6;
+			$scope.hourRain6 = dataa.hourRain6;
+			$scope.hourIcon6 = dataa.hourIcon6;
+			$scope.rainInten6 = dataa.rainInten6;
+			$scope.hourClouds6 = dataa.hourClouds6;
+			$scope.hourDew6 = dataa.hourDew6;
+			$scope.hourHumid6 = dataa.hourHumid6;
+			$scope.hourPress6 = dataa.hourPress6;
+			$scope.hourVis6 = dataa.hourVis6;
+			$scope.hourWindSpeed6 = dataa.hourWindSpeed6;
+			$scope.hourWindBearing6 = dataa.hourWindBearing6;
+
+			$scope.time7 = dataa.time7;
+			$scope.hourTemp7 = dataa.hourTemp7;
+			$scope.hourRain7 = dataa.hourRain7;
+			$scope.hourIcon7 = dataa.hourIcon7;
+			$scope.rainInten7 = dataa.rainInten7;
+			$scope.hourClouds7 = dataa.hourClouds7;
+			$scope.hourDew7 = dataa.hourDew7;
+			$scope.hourHumid7 = dataa.hourHumid7;
+			$scope.hourPress7 = dataa.hourPress7;
+			$scope.hourVis7 = dataa.hourVis7;
+			$scope.hourWindSpeed7 = dataa.hourWindSpeed7;
+			$scope.hourWindBearing7 = dataa.hourWindBearing7;
+
+			$scope.time8 = dataa.time8;
+			$scope.hourTemp8 = dataa.hourTemp8;
+			$scope.hourRain8 = dataa.hourRain8;
+			$scope.hourIcon8 = dataa.hourIcon8;
+			$scope.rainInten8 = dataa.rainInten8;
+			$scope.hourClouds8 = dataa.hourClouds8;
+			$scope.hourDew8 = dataa.hourDew8;
+			$scope.hourHumid8 = dataa.hourHumid8;
+			$scope.hourPress8 = dataa.hourPress8;
+			$scope.hourVis8 = dataa.hourVis8;
+			$scope.hourWindSpeed8 = dataa.hourWindSpeed8;
+			$scope.hourWindBearing8 = dataa.hourWindBearing8;
+
+			$scope.time9 = dataa.time9;
+			$scope.hourTemp9 = dataa.hourTemp9;
+			$scope.hourRain9 = dataa.hourRain9;
+			$scope.hourIcon9 = dataa.hourIcon9;
+			$scope.rainInten9 = dataa.rainInten9;
+			$scope.hourClouds9 = dataa.hourClouds9;
+			$scope.hourDew9 = dataa.hourDew9;
+			$scope.hourHumid9 = dataa.hourHumid9;
+			$scope.hourPress9 = dataa.hourPress9;
+			$scope.hourVis9 = dataa.hourVis9;
+			$scope.hourWindSpeed9 = dataa.hourWindSpeed9;
+			$scope.hourWindBearing9 = dataa.hourWindBearing9;
+
+			$scope.time10 = dataa.time10;
+			$scope.hourTemp10 = dataa.hourTemp10;
+			$scope.hourRain10 = dataa.hourRain10;
+			$scope.hourIcon10 = dataa.hourIcon10;
+			$scope.rainInten10 = dataa.rainInten10;
+			$scope.hourClouds10 = dataa.hourClouds10;
+			$scope.hourDew10 = dataa.hourDew10;
+			$scope.hourHumid10 = dataa.hourHumid10;
+			$scope.hourPress10 = dataa.hourPress10;
+			$scope.hourVis10 = dataa.hourVis10;
+			$scope.hourWindSpeed10 = dataa.hourWindSpeed10;
+			$scope.hourWindBearing10 = dataa.hourWindBearing10;
+
+			$scope.time11 = dataa.time11;
+			$scope.hourTemp11 = dataa.hourTemp11;
+			$scope.hourRain11 = dataa.hourRain11;
+			$scope.hourIcon11 = dataa.hourIcon11;
+			$scope.rainInten11 = dataa.rainInten11;
+			$scope.hourClouds11 = dataa.hourClouds11;
+			$scope.hourDew11 = dataa.hourDew11;
+			$scope.hourHumid11 = dataa.hourHumid11;
+			$scope.hourPress11 = dataa.hourPress11;
+			$scope.hourVis11 = dataa.hourVis11;
+			$scope.hourWindSpeed11 = dataa.hourWindSpeed11;
+			$scope.hourWindBearing11 = dataa.hourWindBearing11;
+
+			$scope.time12 = dataa.time12;
+			$scope.hourTemp12 = dataa.hourTemp12;
+			$scope.hourRain12 = dataa.hourRain12;
+			$scope.hourIcon12 = dataa.hourIcon12;
+			$scope.rainInten12 = dataa.rainInten12;
+			$scope.hourClouds12 = dataa.hourClouds12;
+			$scope.hourDew12 = dataa.hourDew12;
+			$scope.hourHumid12 = dataa.hourHumid12;
+			$scope.hourPress12 = dataa.hourPress12;
+			$scope.hourVis12 = dataa.hourVis12;
+			$scope.hourWindSpeed12 = dataa.hourWindSpeed12;
+			$scope.hourWindBearing12 = dataa.hourWindBearing12;
+
+			$scope.time13 = dataa.time13;
+			$scope.hourTemp13 = dataa.hourTemp13;
+			$scope.hourRain13 = dataa.hourRain13;
+			$scope.hourIcon13 = dataa.hourIcon13;
+			$scope.rainInten13 = dataa.rainInten13;
+			$scope.hourClouds13 = dataa.hourClouds13;
+			$scope.hourDew13 = dataa.hourDew13;
+			$scope.hourHumid13 = dataa.hourHumid13;
+			$scope.hourPress13 = dataa.hourPress13;
+			$scope.hourVis13 = dataa.hourVis13;
+			$scope.hourWindSpeed13 = dataa.hourWindSpeed13;
+			$scope.hourWindBearing13 = dataa.hourWindBearing13;
+
+			$scope.time14 = dataa.time14;
+			$scope.hourTemp14 = dataa.hourTemp14;
+			$scope.hourRain14 = dataa.hourRain14;
+			$scope.hourIcon14 = dataa.hourIcon14;
+			$scope.rainInten14 = dataa.rainInten14;
+			$scope.hourClouds14 = dataa.hourClouds14;
+			$scope.hourDew14 = dataa.hourDew14;
+			$scope.hourHumid14 = dataa.hourHumid14;
+			$scope.hourPress14 = dataa.hourPress14;
+			$scope.hourVis14 = dataa.hourVis14;
+			$scope.hourWindSpeed14 = dataa.hourWindSpeed14;
+			$scope.hourWindBearing14 = dataa.hourWindBearing14;
+
+			$scope.time15 = dataa.time15;
+			$scope.hourTemp15 = dataa.hourTemp15;
+			$scope.hourRain15 = dataa.hourRain15;
+			$scope.hourIcon15 = dataa.hourIcon15;
+			$scope.rainInten15 = dataa.rainInten15;
+			$scope.hourClouds15 = dataa.hourClouds15;
+			$scope.hourDew15 = dataa.hourDew15;
+			$scope.hourHumid15 = dataa.hourHumid15;
+			$scope.hourPress15 = dataa.hourPress15;
+			$scope.hourVis15 = dataa.hourVis15;
+			$scope.hourWindSpeed15 = dataa.hourWindSpeed15;
+			$scope.hourWindBearing15 = dataa.hourWindBearing15;
+
+			$scope.time16 = dataa.time16;
+			$scope.hourTemp16 = dataa.hourTemp16;
+			$scope.hourRain16 = dataa.hourRain16;
+			$scope.hourIcon16 = dataa.hourIcon16;
+			$scope.rainInten16 = dataa.rainInten16;
+			$scope.hourClouds16 = dataa.hourClouds16;
+			$scope.hourDew16 = dataa.hourDew16;
+			$scope.hourHumid16 = dataa.hourHumid16;
+			$scope.hourPress16 = dataa.hourPress16;
+			$scope.hourVis16 = dataa.hourVis16;
+			$scope.hourWindSpeed16 = dataa.hourWindSpeed16;
+			$scope.hourWindBearing16 = dataa.hourWindBearing16;
+
+			$scope.time17 = dataa.time17;
+			$scope.hourTemp17 = dataa.hourTemp17;
+			$scope.hourRain17 = dataa.hourRain17;
+			$scope.hourIcon17 = dataa.hourIcon17;
+			$scope.rainInten17 = dataa.rainInten17;
+			$scope.hourClouds17 = dataa.hourClouds17;
+			$scope.hourDew17 = dataa.hourDew17;
+			$scope.hourHumid17 = dataa.hourHumid17;
+			$scope.hourPress17 = dataa.hourPress17;
+			$scope.hourVis17 = dataa.hourVis17;
+			$scope.hourWindSpeed17 = dataa.hourWindSpeed17;
+			$scope.hourWindBearing17 = dataa.hourWindBearing17;
+
+			$scope.time18 = dataa.time18;
+			$scope.hourTemp18 = dataa.hourTemp18;
+			$scope.hourRain18 = dataa.hourRain18;
+			$scope.hourIcon18 = dataa.hourIcon18;
+			$scope.rainInten18 = dataa.rainInten18;
+			$scope.hourClouds18 = dataa.hourClouds18;
+			$scope.hourDew18 = dataa.hourDew18;
+			$scope.hourHumid18 = dataa.hourHumid18;
+			$scope.hourPress18 = dataa.hourPress18;
+			$scope.hourVis18 = dataa.hourVis18;
+			$scope.hourWindSpeed18 = dataa.hourWindSpeed18;
+			$scope.hourWindBearing18 = dataa.hourWindBearing18;
+
+			$scope.time19 = dataa.time19;
+			$scope.hourTemp19 = dataa.hourTemp19;
+			$scope.hourRain19 = dataa.hourRain19;
+			$scope.hourIcon19 = dataa.hourIcon19;
+			$scope.rainInten19 = dataa.rainInten19;
+			$scope.hourClouds19 = dataa.hourClouds19;
+			$scope.hourDew19 = dataa.hourDew19;
+			$scope.hourHumid19 = dataa.hourHumid19;
+			$scope.hourPress19 = dataa.hourPress19;
+			$scope.hourVis19 = dataa.hourVis19;
+			$scope.hourWindSpeed19 = dataa.hourWindSpeed19;
+			$scope.hourWindBearing19 = dataa.hourWindBearing19;
+
+			$scope.time20 = dataa.time20;
+			$scope.hourTemp20 = dataa.hourTemp20;
+			$scope.hourRain20 = dataa.hourRain20;
+			$scope.hourIcon20 = dataa.hourIcon20;
+			$scope.rainInten20 = dataa.rainInten20;
+			$scope.hourClouds20 = dataa.hourClouds20;
+			$scope.hourDew20 = dataa.hourDew20;
+			$scope.hourHumid20 = dataa.hourHumid20;
+			$scope.hourPress20 = dataa.hourPress20;
+			$scope.hourVis20 = dataa.hourVis20;
+			$scope.hourWindSpeed20 = dataa.hourWindSpeed20;
+			$scope.hourWindBearing20 = dataa.hourWindBearing20;
+
+			$scope.time21 = dataa.time21;
+			$scope.hourTemp21 = dataa.hourTemp21;
+			$scope.hourRain21 = dataa.hourRain21;
+			$scope.hourIcon21 = dataa.hourIcon21;
+			$scope.rainInten21 = dataa.rainInten21;
+			$scope.hourClouds21 = dataa.hourClouds21;
+			$scope.hourDew21 = dataa.hourDew21;
+			$scope.hourHumid21 = dataa.hourHumid21;
+			$scope.hourPress21 = dataa.hourPress21;
+			$scope.hourVis21 = dataa.hourVis21;
+			$scope.hourWindSpeed21 = dataa.hourWindSpeed21;
+			$scope.hourWindBearing21 = dataa.hourWindBearing21;
+
+			$scope.time22 = dataa.time22;
+			$scope.hourTemp22 = dataa.hourTemp22;
+			$scope.hourRain22 = dataa.hourRain22;
+			$scope.hourIcon22 = dataa.hourIcon22;
+			$scope.rainInten22 = dataa.rainInten22;
+			$scope.hourClouds22 = dataa.hourClouds22;
+			$scope.hourDew22 = dataa.hourDew22;
+			$scope.hourHumid22 = dataa.hourHumid22;
+			$scope.hourPress22 = dataa.hourPress22;
+			$scope.hourVis22 = dataa.hourVis22;
+			$scope.hourWindSpeed22 = dataa.hourWindSpeed22;
+			$scope.hourWindBearing22 = dataa.hourWindBearing22;
+
+			$scope.time23 = dataa.time23;
+			$scope.hourTemp23 = dataa.hourTemp23;
+			$scope.hourRain23 = dataa.hourRain23;
+			$scope.hourIcon23 = dataa.hourIcon23;
+			$scope.rainInten23 = dataa.rainInten23;
+			$scope.hourClouds23 = dataa.hourClouds23;
+			$scope.hourDew23 = dataa.hourDew23;
+			$scope.hourHumid23 = dataa.hourHumid23;
+			$scope.hourPress23 = dataa.hourPress23;
+			$scope.hourVis23 = dataa.hourVis23;
+			$scope.hourWindSpeed23 = dataa.hourWindSpeed23;
+			$scope.hourWindBearing23 = dataa.hourWindBearing23;
+
+			$scope.time24 = dataa.time24;
+			$scope.hourTemp24 = dataa.hourTemp24;
+			$scope.hourRain24 = dataa.hourRain24;
+			$scope.hourIcon24 = dataa.hourIcon24;
+			$scope.rainInten24 = dataa.rainInten24;
+			$scope.hourClouds24 = dataa.hourClouds24;
+			$scope.hourDew24 = dataa.hourDew24;
+			$scope.hourHumid24 = dataa.hourHumid24;
+			$scope.hourPress24 = dataa.hourPress24;
+			$scope.hourVis24 = dataa.hourVis24;
+			$scope.hourWindSpeed24 = dataa.hourWindSpeed24;
+			$scope.hourWindBearing24 = dataa.hourWindBearing24;
+
+			$scope.time25 = dataa.time25;
+			$scope.hourTemp25 = dataa.hourTemp25;
+			$scope.hourRain25 = dataa.hourRain25;
+			$scope.hourIcon25 = dataa.hourIcon25;
+			$scope.rainInten25 = dataa.rainInten25;
+			$scope.hourClouds25 = dataa.hourClouds25;
+			$scope.hourDew25 = dataa.hourDew25;
+			$scope.hourHumid25 = dataa.hourHumid25;
+			$scope.hourPress25 = dataa.hourPress25;
+			$scope.hourVis25 = dataa.hourVis25;
+			$scope.hourWindSpeed25 = dataa.hourWindSpeed25;
+			$scope.hourWindBearing25 = dataa.hourWindBearing25;
+
+			$scope.time26 = dataa.time26;
+			$scope.hourTemp26 = dataa.hourTemp26;
+			$scope.hourRain26 = dataa.hourRain26;
+			$scope.hourIcon26 = dataa.hourIcon26;
+			$scope.rainInten26 = dataa.rainInten26;
+			$scope.hourClouds26 = dataa.hourClouds26;
+			$scope.hourDew26 = dataa.hourDew26;
+			$scope.hourHumid26 = dataa.hourHumid26;
+			$scope.hourPress26 = dataa.hourPress26;
+			$scope.hourVis26 = dataa.hourVis26;
+			$scope.hourWindSpeed26 = dataa.hourWindSpeed26;
+			$scope.hourWindBearing26 = dataa.hourWindBearing26;
+
+			$scope.time27 = dataa.time27;
+			$scope.hourTemp27 = dataa.hourTemp27;
+			$scope.hourRain27 = dataa.hourRain27;
+			$scope.hourIcon27 = dataa.hourIcon27;
+			$scope.rainInten27 = dataa.rainInten27;
+			$scope.hourClouds27 = dataa.hourClouds27;
+			$scope.hourDew27 = dataa.hourDew27;
+			$scope.hourHumid27 = dataa.hourHumid27;
+			$scope.hourPress27 = dataa.hourPress27;
+			$scope.hourVis27 = dataa.hourVis27;
+			$scope.hourWindSpeed27 = dataa.hourWindSpeed27;
+			$scope.hourWindBearing27 = dataa.hourWindBearing27;
+
+			$scope.time28 = dataa.time28;
+			$scope.hourTemp28 = dataa.hourTemp28;
+			$scope.hourRain28 = dataa.hourRain28;
+			$scope.hourIcon28 = dataa.hourIcon28;
+			$scope.rainInten28 = dataa.rainInten28;
+			$scope.hourClouds28 = dataa.hourClouds28;
+			$scope.hourDew28 = dataa.hourDew28;
+			$scope.hourHumid28 = dataa.hourHumid28;
+			$scope.hourPress28 = dataa.hourPress28;
+			$scope.hourVis28 = dataa.hourVis28;
+			$scope.hourWindSpeed28 = dataa.hourWindSpeed28;
+			$scope.hourWindBearing28 = dataa.hourWindBearing28;
+
+			$scope.time29 = dataa.time29;
+			$scope.hourTemp29 = dataa.hourTemp29;
+			$scope.hourRain29 = dataa.hourRain29;
+			$scope.hourIcon29 = dataa.hourIcon29;
+			$scope.rainInten29 = dataa.rainInten29;
+			$scope.hourClouds29 = dataa.hourClouds29;
+			$scope.hourDew29 = dataa.hourDew29;
+			$scope.hourHumid29 = dataa.hourHumid29;
+			$scope.hourPress29 = dataa.hourPress29;
+			$scope.hourVis29 = dataa.hourVis29;
+			$scope.hourWindSpeed29 = dataa.hourWindSpeed29;
+			$scope.hourWindBearing29 = dataa.hourWindBearing29;
+
+			$scope.time30 = dataa.time30;
+			$scope.hourTemp30 = dataa.hourTemp30;
+			$scope.hourRain30 = dataa.hourRain30;
+			$scope.hourIcon30 = dataa.hourIcon30;
+			$scope.rainInten30 = dataa.rainInten30;
+			$scope.hourClouds30 = dataa.hourClouds30;
+			$scope.hourDew30 = dataa.hourDew30;
+			$scope.hourHumid30 = dataa.hourHumid30;
+			$scope.hourPress30 = dataa.hourPress30;
+			$scope.hourVis30 = dataa.hourVis30;
+			$scope.hourWindSpeed30 = dataa.hourWindSpeed30;
+			$scope.hourWindBearing30 = dataa.hourWindBearing30;
+
+			$scope.time31 = dataa.time31;
+			$scope.hourTemp31 = dataa.hourTemp31;
+			$scope.hourRain31 = dataa.hourRain31;
+			$scope.hourIcon31 = dataa.hourIcon31;
+			$scope.rainInten31 = dataa.rainInten31;
+			$scope.hourClouds31 = dataa.hourClouds31;
+			$scope.hourDew31 = dataa.hourDew31;
+			$scope.hourHumid31 = dataa.hourHumid31;
+			$scope.hourPress31 = dataa.hourPress31;
+			$scope.hourVis31 = dataa.hourVis31;
+			$scope.hourWindSpeed31 = dataa.hourWindSpeed31;
+			$scope.hourWindBearing31 = dataa.hourWindBearing31;
+
+			$scope.time32 = dataa.time32;
+			$scope.hourTemp32 = dataa.hourTemp32;
+			$scope.hourRain32 = dataa.hourRain32;
+			$scope.hourIcon32 = dataa.hourIcon32;
+			$scope.rainInten32 = dataa.rainInten32;
+			$scope.hourClouds32 = dataa.hourClouds32;
+			$scope.hourDew32 = dataa.hourDew32;
+			$scope.hourHumid32 = dataa.hourHumid32;
+			$scope.hourPress32 = dataa.hourPress32;
+			$scope.hourVis32 = dataa.hourVis32;
+			$scope.hourWindSpeed32 = dataa.hourWindSpeed32;
+			$scope.hourWindBearing32 = dataa.hourWindBearing32;
+
+			$scope.time33 = dataa.time33;
+			$scope.hourTemp33 = dataa.hourTemp33;
+			$scope.hourRain33 = dataa.hourRain33;
+			$scope.hourIcon33 = dataa.hourIcon33;
+			$scope.rainInten33 = dataa.rainInten33;
+			$scope.hourClouds33 = dataa.hourClouds33;
+			$scope.hourDew33 = dataa.hourDew33;
+			$scope.hourHumid33 = dataa.hourHumid33;
+			$scope.hourPress33 = dataa.hourPress33;
+			$scope.hourVis33 = dataa.hourVis33;
+			$scope.hourWindSpeed33 = dataa.hourWindSpeed33;
+			$scope.hourWindBearing33 = dataa.hourWindBearing33;
+
+			$scope.time34 = dataa.time34;
+			$scope.hourTemp34 = dataa.hourTemp34;
+			$scope.hourRain34 = dataa.hourRain34;
+			$scope.hourIcon34 = dataa.hourIcon34;
+			$scope.rainInten34 = dataa.rainInten34;
+			$scope.hourClouds34 = dataa.hourClouds34;
+			$scope.hourDew34 = dataa.hourDew34;
+			$scope.hourHumid34 = dataa.hourHumid34;
+			$scope.hourPress34 = dataa.hourPress34;
+			$scope.hourVis34 = dataa.hourVis34;
+			$scope.hourWindSpeed34 = dataa.hourWindSpeed34;
+			$scope.hourWindBearing34 = dataa.hourWindBearing34;
+
+			$scope.time35 = dataa.time35;
+			$scope.hourTemp35 = dataa.hourTemp35;
+			$scope.hourRain35 = dataa.hourRain35;
+			$scope.hourIcon35 = dataa.hourIcon35;
+			$scope.rainInten35 = dataa.rainInten35;
+			$scope.hourClouds35 = dataa.hourClouds35;
+			$scope.hourDew35 = dataa.hourDew35;
+			$scope.hourHumid35 = dataa.hourHumid35;
+			$scope.hourPress35 = dataa.hourPress35;
+			$scope.hourVis35 = dataa.hourVis35;
+			$scope.hourWindSpeed35 = dataa.hourWindSpeed35;
+			$scope.hourWindBearing35 = dataa.hourWindBearing35;
+
+			$scope.time36 = dataa.time36;
+			$scope.hourTemp36 = dataa.hourTemp36;
+			$scope.hourRain36 = dataa.hourRain36;
+			$scope.hourIcon36 = dataa.hourIcon36;
+			$scope.rainInten36 = dataa.rainInten36;
+			$scope.hourClouds36 = dataa.hourClouds36;
+			$scope.hourDew36 = dataa.hourDew36;
+			$scope.hourHumid36 = dataa.hourHumid36;
+			$scope.hourPress36 = dataa.hourPress36;
+			$scope.hourVis36 = dataa.hourVis36;
+			$scope.hourWindSpeed36 = dataa.hourWindSpeed36;
+			$scope.hourWindBearing36 = dataa.hourWindBearing36;
+
+			$scope.time37 = dataa.time37;
+			$scope.hourTemp37 = dataa.hourTemp37;
+			$scope.hourRain37 = dataa.hourRain37;
+			$scope.hourIcon37 = dataa.hourIcon37;
+			$scope.rainInten37 = dataa.rainInten37;
+			$scope.hourClouds37 = dataa.hourClouds37;
+			$scope.hourDew37 = dataa.hourDew37;
+			$scope.hourHumid37 = dataa.hourHumid37;
+			$scope.hourPress37 = dataa.hourPress37;
+			$scope.hourVis37 = dataa.hourVis37;
+			$scope.hourWindSpeed37 = dataa.hourWindSpeed37;
+			$scope.hourWindBearing37 = dataa.hourWindBearing37;
+
+			$scope.time38 = dataa.time38;
+			$scope.hourTemp38 = dataa.hourTemp38;
+			$scope.hourRain38 = dataa.hourRain38;
+			$scope.hourIcon38 = dataa.hourIcon38;
+			$scope.rainInten38 = dataa.rainInten38;
+			$scope.hourClouds38 = dataa.hourClouds38;
+			$scope.hourDew38 = dataa.hourDew38;
+			$scope.hourHumid38 = dataa.hourHumid38;
+			$scope.hourPress38 = dataa.hourPress38;
+			$scope.hourVis38 = dataa.hourVis38;
+			$scope.hourWindSpeed38 = dataa.hourWindSpeed38;
+			$scope.hourWindBearing38 = dataa.hourWindBearing38;
+
+			$scope.time39 = dataa.time39;
+			$scope.hourTemp39 = dataa.hourTemp39;
+			$scope.hourRain39 = dataa.hourRain39;
+			$scope.hourIcon39 = dataa.hourIcon39;
+			$scope.rainInten39 = dataa.rainInten39;
+			$scope.hourClouds39 = dataa.hourClouds39;
+			$scope.hourDew39 = dataa.hourDew39;
+			$scope.hourHumid39 = dataa.hourHumid39;
+			$scope.hourPress39 = dataa.hourPress39;
+			$scope.hourVis39 = dataa.hourVis39;
+			$scope.hourWindSpeed39 = dataa.hourWindSpeed39;
+			$scope.hourWindBearing39 = dataa.hourWindBearing39;
+
+			$scope.time40 = dataa.time40;
+			$scope.hourTemp40 = dataa.hourTemp40;
+			$scope.hourRain40 = dataa.hourRain40;
+			$scope.hourIcon40 = dataa.hourIcon40;
+			$scope.rainInten40 = dataa.rainInten40;
+			$scope.hourClouds40 = dataa.hourClouds40;
+			$scope.hourDew40 = dataa.hourDew40;
+			$scope.hourHumid40 = dataa.hourHumid40;
+			$scope.hourPress40 = dataa.hourPress40;
+			$scope.hourVis40 = dataa.hourVis40;
+			$scope.hourWindSpeed40 = dataa.hourWindSpeed40;
+			$scope.hourWindBearing40 = dataa.hourWindBearing40;
+
+			$scope.time41 = dataa.time41;
+			$scope.hourTemp41 = dataa.hourTemp41;
+			$scope.hourRain41 = dataa.hourRain41;
+			$scope.hourIcon41 = dataa.hourIcon41;
+			$scope.rainInten41 = dataa.rainInten41;
+			$scope.hourClouds41 = dataa.hourClouds41;
+			$scope.hourDew41 = dataa.hourDew41;
+			$scope.hourHumid41 = dataa.hourHumid41;
+			$scope.hourPress41 = dataa.hourPress41;
+			$scope.hourVis41 = dataa.hourVis41;
+			$scope.hourWindSpeed41 = dataa.hourWindSpeed41;
+			$scope.hourWindBearing41 = dataa.hourWindBearing41;
+
+			$scope.time42 = dataa.time42;
+			$scope.hourTemp42 = dataa.hourTemp42;
+			$scope.hourRain42 = dataa.hourRain42;
+			$scope.hourIcon42 = dataa.hourIcon42;
+			$scope.rainInten42 = dataa.rainInten42;
+			$scope.hourClouds42 = dataa.hourClouds42;
+			$scope.hourDew42 = dataa.hourDew42;
+			$scope.hourHumid42 = dataa.hourHumid42;
+			$scope.hourPress42 = dataa.hourPress42;
+			$scope.hourVis42 = dataa.hourVis42;
+			$scope.hourWindSpeed42 = dataa.hourWindSpeed42;
+			$scope.hourWindBearing42 = dataa.hourWindBearing42;
+
+			$scope.time43 = dataa.time43;
+			$scope.hourTemp43 = dataa.hourTemp43;
+			$scope.hourRain43 = dataa.hourRain43;
+			$scope.hourIcon43 = dataa.hourIcon43;
+			$scope.rainInten43 = dataa.rainInten43;
+			$scope.hourClouds43 = dataa.hourClouds43;
+			$scope.hourDew43 = dataa.hourDew43;
+			$scope.hourHumid43 = dataa.hourHumid43;
+			$scope.hourPress43 = dataa.hourPress43;
+			$scope.hourVis43 = dataa.hourVis43;
+			$scope.hourWindSpeed43 = dataa.hourWindSpeed43;
+			$scope.hourWindBearing43 = dataa.hourWindBearing43;
+
+			$scope.time44 = dataa.time44;
+			$scope.hourTemp44 = dataa.hourTemp44;
+			$scope.hourRain44 = dataa.hourRain44;
+			$scope.hourIcon44 = dataa.hourIcon44;
+			$scope.rainInten44 = dataa.rainInten44;
+			$scope.hourClouds44 = dataa.hourClouds44;
+			$scope.hourDew44 = dataa.hourDew44;
+			$scope.hourHumid44 = dataa.hourHumid44;
+			$scope.hourPress44 = dataa.hourPress44;
+			$scope.hourVis44 = dataa.hourVis44;
+			$scope.hourWindSpeed44 = dataa.hourWindSpeed44;
+			$scope.hourWindBearing44 = dataa.hourWindBearing44;
+
+			$scope.time45 = dataa.time45;
+			$scope.hourTemp45 = dataa.hourTemp45;
+			$scope.hourRain45 = dataa.hourRain45;
+			$scope.hourIcon45 = dataa.hourIcon45;
+			$scope.rainInten45 = dataa.rainInten45;
+			$scope.hourClouds45 = dataa.hourClouds45;
+			$scope.hourDew45 = dataa.hourDew45;
+			$scope.hourHumid45 = dataa.hourHumid45;
+			$scope.hourPress45 = dataa.hourPress45;
+			$scope.hourVis45 = dataa.hourVis45;
+			$scope.hourWindSpeed45 = dataa.hourWindSpeed45;
+			$scope.hourWindBearing45 = dataa.hourWindBearing45;
+
+			$scope.time46 = dataa.time46;
+			$scope.hourTemp46 = dataa.hourTemp46;
+			$scope.hourRain46 = dataa.hourRain46;
+			$scope.hourIcon46 = dataa.hourIcon46;
+			$scope.rainInten46 = dataa.rainInten46;
+			$scope.hourClouds46 = dataa.hourClouds46;
+			$scope.hourDew46 = dataa.hourDew46;
+			$scope.hourHumid46 = dataa.hourHumid46;
+			$scope.hourPress46 = dataa.hourPress46;
+			$scope.hourVis46 = dataa.hourVis46;
+			$scope.hourWindSpeed46 = dataa.hourWindSpeed46;
+			$scope.hourWindBearing46 = dataa.hourWindBearing46;
+
+			$scope.time47 = dataa.time47;
+			$scope.hourTemp47 = dataa.hourTemp47;
+			$scope.hourRain47 = dataa.hourRain47;
+			$scope.hourIcon47 = dataa.hourIcon47;
+			$scope.rainInten47 = dataa.rainInten47;
+			$scope.hourClouds47 = dataa.hourClouds47;
+			$scope.hourDew47 = dataa.hourDew47;
+			$scope.hourHumid47 = dataa.hourHumid47;
+			$scope.hourPress47 = dataa.hourPress47;
+			$scope.hourVis47 = dataa.hourVis47;
+			$scope.hourWindSpeed47 = dataa.hourWindSpeed47;
+			$scope.hourWindBearing47 = dataa.hourWindBearing47;
+
+			$scope.time48 = dataa.time48;
+			$scope.hourTemp48 = dataa.hourTemp48;
+			$scope.hourRain48 = dataa.hourRain48;
+			$scope.hourIcon48 = dataa.hourIcon48;
+			$scope.rainInten48 = dataa.rainInten48;
+			$scope.hourClouds48 = dataa.hourClouds48;
+			$scope.hourDew48 = dataa.hourDew48;
+			$scope.hourHumid48 = dataa.hourHumid48;
+			$scope.hourPress48 = dataa.hourPress48;
+			$scope.hourVis48 = dataa.hourVis48;
+			$scope.hourWindSpeed48 = dataa.hourWindSpeed48;
+			$scope.hourWindBearing48 = dataa.hourWindBearing48;
+
+		$scope.Address = address;
 		console.log(changeUnitsClick);
 		if (changeUnitsClick){
 			console.log('inside click');
@@ -1434,6 +2234,4 @@ $(document).ready(function(){
 		changeUnitsClick = false;
 		console.log(changeUnitsClick);
 		console.log(units);
-	}
-
-});
+	};

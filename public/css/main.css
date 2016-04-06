@@ -1,0 +1,194 @@
+button.btn#go2 {
+	background-color: #02132F;
+	color: #C0C8D6;
+}
+
+div#address-input-bar2 {
+	display: none;
+	width: 40%;
+	margin-top: 0.5%;
+	position: fixed;
+	left: 3%;
+	top: 2%;
+	z-index: 1;
+}
+
+h1#location-output {
+	font-variant-caps: all-petite-caps;
+	border: 3px solid none;
+	border-radius: 5px;
+	padding: 0;
+	width: 30%;
+	margin-left: 0;
+	margin-top: 0;
+	position: fixed;
+	left: 3%;
+	top: 2%;
+	z-index: 1;
+}
+
+#time-zone {
+	position: fixed;
+	left: 2%;
+	top: 5%;
+	margin-left: 75%;
+}
+
+.currently {
+	margin-top: 1%;
+	margin-left: 5%;
+/*	background-color: #3ac179;*/
+}
+
+.legend {
+	z-index: 0;
+}
+
+#buttonUnits {
+	display: none;
+	position: absolute;
+	left: 65%;
+	top: 25%;
+	z-index: 1;
+}
+
+#seven-day-outlook {
+	width: auto;
+   overflow-x: scroll;
+   white-space: nowrap;
+}
+
+.hour-wind-speed {
+	margin-bottom: 0;
+}
+
+.summary {
+	white-space: normal;
+	height: 60px;
+}
+
+.day {
+	display: inline-block;
+	/*width: 15%;*/
+	width: 213.75px;
+}
+
+.img-responsive {
+	display: initial;
+}
+
+.day-image {
+	height: 128px;
+	width: 128px;
+}
+
+/*#hour-data {
+	width: auto;
+	overflow-x: scroll;
+}*/
+
+.hour-pressure {
+/*	font-size: small;*/
+}
+
+.hour-visibility {
+/*	font-size: small;*/
+}
+
+.hour-wind-speed {
+/*	font-size: small;*/
+}
+
+.hour-wind-bearing {
+/*	font-size: small;*/
+}
+
+h3 {
+	font-size: small;
+}
+
+h3.h3-descriptor {
+	font-size: normal;
+}
+
+div.temp-row {
+
+}
+
+p.hi {
+	color: #FF4615;
+	font-size: large;
+}
+
+p.low {
+	color: #322FDC;
+	font-size: large;
+}
+
+.h2-descriptor {
+	background-color: none;
+	color: white;
+}
+
+#twelveHourTitle {
+	background-color: none;
+	color: white;
+}
+
+img {
+	background: hidden;
+	border-radius: 8%;
+	border: 3px solid none;
+}
+
+h3 {
+	margin-top: 10px;
+}
+
+.H {
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.odd {
+	text-align: center;
+	background-color: #63E5D7;
+	padding-left: 9px;
+	padding-right: 9px;
+}
+
+.even {
+	text-align: center;
+	background-color: #aae8ea;
+	padding-left: 9px;
+	padding-right: 9px;
+}
+
+.time {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+div.twelve-columns {
+	padding: 1%;
+}
+
+p.rain-intensity {
+	height: 40px;
+}
+
+p.hour-cloud-cover {
+	height: 40px;
+}
+
+.hour-img {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.time {
+	padding-left: auto;
+	padding-right: auto;
+}

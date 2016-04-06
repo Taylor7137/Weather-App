@@ -11,7 +11,7 @@ server.use(logger);
 server.set('port', process.env.PORT || 8080);
 
 server.get('/', frontpage);
-server.get('/weather', main)
+server.get('/main', main)
 
 server.get('/address/:query',function(req, res){
 	var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + req.params.query +'&key='+keys.addressApiKey;
